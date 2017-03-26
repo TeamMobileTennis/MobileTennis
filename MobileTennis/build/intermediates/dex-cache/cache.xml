@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="G:\AndroidStudio\MobileTennis\core\build\libs\core-1.0.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="9652e66c9047ce826c86100cdb6a105e3fafa87b">
+        <dex dex="G:\AndroidStudio\MobileTennis\android\build\intermediates\pre-dexed\debug\core-1.0_666df8bc8943beef6a1ed9f8d94805bcd0dbdbe1.jar" />
+    </item>
+
+</items>
