@@ -2,14 +2,16 @@ package com.crazyking.mobiletennis;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.renderers.PointSpriteRenderer;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.crazyking.mobiletennis.managers.ScreenManager;
+import com.crazyking.mobiletennis.ui.StyleBuilder;
 
 public class MobileTennis extends Game {
 
@@ -33,6 +35,10 @@ public class MobileTennis extends Game {
 	public ShapeRenderer shapeBatch;
 	public Skin skin;
 
+	// font titleStyle
+	public Label.LabelStyle titleStyle;
+	public Label.LabelStyle buttonStyle;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -40,13 +46,13 @@ public class MobileTennis extends Game {
 		// default gibldx skin
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
+		createStyles();
+
+		Gdx.input.setCatchBackKey(true);
+
 		// setup managers
 		assets = new AssetManager();
 		screenManager = new ScreenManager(this);
-
-
-
-		Gdx.input.setCatchBackKey(true);
 	}
 
 	@Override
@@ -62,5 +68,10 @@ public class MobileTennis extends Game {
 		shapeBatch.dispose();
 		assets.dispose();
 		screenManager.dispose();
+	}
+
+	private void createStyles(){
+		titleStyle = StyleBuilder.createStyle(10, Color.BLACK);
+		buttonStyle = StyleBuilder.createStyle(20, Color.WHITE);
 	}
 }

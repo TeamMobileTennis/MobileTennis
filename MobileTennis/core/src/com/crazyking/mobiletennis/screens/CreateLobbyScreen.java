@@ -2,10 +2,7 @@ package com.crazyking.mobiletennis.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crazyking.mobiletennis.MobileTennis;
 import com.crazyking.mobiletennis.managers.ScreenManager;
 import com.crazyking.mobiletennis.ui.UIBuilder;
@@ -18,7 +15,7 @@ public class CreateLobbyScreen extends AbstractScreen {
 
         float width = Gdx.graphics.getWidth() / 2;
         float height = Gdx.graphics.getHeight() / 10;
-        Label title = UIBuilder.createLabel("Create Lobby", mt.skin, "default", width, height, 0.85f);
+        Label title = UIBuilder.createLabel("Create Lobby", mt.skin, "default", mt.titleStyle, width, height, 0.85f);
 
         stage.addActor(title);
     }
