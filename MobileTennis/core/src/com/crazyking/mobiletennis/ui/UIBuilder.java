@@ -12,9 +12,10 @@ public class UIBuilder {
 
     private UIBuilder(){}
 
-    public static Label createLabel(String text, Skin skin, String type, float width, float height, float posYProc){
+    public static Label createLabel(String text, Skin skin, String type, Label.LabelStyle style, float width, float height, float posYProc){
         Label label = new Label(text, skin, type);
         label.setAlignment(Align.center);
+        label.setStyle(style);
         label.setSize(width, height);
         label.setPosition(Gdx.graphics.getWidth() / 2 - width / 2, Gdx.graphics.getHeight() * posYProc);
 
@@ -22,8 +23,9 @@ public class UIBuilder {
     }
 
 
-    public static TextButton createButton(String text, Skin skin, String type, float width, float height, float posYProc){
+    public static TextButton createButton(String text, Skin skin, String type, Label.LabelStyle style, float width, float height, float posYProc){
         TextButton button = new TextButton(text, skin, type);
+        button.getLabel().setStyle(style);
         button.setSize(width, height);
         button.setPosition(Gdx.graphics.getWidth() / 2 - width / 2, Gdx.graphics.getHeight() * posYProc);
 
