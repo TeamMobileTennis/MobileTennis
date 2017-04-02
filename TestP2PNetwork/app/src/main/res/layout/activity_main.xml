@@ -5,10 +5,28 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/buttonSearch"
+        android:id="@+id/buttonConnect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search for nearby Devices" />
+        android:text="Connect" />
+
+    <Button
+        android:id="@+id/buttonDisconnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disconnect" />
+
+    <Button
+        android:id="@+id/buttonInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Connection Info" />
+
+    <Button
+        android:id="@+id/buttonSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Message (Only as Client)" />
 
 
     <ScrollView

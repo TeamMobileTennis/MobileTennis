@@ -1,44 +1,79 @@
 package de.a_berisha.testp2pnetwork;
 
+import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
  * Created by Adrian Berisha on 29.03.2017.
  */
 
-public class ReadData extends Thread {
-    Socket socket;
-    String data;
-    TextView textView; // To Show Data
+public class ReadData extends AsyncTask<Void, Void, Void> {
 
-    public ReadData(Socket socket, TextView textView){
-        this.socket = socket;
-        this.textView = textView;
+
+    private int port;
+    private MainActivity activity;
+
+    private boolean run = true;
+
+    ReadData(int port, MainActivity activity){
+        this.port = port;
+        this.activity = activity;
+    }
+
+    public void setRun(boolean run){
+        this.run = run;
+    }
+    public boolean getRun(){
+        return run;
     }
 
     @Override
-    public void run() {
-        super.run();
-
-        byte[] bytes = new byte[1024];
-
+    protected Void doInBackground(Void... params) {
         try {
-            InputStream is = socket.getInputStream();
+            ServerSocket socket = new ServerSocket();
+            socket.setReuseAddress(true);
+            socket.bind(new InetSocketAddress(port));
 
-            int n;
-            while((n = is.read(bytes)) != -1){
-                data = new String(bytes, 0, n);
-                textView.append(data+'\n');
+            while(run) {
+
+                activity.logAll(activity.INFO, "Im ready to receive data");
+                Socket client = socket.accept();
+
+                InputStream is = client.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+                String message;
+                char[] buffer = new char[1024];
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    message = new String(buffer, 0, n);
+                    activity.logAll(activity.INFO, message);
+                }
+
+                reader.close();
+                is.close();
+                client.close();
             }
-
-        }catch (IOException io){
+            socket.close();
+            activity.logAll(activity.INFO, "Close the Server Socket");
+        }catch(IOException io){
             io.printStackTrace();
+            activity.logAll(activity.ERROR,"IOException: "+io.getMessage());
+        }catch(Exception e){
+            e.printStackTrace();
+//                    activity.logAll(activity.ERROR,"Exception: " +e.getMessage());
+            Log.d(activity.ERROR, "Error in receive-function");
         }
+
+        return null;
     }
 }
