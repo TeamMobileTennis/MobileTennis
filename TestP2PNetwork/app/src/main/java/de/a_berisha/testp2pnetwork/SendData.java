@@ -41,7 +41,8 @@ public class SendData extends AsyncTask<String, Void, Void> {
 
                     if (wifiInfo != null) {
                         Socket socket = new Socket(wifiInfo.groupOwnerAddress, port);
-                        Log.d(activity.INFO, "Sending this message to the Server: " + message);
+//                        Log.d(activity.INFO, "Sending this message to the Server: " + message);
+                        activity.logAll(activity.INFO, "Sending this message to the Server: " + message);
 
                         OutputStream os = socket.getOutputStream();
                         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os));
