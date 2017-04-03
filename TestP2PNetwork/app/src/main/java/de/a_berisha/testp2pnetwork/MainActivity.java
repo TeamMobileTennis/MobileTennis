@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnInfo;
     private Button btnSend;
     private TextView textView;
+    private EditText etMessage;
 
     private WifiP2pManager.Channel gameChannel;         // Channel for P2P Connections
     private WifiP2pManager manager;                     // Wifi P2P Manager
@@ -68,15 +69,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String INFO = "INFO";
     public static final String ERROR = "ERROR";
 
-    private static final int PORT = 9540;   // Port for the Sockets
+    private static final int PORT = 9540;               // Port for the Sockets
 
-    private boolean owner = false;          // True - Group Owner  False - Client
-    private WifiP2pInfo wifiInfo = null;    // Global Variable for the WifiP2pInformation
+    private boolean owner = false;                      // True - Group Owner  False - Client
+    private WifiP2pInfo wifiInfo = null;                // Global Variable for the WifiP2pInformation
 
-    private ReadData read;                  // To Read Data (Server)
-    private SendData send;                  // To Send Data (Clients)
+    private boolean connected;                          // Boolean to check if device is connected
 
-    private boolean connected;              // Boolean to check if device is connected
+    private Client server;                                          // Socket for the Server
+    private ServerHandler[] clients = new ServerHandler[2];  // Socket for all Clients
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         btnDisconnect = (Button) findViewById(R.id.buttonDisconnect);
         btnInfo = (Button) findViewById(R.id.buttonInfo);
         btnSend = (Button) findViewById(R.id.buttonSend);
+        etMessage = (EditText) findViewById(R.id.message);
 
         //Add Actions if Peers is changed
         filter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
@@ -102,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
         gameChannel = manager.initialize(this, getMainLooper(), null);
         receiver = new Receiver(manager, gameChannel, this);
 
-        startPeerDiscover();
+        //startPeerDiscover();
 
-       // Connect Button
+        // Connect Button
         btnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,25 +167,41 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // Send a Message from the Activity
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(connected) {
-                    if (wifiInfo != null && !owner)
-                        sendToServer("This is a example Message from a Client");
-                    else if (wifiInfo == null)
-                        logAll(ERROR, "No Connection Information available");
-                    else if (owner)
-                        logAll(ERROR, "In this Version, only the Client can send a Message");
-                }else {
-                    logAll(INFO, "No Connection exists");
+                try {
+                    if (connected) {
+                        String message = etMessage.getText().toString();
+                        if (wifiInfo != null && !owner) {
+
+                            activity.logAll("To Server: " + message);
+                            if (server == null)
+                                setupSend();
+                            server.sendMessage(message);
+
+                        } else if (wifiInfo == null)
+                            logAll(ERROR, "No Connection Information available");
+                        else if (owner){
+
+                            logAll(INFO, "To All Clients: " + message);
+                            for(ServerHandler handler : clients){
+                                if(handler!=null){
+                                    handler.sendMessage(message);
+                                }
+                            }
+                        }
+                    } else {
+                        logAll(INFO, "No Connection exists");
+                    }
+                }catch (Exception e){
+                    logAll(ERROR, e.getMessage());
                 }
             }
         });
 
     }
-
 
     // Start to discover for peers and creating a group
     public void startPeerDiscover(){
@@ -271,18 +289,91 @@ public class MainActivity extends AppCompatActivity {
 
     // Receive Data with the Device who is Owner
     public void receive(){
+        try {
+            ServerSocket socket = new ServerSocket();
+            socket.setReuseAddress(true);
+            socket.bind(new InetSocketAddress(PORT));
 
-        read = new ReadData(PORT, this);
 
-        read.execute();
+            new AsyncTask<ServerSocket, Void, Void>(){
+                @Override
+                protected Void doInBackground(ServerSocket... params) {
+                    try {
+                        for (ServerSocket socket : params) {
+                            while(true) {
+
+                                int pos = getFreePosAtServerHandler();
+
+                                if(pos<0){
+                                    logAll(ERROR,"Cannot create Connection. Only 2 Connections are allowed.");
+                                }else {
+                                    clients[pos] = new ServerHandler(socket.accept(), activity);
+                                    clients[pos].start();
+                                }
+
+                            }
+                        }
+                    }catch(Exception e){
+                        logAll(ERROR, e.getMessage());
+                    }
+                    return null;
+                }
+            }.execute(socket);
+
+        }catch (IOException io){
+            logAll(ERROR, io.getMessage());
+        }
+
+    }
+
+    // Notify this Activity that a ServerHandler stops
+    public void stopServerHandler(ServerHandler serverHandler){
+        int pos = -1;
+        for(int i=0;i<clients.length;i++){
+            if(clients[i] == serverHandler){
+                pos = i;
+                break;
+            }
+        }
+        if(pos >= 0){
+            clients[pos] = null;
+        }
+    }
+
+    // Get a free Position at the ServerHandler Array to put
+    // a ServerHandler in it
+    private int getFreePosAtServerHandler(){
+        int pos = -1;
+
+        for(int i=0; i<clients.length; i++){
+            if(clients[i] == null){
+                pos = i;
+                break;
+            }
+        }
+
+        return pos;
     }
 
     // Send Data with each Client to the Server
-    public void sendToServer(String message){
+    private void setupSend(){
 
-        send = new SendData(wifiInfo, PORT, this);
+        try {
+            if(wifiInfo != null) {
+                logAll(INFO, wifiInfo.groupOwnerAddress.getHostAddress()+" - " + PORT);
 
-        send.execute(message);
+                Socket socket = new Socket(wifiInfo.groupOwnerAddress,PORT);
+                server = new Client(socket, activity);
+
+                server.start();
+
+            }else {
+                logAll(INFO, "wifiInfo is null");
+            }
+        }catch(Exception e){
+            logAll(ERROR, e.getMessage());
+        }
+
     }
 
     // This Method log the Messages in the Console
@@ -295,7 +386,9 @@ public class MainActivity extends AppCompatActivity {
         textView.append(log+'\n');
         Log.d(tag, log);
     }
-    public String codeErrorMessage(int code){
+
+    // Error Messages for the ActionListeners
+    private String codeErrorMessage(int code){
         String error;
         switch(code){
             case 0: error = " (Error)"; break;
@@ -306,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
         return error;
     }
 
+    // Getter and Setter for "connected" (Boolean to check if a Connection is open)
     public void setConnected(boolean connected){
         this.connected = connected;
     }
