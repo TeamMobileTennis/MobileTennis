@@ -1,11 +1,16 @@
 package de.a_berisha.testp2pnetwork;
 
 
+import android.os.AsyncTask;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -19,15 +24,32 @@ public class ServerHandler extends Thread {
     private String name;
 
     private BufferedReader reader;
-    private BufferedWriter writer;
+    private PrintWriter writer;
 
     public ServerHandler(Socket client, MainActivity activity){
         this.client = client;
         this.activity = activity;
     }
 
-    public void sendMessage(String message) throws IOException{
-        writer.write(message);
+    public void sendMessage(final String message) throws IOException{
+//        writer.write(message);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                activity.logAll(activity.INFO, "Send Message (Serverhandler)");
+                activity.logAll(activity.INFO, "Message: "+message);
+                writer.println(message);
+                activity.logAll(activity.INFO, "Write Message to Client");
+
+            }
+        }).start();
+    }
+
+    public void closeAll()throws IOException{
+        reader.close();
+        writer.close();
+        client.close();
+        activity.stopServerHandler(this);
     }
 
     @Override
@@ -36,23 +58,27 @@ public class ServerHandler extends Thread {
 
         try {
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+            writer = new PrintWriter(client.getOutputStream(), true);
 
             activity.logAll(activity.INFO, "Connection established successful");
 
             String message;
             while (true) {
                 message = reader.readLine();
-                if(message == "exit" || message == "" || message == null) {
-                    activity.logAll(activity.INFO, "Connection will close");
+                if(message.equals("exit") || message.isEmpty() ) { // Connection will close
                     break;
                 }else {
-                    activity.logAll(activity.INFO,"Received Message: " +  message);
+                    final String tmp = message;
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            activity.logAll(activity.INFO,"Received Message: " +  tmp);
+                        }
+                    });
                 }
 
             }
             activity.logAll(activity.INFO, "Connection with Client closed");
-            client.close();
             activity.stopServerHandler(this);
 
         }catch(IOException io){
