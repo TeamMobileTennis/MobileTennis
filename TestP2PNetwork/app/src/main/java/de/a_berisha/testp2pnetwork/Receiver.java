@@ -46,23 +46,17 @@ public class Receiver extends BroadcastReceiver {
                 manager.requestPeers(channel, new WifiP2pManager.PeerListListener() {
                     @Override
                     public void onPeersAvailable(WifiP2pDeviceList peers) {
-                        activity.logAll(activity.INFO,"Getting Peer List");
+//                        activity.logAll(activity.INFO,"Getting Peer List");
                         Collection<WifiP2pDevice> list = peers.getDeviceList();
 
 
                         if (list.size() > 0) {
-                            activity.logAll(activity.INFO,"Found " + list.size() + " Devices.");
+//                            activity.logAll(activity.INFO,"Found " + list.size() + " Devices.");
 
-                            WifiP2pDevice dev = list.iterator().next();
+                            activity.fillPeerList(list);
 
-                            /*for (WifiP2pDevice wifiP2pDevice : list) {
-                                activity.logAll(activity.INFO,"Dev-Name: " + wifiP2pDevice.deviceName + " Dev-Adr: " + wifiP2pDevice.deviceAddress);
-                            }*/
-
-                            activity.logAll(activity.INFO,"\nSelected Device:\nDev-Name: " + dev.deviceName + " Dev-Adr: " + dev.deviceAddress);
-                            activity.setWifiDeviceList(peers.getDeviceList());
                         } else {
-                            activity.logAll(activity.INFO,"No Devices found.");
+//                            activity.logAll(activity.INFO,"No Devices found.");
                         }
 
                     }
@@ -85,7 +79,6 @@ public class Receiver extends BroadcastReceiver {
                 NetworkInfo netInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
                 if (netInfo != null) {
                     if (netInfo.isConnected()) {
-                        activity.logAll(activity.INFO, "Get Connection Info (Receiver)");
                         activity.getConnectionInfo();
                     }
                 }
@@ -93,7 +86,6 @@ public class Receiver extends BroadcastReceiver {
         }else if(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)){
             if(manager != null) {
                 WifiP2pDevice info = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
-                activity.logAll(activity.INFO,"Device-Status: " + info.status);
                 if(info.status == 3){
                     activity.setConnected(false);
                     activity.startPeerDiscover();
