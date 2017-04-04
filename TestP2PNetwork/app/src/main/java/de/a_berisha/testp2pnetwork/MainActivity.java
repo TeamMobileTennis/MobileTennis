@@ -18,10 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,12 +51,13 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     // Views on the Activity
-    private Button btnConnect;
     private Button btnDisconnect;
     private Button btnInfo;
     private Button btnSend;
     private TextView textView;
     private EditText etMessage;
+    private ListView peerList;
+    private TabHost tabHost;
 
     private WifiP2pManager.Channel gameChannel;         // Channel for P2P Connections
     private WifiP2pManager manager;                     // Wifi P2P Manager
@@ -63,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
     private IntentFilter filter = new IntentFilter();   // Filters for the BroadcastReceiver
     private MainActivity activity = this;               // Current Activity
 
-    private Collection<WifiP2pDevice> wifiDeviceList;  // All requested Wifi P2P Devices
+    private ArrayList<WifiP2pDevice> devList = new ArrayList<>();
 
     //Information for the Log Tags
     public static final String INFO = "INFO";
     public static final String ERROR = "ERROR";
 
-    private static final int PORT = 9540;               // Port for the Sockets
+    private static final int PORT = 9545;               // Port for the Sockets
 
     private boolean owner = false;                      // True - Group Owner  False - Client
     private WifiP2pInfo wifiInfo = null;                // Global Variable for the WifiP2pInformation
@@ -77,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean connected;                          // Boolean to check if device is connected
 
     private Client server;                                          // Socket for the Server
-    private ServerHandler[] clients = new ServerHandler[2];  // Socket for all Clients
+    private ServerHandler[] clients = new ServerHandler[2];         // Socket for all Clients
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +90,25 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialize Views
         textView = (TextView) findViewById(R.id.textV);
-        btnConnect = (Button) findViewById(R.id.buttonConnect);
         btnDisconnect = (Button) findViewById(R.id.buttonDisconnect);
         btnInfo = (Button) findViewById(R.id.buttonInfo);
         btnSend = (Button) findViewById(R.id.buttonSend);
         etMessage = (EditText) findViewById(R.id.message);
+        peerList = (ListView) findViewById(R.id.peerList);
+        tabHost = (TabHost) findViewById(R.id.tabHost);
+
+        tabHost.setup();
+        // Tab 1 : Connection with the ListView
+        TabHost.TabSpec tab = tabHost.newTabSpec("Connection");
+        tab.setContent(R.id.connection);
+        tab.setIndicator("Connection");
+        tabHost.addTab(tab);
+
+        // Tab 2 : Log
+        tab = tabHost.newTabSpec("Log");
+        tab.setContent(R.id.log);
+        tab.setIndicator("Log");
+        tabHost.addTab(tab);
 
         //Add Actions if Peers is changed
         filter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
@@ -106,22 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
         //startPeerDiscover();
 
-        // Connect Button
-        btnConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(wifiDeviceList != null) {
-                    if (wifiDeviceList.size() > 0) {
-                        logAll(INFO, "Connect to the first Device in the List.");
-                        WifiP2pDevice dev = wifiDeviceList.iterator().next();
-                        connect(dev);
-                    } else {
-                        Toast.makeText(MainActivity.this, "No Devices to connect.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-
         // Disconnect Button
         btnDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,78 +131,106 @@ public class MainActivity extends AppCompatActivity {
                 disconnect();
             }
         });
-
         // Info Button
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(manager != null) {
-
-                    manager.requestConnectionInfo(gameChannel, new WifiP2pManager.ConnectionInfoListener() {
-                        @Override
-                        public void onConnectionInfoAvailable(WifiP2pInfo info) {
-                            try {
-                                if (info != null) {
-                                    if (info.groupFormed) {
-                                        if (info.isGroupOwner) {
-                                            logAll(INFO, "Im the Group-Owner");
-                                        } else {
-                                            logAll(INFO, "Im just a client");
-                                        }
-                                    }
-                                    else {
-                                        logAll(INFO, "Group is not formed");
-                                    }
-                                }
-                            }catch(NullPointerException np){
-                                np.printStackTrace();
-                                logAll(ERROR, "NullPointerException: "+np.getMessage());
-                            }catch(NetworkOnMainThreadException nt){
-                                nt.printStackTrace();
-                                logAll(ERROR, "NetworkOnMainThreadException: "+nt.getMessage());
-                            }catch(Exception e){
-                                e.printStackTrace();
-                                Toast.makeText(activity,"No Connection Information available",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
+                infoListener();
             }
         });
         // Send a Message from the Activity
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendListener();
+            }
+        });
+
+        peerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    if (connected) {
-                        String message = etMessage.getText().toString();
-                        if (wifiInfo != null && !owner) {
+                    WifiP2pDevice dev = devList.get(position);
+                    activity.logAll(INFO, "Connect with: " + dev.deviceName);
+                    connect(dev);
 
-                            activity.logAll("To Server: " + message);
-                            if (server == null)
-                                setupSend();
-                            server.sendMessage(message);
-
-                        } else if (wifiInfo == null)
-                            logAll(ERROR, "No Connection Information available");
-                        else if (owner){
-
-                            logAll(INFO, "To All Clients: " + message);
-                            for(ServerHandler handler : clients){
-                                if(handler!=null){
-                                    handler.sendMessage(message);
-                                }
-                            }
-                        }
-                    } else {
-                        logAll(INFO, "No Connection exists");
-                    }
                 }catch (Exception e){
-                    logAll(ERROR, e.getMessage());
+                    activity.logAll(ERROR, "An unexpected error occurs");
                 }
             }
         });
 
+        receive();
+
+    }
+
+    private void sendListener() {
+        try {
+            if (connected) {
+                String message = etMessage.getText().toString();
+                if (wifiInfo != null && !owner) {
+
+                    activity.logAll("To Server: " + message);
+
+                    if (server != null) {
+                        logAll(INFO, "Send to Server. Socket isn't null");
+                        server.sendMessage(message);
+                    }else {
+                        logAll(ERROR, "No Connection established. Try it again.");
+                        setupSend();
+                    }
+
+                } else if (wifiInfo == null)
+                    logAll(ERROR, "No Connection Information available");
+                else if (owner){
+
+                    logAll(INFO, "To All Clients: " + message);
+                    for(ServerHandler handler : clients){
+                        if(handler!=null){
+                            handler.sendMessage(message);
+                        }
+                    }
+                }
+            } else {
+                logAll(INFO, "No Connection exists");
+            }
+        }catch (Exception e){
+            logAll(ERROR, e.getMessage() + " (Send Listener)");
+        }
+    }
+
+    private void infoListener() {
+        if(manager != null) {
+
+            manager.requestConnectionInfo(gameChannel, new WifiP2pManager.ConnectionInfoListener() {
+                @Override
+                public void onConnectionInfoAvailable(WifiP2pInfo info) {
+                    try {
+                        if (info != null) {
+                            if (info.groupFormed) {
+                                if (info.isGroupOwner) {
+                                    logAll(INFO, "Im the Group-Owner");
+                                } else {
+                                    logAll(INFO, "Im just a client");
+                                }
+                            }
+                            else {
+                                logAll(INFO, "Group is not formed");
+                            }
+                        }
+                    }catch(NullPointerException np){
+                        np.printStackTrace();
+                        logAll(ERROR, "NullPointerException: "+np.getMessage());
+                    }catch(NetworkOnMainThreadException nt){
+                        nt.printStackTrace();
+                        logAll(ERROR, "NetworkOnMainThreadException: "+nt.getMessage());
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(activity,"No Connection Information available",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     // Start to discover for peers and creating a group
@@ -252,6 +282,20 @@ public class MainActivity extends AppCompatActivity {
                 logAll(ERROR, "Remove Group failed."+codeErrorMessage(reason));
             }
         });
+        try {
+            if (owner) {
+                if (server != null) {
+                    server.closeAll();
+                }
+
+            } else {
+                for(int i=0; i<clients.length; i++){
+                    clients[i].closeAll();
+                }
+            }
+        }catch(IOException e){
+            logAll(ERROR, e.getMessage());
+        }
     }
 
     // Get connection information of the current group
@@ -269,10 +313,10 @@ public class MainActivity extends AppCompatActivity {
                                 if(info.isGroupOwner) {
                                     logAll(INFO, "Server");
                                     owner = true;
-                                    receive();
                                 }else {
                                     logAll(INFO, "Client");
                                     owner = false;
+                                    setupSend();
                                 }
                             }catch(Exception e){
                                 logAll(ERROR, e.getMessage());
@@ -307,6 +351,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(pos<0){
                                     logAll(ERROR,"Cannot create Connection. Only 2 Connections are allowed.");
                                 }else {
+                                    activity.logAll("Wait for Connections");
                                     clients[pos] = new ServerHandler(socket.accept(), activity);
                                     clients[pos].start();
                                 }
@@ -320,9 +365,63 @@ public class MainActivity extends AppCompatActivity {
                 }
             }.execute(socket);
 
+
+
+
+
         }catch (IOException io){
             logAll(ERROR, io.getMessage());
         }
+
+    }
+
+    // Send Data with each Client to the Server
+    private void setupSend(){
+
+        try {
+            if (wifiInfo != null) {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Socket socket = new Socket();
+
+                            socket.bind(null);
+                            socket.connect(new InetSocketAddress(wifiInfo.groupOwnerAddress, PORT));
+                            logAll(INFO, "Create Socket successful");
+                            server = new Client(socket, activity);
+                            logAll(INFO, "Create Client successful");
+                            server.start();
+                        }catch (Exception e){
+                            logAll(ERROR, e.getMessage());
+                        }
+                    }
+                }).start();
+
+            } else {
+                logAll(INFO, "wifiInfo is null");
+            }
+        }catch (NetworkOnMainThreadException e){
+            logAll(ERROR, "NetworkOnMainThreadException: "+e.getMessage());
+        }catch(Exception e){
+            logAll(ERROR, "Exception: "+e.getMessage());
+        }
+
+    }
+
+    // Fill the List View with the current requested Devices
+    public void fillPeerList(Collection<WifiP2pDevice> list){
+        devList.clear();
+        devList.addAll(list);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+
+        for(WifiP2pDevice dev : devList){
+            adapter.add(dev.deviceName);
+        }
+
+        peerList.setAdapter(adapter);
 
     }
 
@@ -337,6 +436,12 @@ public class MainActivity extends AppCompatActivity {
         }
         if(pos >= 0){
             clients[pos] = null;
+        }
+    }
+
+    public void stopClient(Client client){
+        if(server == client){
+            server = null;
         }
     }
 
@@ -355,36 +460,22 @@ public class MainActivity extends AppCompatActivity {
         return pos;
     }
 
-    // Send Data with each Client to the Server
-    private void setupSend(){
-
-        try {
-            if(wifiInfo != null) {
-                logAll(INFO, wifiInfo.groupOwnerAddress.getHostAddress()+" - " + PORT);
-
-                Socket socket = new Socket(wifiInfo.groupOwnerAddress,PORT);
-                server = new Client(socket, activity);
-
-                server.start();
-
-            }else {
-                logAll(INFO, "wifiInfo is null");
-            }
-        }catch(Exception e){
-            logAll(ERROR, e.getMessage());
-        }
-
-    }
-
     // This Method log the Messages in the Console
     // and in the TextView of the Application
     public void logAll(String log) {
-        textView.append(log+'\n');
-        System.out.println(log);
+//        textView.append(log+'\n');
+        Log.d(INFO, log);
+        testMethod(log);
+    }
+    public void testMethod(String msg){
+        textView.append(msg+'\n');
     }
     public void logAll(String tag, String log){
-        textView.append(log+'\n');
+//        textView.append(log+'\n');
         Log.d(tag, log);
+    }
+    public void showMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 
     // Error Messages for the ActionListeners
@@ -427,6 +518,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setWifiDeviceList(Collection<WifiP2pDevice> dev){ this.wifiDeviceList = dev; }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            if (manager != null && gameChannel != null) {
+                manager.removeGroup(gameChannel, null);
+            }
+            if (server != null) {
+                server.closeAll();
+            }
+            for(int i=0; i<clients.length; i++){
+                if(clients[i] != null){
+                    clients[i].closeAll();
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
+    }
 }

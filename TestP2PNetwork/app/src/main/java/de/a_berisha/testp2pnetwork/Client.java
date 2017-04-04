@@ -1,10 +1,14 @@
 package de.a_berisha.testp2pnetwork;
 
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -18,15 +22,27 @@ public class Client extends Thread {
 
 
     private BufferedReader reader;
-    private BufferedWriter writer;
+    private PrintWriter writer;
 
     public Client(Socket server, MainActivity activity){
         this.server = server;
         this.activity = activity;
     }
 
-    public void sendMessage(String message) throws IOException{
-        writer.write(message);
+    public void sendMessage(final String message){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                writer.println(message);
+            }
+        }).start();
+    }
+
+    public void closeAll()throws IOException{
+        reader.close();
+        writer.close();
+        server.close();
+        activity.stopClient(this);
     }
 
 
@@ -37,26 +53,36 @@ public class Client extends Thread {
         try {
 
             reader = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(server.getOutputStream()));
+            writer = new PrintWriter(server.getOutputStream(), true);
 
             activity.logAll(activity.INFO, "Connection established successful");
 
             String message;
             while (true) {
+
                 message = reader.readLine();
-                if(message == "exit" || message == "" || message == null) {
-                    activity.logAll(activity.INFO, "Connection will close");
+
+
+                if(message.equals("exit") || message.isEmpty() ) {   // Connection will close
                     break;
                 }else {
-                    activity.logAll(activity.INFO,"Received Message: " +  message);
+                    final String tmp = message;
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            activity.logAll(activity.INFO,"Received Message: " +  tmp);
+                        }
+                    });
+
                 }
             }
 
             activity.logAll(activity.INFO, "Connection with Server closed.");
-            server.close();
+            closeAll();
 
         }catch(IOException io){
             activity.logAll(activity.ERROR, io.getMessage());
         }
     }
+
 }
