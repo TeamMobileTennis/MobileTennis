@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
     private ListView peerList;
     private TabHost tabHost;
 
-    private WifiP2pManager.Channel gameChannel;         // Channel for P2P Connections
-    private WifiP2pManager manager;                     // Wifi P2P Manager
-    private Receiver receiver;                          // BroadcastReceiver
+    private WifiP2pManager.Channel gameChannel;                     // Channel for P2P Connections
+    private WifiP2pManager manager;                                 // Wifi P2P Manager
+    private Receiver receiver;                                      // BroadcastReceiver
 
-    private IntentFilter filter = new IntentFilter();   // Filters for the BroadcastReceiver
-    private MainActivity activity = this;               // Current Activity
+    private IntentFilter filter = new IntentFilter();               // Filters for the BroadcastReceiver
+    private MainActivity activity = this;                           // Current Activity
 
     private ArrayList<WifiP2pDevice> devList = new ArrayList<>();
 
@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String INFO = "INFO";
     public static final String ERROR = "ERROR";
 
-    private static final int PORT = 9545;               // Port for the Sockets
+    private static final int PORT = 9545;                           // Port for the Sockets
 
-    private boolean owner = false;                      // True - Group Owner  False - Client
-    private WifiP2pInfo wifiInfo = null;                // Global Variable for the WifiP2pInformation
+    private boolean owner = false;                                  // True - Group Owner  False - Client
+    private WifiP2pInfo wifiInfo = null;                            // Global Variable for the WifiP2pInformation
 
-    private boolean connected;                          // Boolean to check if device is connected
+    private boolean connected;                                      // Boolean to check if device is connected
 
     private Client server;                                          // Socket for the Server
     private ServerHandler[] clients = new ServerHandler[2];         // Socket for all Clients
@@ -425,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Notify this Activity that a ServerHandler stops
+    // Notify this Activity that a ServerHandler (Connection to a Client) stops
     public void stopServerHandler(ServerHandler serverHandler){
         int pos = -1;
         for(int i=0;i<clients.length;i++){
@@ -439,6 +439,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Notify this Activity that the Client (Connection to the Server) stops
     public void stopClient(Client client){
         if(server == client){
             server = null;
@@ -460,22 +461,20 @@ public class MainActivity extends AppCompatActivity {
         return pos;
     }
 
-    // This Method log the Messages in the Console
+    // This Methods log the Messages in the Console
     // and in the TextView of the Application
     public void logAll(String log) {
-//        textView.append(log+'\n');
-        Log.d(INFO, log);
-        testMethod(log);
-    }
-    public void testMethod(String msg){
-        textView.append(msg+'\n');
+        logAll(INFO, log);
     }
     public void logAll(String tag, String log){
-//        textView.append(log+'\n');
         Log.d(tag, log);
+        logOnUI(log);
     }
-    public void showMessage(String message){
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+
+    // This method must be private, because the View only can be changed
+    // in the same Thread
+    private void logOnUI(String msg){
+        textView.append(msg+'\n');
     }
 
     // Error Messages for the ActionListeners
