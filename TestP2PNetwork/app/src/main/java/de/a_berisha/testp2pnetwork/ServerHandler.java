@@ -32,15 +32,10 @@ public class ServerHandler extends Thread {
     }
 
     public void sendMessage(final String message) throws IOException{
-//        writer.write(message);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                activity.logAll(activity.INFO, "Send Message (Serverhandler)");
-                activity.logAll(activity.INFO, "Message: "+message);
                 writer.println(message);
-                activity.logAll(activity.INFO, "Write Message to Client");
-
             }
         }).start();
     }
@@ -60,21 +55,20 @@ public class ServerHandler extends Thread {
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(client.getOutputStream(), true);
 
-            activity.logAll(activity.INFO, "Connection established successful");
+            activity.logAll("Connection established successful");
 
             String message;
             while (true) {
                 message = reader.readLine();
                 if(message.equals("exit") || message.isEmpty() ) { // Connection will close
                     break;
+                }
+                if(message.startsWith("GET_INFO")) {
+                    activity.logAll("Get Information for the Game Lobby");
+                }else if(message.startsWith("CONN")) {
+                    activity.logAll("Device want to connect as Game Client");
                 }else {
-                    final String tmp = message;
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.logAll(activity.INFO,"Received Message: " +  tmp);
-                        }
-                    });
+                    activity.logAll(message);
                 }
 
             }

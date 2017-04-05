@@ -1,5 +1,6 @@
 package de.a_berisha.testp2pnetwork;
 
+import android.icu.text.IDNA;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -13,6 +14,21 @@ import java.net.Socket;
 
 /**
  * Created by Adrian Berisha on 03.04.2017.
+ */
+
+/*
+    Requests to Server
+
+    GET_INFO    => Get Information about the Game Lobby
+    CONN        => Connect to Server as Game Client
+
+    INFO{"Name of the Lobby", "Name of Player 1", "Name of Player 2"}
+        (If Player 1 or 2 or both not exists, but a empty String in it)
+    CONN_RESP{NUMBER}
+        => Answer from Server, with Information
+            0 => Connection success
+            1 => Lobby full
+
  */
 
 public class Client extends Thread {
@@ -55,29 +71,42 @@ public class Client extends Thread {
             reader = new BufferedReader(new InputStreamReader(server.getInputStream()));
             writer = new PrintWriter(server.getOutputStream(), true);
 
-            activity.logAll(activity.INFO, "Connection established successful");
+            activity.logAll("Connection established successful");
 
             String message;
             while (true) {
 
                 message = reader.readLine();
 
-
                 if(message.equals("exit") || message.isEmpty() ) {   // Connection will close
                     break;
-                }else {
-                    final String tmp = message;
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.logAll(activity.INFO,"Received Message: " +  tmp);
-                        }
-                    });
-
                 }
+                try {
+                    if (message.startsWith("CONN_RESP")) {
+                        int code = Integer.parseInt(MessageEncode.getData(message));
+                        activity.logAll(code == 0 ? "Connection successful" : "Lobby is full");
+
+                    } else if (message.startsWith("INFO")) {
+                        Information info = new Information(message);
+                        activity.logAll("Lobby-Name: "+info.getLobbyName()+"\nPlayer 1: "+info.getPlayer1()+"\nPlayer 2: "+info.getPlayer2());
+
+                    } else if (message.startsWith("START")) {
+                        activity.logAll("Game starts");
+
+                    } else if (message.startsWith("END")) {
+                        activity.logAll("Game finished");
+
+                    } else {
+                        activity.logAll("Received Message: "+message);
+
+                    }
+                }catch(Exception e){
+                    activity.logAll("ERROR",e.getMessage());
+                }
+
             }
 
-            activity.logAll(activity.INFO, "Connection with Server closed.");
+            activity.logAll("Connection with Server closed.");
             closeAll();
 
         }catch(IOException io){

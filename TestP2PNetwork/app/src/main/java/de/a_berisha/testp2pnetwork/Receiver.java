@@ -42,26 +42,16 @@ public class Receiver extends BroadcastReceiver {
 
         if(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)){
             if(manager != null) {
-
                 manager.requestPeers(channel, new WifiP2pManager.PeerListListener() {
                     @Override
                     public void onPeersAvailable(WifiP2pDeviceList peers) {
-//                        activity.logAll(activity.INFO,"Getting Peer List");
                         Collection<WifiP2pDevice> list = peers.getDeviceList();
 
-
                         if (list.size() > 0) {
-//                            activity.logAll(activity.INFO,"Found " + list.size() + " Devices.");
-
                             activity.fillPeerList(list);
-
-                        } else {
-//                            activity.logAll(activity.INFO,"No Devices found.");
                         }
-
                     }
                 });
-
             }
 
 
