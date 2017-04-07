@@ -19,7 +19,7 @@ android {
     }
     defaultConfig {
         applicationId "com.crazyking.mobiletennis"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 25
     }
 }
