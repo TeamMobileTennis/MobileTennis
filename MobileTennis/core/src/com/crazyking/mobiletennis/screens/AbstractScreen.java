@@ -7,26 +7,26 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.crazyking.mobiletennis.MobileTennis;
+import com.crazyking.mobiletennis.MobileTennisCore;
 
 public abstract class AbstractScreen implements Screen {
 
-    public final MobileTennis mt;
+    public final MobileTennisCore mt;
 
     Stage stage;
     OrthographicCamera camera;
     Viewport viewport;
 
-    public AbstractScreen(MobileTennis mt){
+    public AbstractScreen(MobileTennisCore mt){
         this.mt = mt;
         this.stage = new Stage();
 
         // Make a camera + Extendviewport and apply the camera to the viewport
         camera = new OrthographicCamera();
-        viewport = new ExtendViewport(MobileTennis.V_WIDTH, MobileTennis.V_HEIGHT, camera);
+        viewport = new ExtendViewport(MobileTennisCore.V_WIDTH, MobileTennisCore.V_HEIGHT, camera);
         viewport.apply();
 
-        camera.position.set(MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT/2, 0);
+        camera.position.set(MobileTennisCore.V_WIDTH/2, MobileTennisCore.V_HEIGHT/2, 0);
     }
 
     public abstract void update(float delta);

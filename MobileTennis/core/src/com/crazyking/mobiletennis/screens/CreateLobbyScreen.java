@@ -3,14 +3,14 @@ package com.crazyking.mobiletennis.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.crazyking.mobiletennis.MobileTennis;
+import com.crazyking.mobiletennis.MobileTennisCore;
 import com.crazyking.mobiletennis.managers.ScreenManager;
 import com.crazyking.mobiletennis.ui.UIBuilder;
 
 
 public class CreateLobbyScreen extends AbstractScreen {
 
-    public CreateLobbyScreen(MobileTennis mt){
+    public CreateLobbyScreen(MobileTennisCore mt){
         super(mt);
 
         float width = Gdx.graphics.getWidth() / 2;

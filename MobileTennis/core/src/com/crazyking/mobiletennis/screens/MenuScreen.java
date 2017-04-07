@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.crazyking.mobiletennis.MobileTennisCore;
 import com.crazyking.mobiletennis.ui.ButtonHandler;
-import com.crazyking.mobiletennis.MobileTennis;
 import com.crazyking.mobiletennis.managers.ScreenManager;
 import com.crazyking.mobiletennis.ui.UIBuilder;
 
@@ -19,13 +19,13 @@ public class MenuScreen extends AbstractScreen {
     TextButton createLobby, joinLobby, settings, accelTest;
     Label title;
 
-    public MenuScreen(final MobileTennis mt){
+    public MenuScreen(final MobileTennisCore mt){
         super(mt);
 
         // Make the background sprite and set it to 0/0
         background = new Sprite(new Texture(Gdx.files.internal("menu.jpg")));
         background.setPosition(0, 0);
-        background.setSize(MobileTennis.V_WIDTH, MobileTennis.V_HEIGHT);
+        background.setSize(MobileTennisCore.V_WIDTH, MobileTennisCore.V_HEIGHT);
 
         createUI();
 
