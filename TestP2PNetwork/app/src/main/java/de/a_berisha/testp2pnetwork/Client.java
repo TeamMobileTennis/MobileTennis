@@ -1,16 +1,17 @@
 package de.a_berisha.testp2pnetwork;
 
-import android.icu.text.IDNA;
-import android.widget.Toast;
+import android.net.wifi.p2p.WifiP2pInfo;
+import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import static de.a_berisha.testp2pnetwork.Constants.*;
+import static de.a_berisha.testp2pnetwork.Constants.CMD.*;
 
 /**
  * Created by Adrian Berisha on 03.04.2017.
@@ -19,10 +20,10 @@ import java.net.Socket;
 /*
     Requests to Server
 
-    GET_INFO    => Get Information about the Game Lobby
-    CONN        => Connect to Server as Game Client
+    GET_INFO                    => Get Information about the Game Lobby
+    CONN{Name of Player}        => Connect to Server as Game Client
 
-    INFO{"Name of the Lobby", "Name of Player 1", "Name of Player 2"}
+    INFO{"Name of the Lobby", "Name of Player 1", "Name of Player 2"}   Also need MAC-ADDRESS
         (If Player 1 or 2 or both not exists, but a empty String in it)
     CONN_RESP{NUMBER}
         => Answer from Server, with Information
@@ -31,34 +32,43 @@ import java.net.Socket;
 
  */
 
-public class Client extends Thread {
+public class Client extends Thread implements ConnectionHandler{
 
     private Socket server;
-    private MainActivity activity;
+    private ViewPeerInterface view;
+    private InetAddress host;
+    private int port;
 
+    private String playerName;          // Name of this Client
 
     private BufferedReader reader;
     private PrintWriter writer;
 
-    public Client(Socket server, MainActivity activity){
+    private boolean close = false;
+    private boolean game = false;       // Is this Client a Game Client
+
+    public Client(Socket server, ViewPeerInterface view, String playerName){
         this.server = server;
-        this.activity = activity;
+        this.playerName = playerName;
+        this.view = view;
     }
 
-    public void sendMessage(final String message){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                writer.println(message);
-            }
-        }).start();
+    public Client(WifiP2pInfo wifiInfo, int port, ViewPeerInterface view, String playerName){
+        this.view = view;
+        this.playerName = playerName;
+        this.host = wifiInfo.groupOwnerAddress;
+        this.port = port;
     }
 
-    public void closeAll()throws IOException{
+    public void sendMessage(String message){
+        writer.println(message);
+    }
+
+    public void closeConn()throws IOException{
+        close = true;
         reader.close();
         writer.close();
         server.close();
-        activity.stopClient(this);
     }
 
 
@@ -67,14 +77,15 @@ public class Client extends Thread {
         super.run();
 
         try {
+            server = new Socket();
+            server.setReuseAddress(true);
+            server.connect(new InetSocketAddress(host, port));
 
             reader = new BufferedReader(new InputStreamReader(server.getInputStream()));
             writer = new PrintWriter(server.getOutputStream(), true);
 
-            activity.logAll("Connection established successful");
-
             String message;
-            while (true) {
+            while (!close) {
 
                 message = reader.readLine();
 
@@ -82,35 +93,44 @@ public class Client extends Thread {
                     break;
                 }
                 try {
-                    if (message.startsWith("CONN_RESP")) {
-                        int code = Integer.parseInt(MessageEncode.getData(message));
-                        activity.logAll(code == 0 ? "Connection successful" : "Lobby is full");
+                    String cmd = Messages.getCommand(message);
 
-                    } else if (message.startsWith("INFO")) {
-                        Information info = new Information(message);
-                        activity.logAll("Lobby-Name: "+info.getLobbyName()+"\nPlayer 1: "+info.getPlayer1()+"\nPlayer 2: "+info.getPlayer2());
+                    if(!cmd.isEmpty()){
 
-                    } else if (message.startsWith("START")) {
-                        activity.logAll("Game starts");
+                        if(cmd.equalsIgnoreCase(RESP)){
+                            int code = Integer.parseInt(Messages.getDataMap(message).get(CODE));
+                            if(code == 0) {
+                                game = true;
+                            }else {
+                                game = false;
+                                Log.d("INFO", "Lobby is full");
+                            }
+                        }else if(cmd.equalsIgnoreCase(INFO)){
+                            view.passInformation(new Information(message));
+                        }else if(cmd.equalsIgnoreCase(START)){
 
-                    } else if (message.startsWith("END")) {
-                        activity.logAll("Game finished");
+                        }else if(cmd.equalsIgnoreCase(PAUSE)){
 
-                    } else {
-                        activity.logAll("Received Message: "+message);
+                        }else if(cmd.equalsIgnoreCase(END)){
 
+                        }
+
+                    }else {
+                        view.passMessage(message);
                     }
+
                 }catch(Exception e){
-                    activity.logAll("ERROR",e.getMessage());
+                    Log.d("ERROR",e.getMessage());
+
                 }
 
             }
 
-            activity.logAll("Connection with Server closed.");
-            closeAll();
+            Log.d("INFO","Connection with Server closed");
+            closeConn();
 
         }catch(IOException io){
-            activity.logAll(activity.ERROR, io.getMessage());
+            Log.d("ERROR",io.getMessage());
         }
     }
 

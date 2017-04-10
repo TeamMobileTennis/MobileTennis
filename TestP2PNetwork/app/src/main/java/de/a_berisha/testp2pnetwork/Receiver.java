@@ -11,6 +11,7 @@ import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.lang.reflect.Method;
@@ -24,16 +25,21 @@ import java.util.Collection;
 
 public class Receiver extends BroadcastReceiver {
 
+    private Context context;
+    private PeerInterface peerConnection;
+    private ViewPeerInterface view;
+
     private WifiP2pManager manager;
     private WifiP2pManager.Channel channel;
-    private MainActivity activity;
 
 
-    public Receiver(WifiP2pManager manager, WifiP2pManager.Channel channel, MainActivity activity){
+    public Receiver(Context context, WifiP2pManager manager, WifiP2pManager.Channel channel, PeerInterface peerConnection, ViewPeerInterface view){
         super();
+        this.context = context;
         this.manager = manager;
         this.channel = channel;
-        this.activity = activity;
+        this.peerConnection = peerConnection;
+        this.view = view;
     }
 
     @Override
@@ -45,22 +51,20 @@ public class Receiver extends BroadcastReceiver {
                 manager.requestPeers(channel, new WifiP2pManager.PeerListListener() {
                     @Override
                     public void onPeersAvailable(WifiP2pDeviceList peers) {
-                        Collection<WifiP2pDevice> list = peers.getDeviceList();
-
+                        ArrayList<WifiP2pDevice> list = new ArrayList<WifiP2pDevice>(peers.getDeviceList());
                         if (list.size() > 0) {
-                            activity.fillPeerList(list);
+//                            view.fillPeerList(list);
+                            Log.d("INFO", list.size()+"");
+                            peerConnection.setPeerList(list);
                         }
                     }
                 });
             }
-
-
         }else if(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)){
             int wifi_state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
-            WifiManager wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
             if( wifi_state == WifiP2pManager.WIFI_P2P_STATE_DISABLED){
-                activity.logAll(activity.INFO,"Wifi disabled, try to enable it.");
                 wifiManager.setWifiEnabled(true);
             }
 
@@ -69,7 +73,8 @@ public class Receiver extends BroadcastReceiver {
                 NetworkInfo netInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
                 if (netInfo != null) {
                     if (netInfo.isConnected()) {
-                        activity.getConnectionInfo();
+                        peerConnection.getConnectionInfo();
+
                     }
                 }
             }
@@ -77,10 +82,10 @@ public class Receiver extends BroadcastReceiver {
             if(manager != null) {
                 WifiP2pDevice info = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
                 if(info.status == 3){
-                    activity.setConnected(false);
-                    activity.startPeerDiscover();
+//                    activity.setConnected(false);
+//                    peerConnection.startPeerDiscover();
                 }else if(info.status == 0){
-                    activity.setConnected(true);
+//                    activity.setConnected(true);
                 }
             }
         }
