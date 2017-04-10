@@ -1,42 +1,53 @@
 package de.a_berisha.testp2pnetwork;
 
+import java.util.HashMap;
+import static de.a_berisha.testp2pnetwork.Constants.CMD.*;
+
 /**
  * Created by Adrian Berisha on 05.04.2017.
  */
 
-public class Information extends MessageEncode{
+public class Information extends Messages{
     private String lobbyName;
     private String player1;
     private String player2;
+    private String address;
 
-    private final String DELIMITER = ",";
-    
-    public Information(String lobbyName, String player1, String player2){
+    private final String lName = "lobbyname";
+    private final String p1 = "player1";
+    private final String p2 = "player2";
+    private final String mac = "mac";
+
+
+    public Information(String lobbyName, String player1, String player2, String address){
         this.lobbyName = lobbyName;
         this.player1 = player1;
         this.player2 = player2;
+        this.address = address;
     }
 
-    /*
-        INFO{Name of the Lobby, Name of Player 1, Name of Player 2}
-        The Name of the Lobby cannot be empty
+    /**
+     *  {cmd:"INFO",lobbyname: "Name of the Lobby",player1:"Name of Player 1",player2:"Name of Player 2",mac:"mac-address"}
      */
     public Information(String info) throws Exception{
     	strToInfo(info);
     }
 
     public String toString(){
-    	return "INFO{"+lobbyName + DELIMITER + (player1.isEmpty()?" ":player1) + DELIMITER + (player2.isEmpty()?" ":player2)+ "}";
+        HashMap<String, String> data = new HashMap<>();
+        data.put(lName, lobbyName);
+        data.put(p1, player1);
+        data.put(p2, player2);
+        data.put(mac, address);
+    	return getDataStr(INFO, data);
     }
     public void strToInfo(String info)throws Exception{
-    	String[] data = getData(info, DELIMITER);
-        
-    	if(data.length != 3)
-    		throw new Exception("Message is not correct");
-    	
-        lobbyName = data[0];
-        player1 = data[1];
-        player2 = data[2];
+        HashMap<String, String> data = getDataMap(info);
+
+        lobbyName = data.get(lName);
+        player1 = data.get(p1);
+        player2 = data.get(p2);
+        address = data.get(mac);
     }
     
     public String getLobbyName() {
@@ -44,6 +55,26 @@ public class Information extends MessageEncode{
     }
     public void setLobbyName(String lobbyName) {
         this.lobbyName = lobbyName;
+    }
+
+
+    public boolean setPlayerName(String playerName){
+        if(player1.isEmpty()) {
+            player1 = playerName;
+            return true;
+        }else if(player2.isEmpty()) {
+            player2 = playerName;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean equals(Information obj) {
+        if(this.lobbyName.equals(obj.getLobbyName()) && this.player1.equals(obj.getPlayer1())
+                && this.player2.equals(obj.getPlayer2()) && this.address.equals(obj.getAddress()))
+            return true;
+        return false;
+
     }
 
     public String getPlayer1() {
@@ -58,5 +89,12 @@ public class Information extends MessageEncode{
     }
     public void setPlayer2(String player2) {
         this.player2 = player2;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

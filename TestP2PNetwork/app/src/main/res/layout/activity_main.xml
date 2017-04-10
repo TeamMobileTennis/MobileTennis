@@ -45,11 +45,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0">
                         <Button
-                            android:id="@+id/buttonConnect"
+                            android:id="@+id/buttonCreate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
-                            android:text="Connect" />
+                            android:text="Create" />
 
                         <Button
                             android:id="@+id/buttonDisconnect"
