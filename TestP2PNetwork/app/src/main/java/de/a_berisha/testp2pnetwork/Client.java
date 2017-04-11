@@ -69,6 +69,7 @@ public class Client extends Thread implements ConnectionHandler{
         reader.close();
         writer.close();
         server.close();
+        this.interrupt();
     }
 
 
@@ -129,7 +130,7 @@ public class Client extends Thread implements ConnectionHandler{
             Log.d("INFO","Connection with Server closed");
             closeConn();
 
-        }catch(IOException io){
+        }catch(Exception io){
             Log.d("ERROR",io.getMessage());
         }
     }

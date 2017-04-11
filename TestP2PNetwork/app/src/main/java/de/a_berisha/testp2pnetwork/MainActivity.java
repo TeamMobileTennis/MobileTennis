@@ -1,6 +1,7 @@
 package de.a_berisha.testp2pnetwork;
 
 
+import android.content.Context;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     }
 
 
+
     @Override
     public void fillPeerList(ArrayList<WifiP2pDevice> peerList) {
         devList.clear();
@@ -170,6 +172,8 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     @Override
     protected void onStop() {
         super.onStop();
+        peerConnection.endSearching();
+        peerConnection.closeConnections();
     }
 
     @Override

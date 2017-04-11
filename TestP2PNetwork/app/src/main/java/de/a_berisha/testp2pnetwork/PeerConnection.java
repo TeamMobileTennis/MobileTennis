@@ -5,6 +5,7 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Looper;
@@ -40,8 +41,8 @@ public class PeerConnection implements PeerInterface{
 
     private String playerName;
 
-    private GameLobby lobby;    // Need only the Lobby-Creator
-    private Client client;      // Need only the Client
+    private GameLobby lobby = null;    // Need only the Lobby-Creator
+    private Client client = null;      // Need only the Client
 
     private GetInformation getInfo;
 
@@ -76,6 +77,7 @@ public class PeerConnection implements PeerInterface{
 
     public void startLobby(String lobbyName){
         try {
+            manager.createGroup(channel, null);
             WifiManager wifiManager  = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             lobby = new GameLobby(lobbyName, PORT, view, wifiManager.getConnectionInfo().getMacAddress());
             startPeerDiscover();
@@ -87,16 +89,14 @@ public class PeerConnection implements PeerInterface{
     }
 
     public void searchLobby(){
+        Log.d(INFO, "Start searching for Lobbys");
         startPeerDiscover();
         getInformation();
-        /*client = new Client(wifiInfo, PORT, view, playerName);
-        for (WifiP2pDevice dev : peerList) {
-            connect(dev);
-        }*/
-
     }
     public void endSearching(){
-        getInfo.endSearching();
+        if(getInfo != null)
+            if(getInfo.isAlive())
+                getInfo.endSearching();
     }
 
     public void getInformation(){
@@ -221,4 +221,20 @@ public class PeerConnection implements PeerInterface{
         });
     }
 
+    public void closeConnections(){
+        try {
+            if (lobby != null) {
+                if(!lobby.isAlive()) {
+                    lobby.closeLobby();
+                }
+            }
+            if(client != null){
+                if(!client.isAlive())
+                    client.closeConn();
+            }
+
+        }catch (IOException e){
+            Log.d(ERROR, e.getMessage());
+        }
+    }
 }

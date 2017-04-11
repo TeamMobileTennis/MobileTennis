@@ -47,6 +47,7 @@ public class ServerHandler extends Thread{
         writer.close();
         client.close();
         gameLobby.stopServerHandler(this);
+        this.interrupt();
     }
 
     @Override
@@ -89,7 +90,7 @@ public class ServerHandler extends Thread{
             Log.d("INFO","Connection with a Client closed");
             closeConn();
 
-        }catch(IOException io){
+        }catch(Exception io){
             Log.d("ERROR",io.getMessage());
         }
     }

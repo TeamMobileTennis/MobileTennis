@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,10 +37,13 @@ public class GetInformation extends Thread {
     private boolean finish = false;
     private boolean finishSearching = false;
 
+    private Thread sendThread = null;
+
 
     public static GetInformation getInstance(ArrayList<WifiP2pDevice> peerList, WifiP2pManager manager, WifiP2pManager.Channel channel, ViewPeerInterface view, int port){
         if(instance == null){
             instance = new GetInformation(peerList, manager, channel, view, port);
+            Log.d("INFO", "Created getInformation Class");
         }
         return instance;
     }
@@ -61,13 +65,21 @@ public class GetInformation extends Thread {
     @Override
     public void run() {
         super.run();
+        Log.d("INFO", "Start Running");
+
+        if(peerList != null){
+            Log.d("INFO","PeerList: "+peerList.toString());
+        }
         while(!finishSearching){
 
             if(peerList != null) {
+
                 for (WifiP2pDevice device : peerList) {
+                    sendThread = null;
                     WifiP2pConfig config = new WifiP2pConfig();
                     config.deviceAddress = device.deviceAddress;
                     config.groupOwnerIntent = 0;
+                    manager.removeGroup(channel, null);
                     manager.connect(channel, config, new WifiP2pManager.ActionListener() {
                         @Override
                         public void onSuccess() {
@@ -76,7 +88,7 @@ public class GetInformation extends Thread {
                                 public void onConnectionInfoAvailable(final WifiP2pInfo info) {
                                     wifiInfo = info;
 
-                                    Thread test = new Thread(new Runnable() {
+                                    sendThread = new Thread(new Runnable() {
                                         @Override
                                         public void run() {
                                             if (wifiInfo.groupFormed) {
@@ -87,17 +99,20 @@ public class GetInformation extends Thread {
                                                     }else {
                                                         final Thread t = currentThread();
 
+
                                                         Thread timeout = new Thread(new Runnable() {
                                                             @Override
                                                             public void run() {
                                                                 try {
                                                                     Log.d("INFO", "Timeout Thread started. Go to sleep for 500ms");
                                                                     Thread.sleep(500);
-                                                                    t.interrupt();
+//                                                                    t.interrupt();
+                                                                    sendThread.interrupt();
                                                                     Log.d("INFO", "Thread Timeout");
                                                                 }catch (InterruptedException e){
                                                                     Log.d("ERROR", e.getMessage());
                                                                 }
+
                                                             }
                                                         });
                                                         timeout.start();
@@ -130,13 +145,9 @@ public class GetInformation extends Thread {
                                             }else {
                                                 Log.d("INFO", "Group not formed.");
                                             }
-                                            finish = true;
                                         }
                                     });
-                                    test.start();
-                                    while(test.isAlive()){
-                                        Log.d("INFO", "Thread is alive");
-                                    }
+                                    sendThread.start();
 
                                 }
                             });
@@ -144,11 +155,21 @@ public class GetInformation extends Thread {
 
                         @Override
                         public void onFailure(int reason) {
-                            Log.d("ERROR", "Connecting failed.");
+                            Log.d("ERROR", "Connecting failed: "+reason);
                         }
                     });
                     // Wait here for all Threads
-                    while (!finish) {}
+//                    while (!finish);
+                    try {
+                        if (sendThread != null) {
+                            if (sendThread.isAlive()) {
+                                sendThread.join();
+                            }
+                        }
+                    }catch (Exception e){
+                        Log.d("ERROR",e.getMessage());
+                    }
+
                 }
             }
 
