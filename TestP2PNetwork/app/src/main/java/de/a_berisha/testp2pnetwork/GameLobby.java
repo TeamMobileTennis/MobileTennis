@@ -19,7 +19,7 @@ public class GameLobby extends Thread implements ConnectionHandler{
     private boolean close = false;
 
     // With P2P 254 Connections are allowed, because of the IP-Address.
-    // The Default IP-Address Range is between 192.168.49.1 to 192.168.49.254
+    // The Default IP-Address Range is between 192.168.49.1 to 192.168.49.255
     private ServerHandler[] clients = new ServerHandler[254-2];       // Connection to Clients
     private ServerHandler[] gameClients = new ServerHandler[2];     // Only 2 Game Clients are allowed
 
@@ -70,7 +70,7 @@ public class GameLobby extends Thread implements ConnectionHandler{
                 }else {
                     Log.d("ERROR", "Too many Connections");
                 }
-            }catch (IOException e){
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
@@ -96,10 +96,12 @@ public class GameLobby extends Thread implements ConnectionHandler{
         closeAllClients();
         for(int i=0; i<gameClients.length; i++){
             if(gameClients[i] != null){
-                gameClients[i].closeConn();
+                if(gameClients[i].isAlive())
+                    gameClients[i].closeConn();
             }
         }
         serverSocket.close();
+        this.interrupt();
     }
 
     /**
@@ -124,13 +126,14 @@ public class GameLobby extends Thread implements ConnectionHandler{
     }
 
     /**
-     *  Close all Connections to clients, which are Game-Clients
+     *  Close all Connections to clients, which are no Game-Clients
      */
     public void closeAllClients(){
         try {
             for (int i = 0; i < clients.length; i++) {
-                clients[i].closeConn();
-
+                if(clients[i] != null)
+                    if(clients[i].isAlive())
+                        clients[i].closeConn();
             }
         }catch (IOException e){
             e.printStackTrace();
