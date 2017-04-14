@@ -2,7 +2,9 @@ package de.a_berisha.testp2pnetwork;
 
 
 import android.content.Context;
+import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,14 +19,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import static de.a_berisha.testp2pnetwork.Constants.*;
-import static de.a_berisha.testp2pnetwork.Constants.CMD.*;
+import de.a_berisha.testp2pnetwork.connection.Client.ClientPeerConn;
+import de.a_berisha.testp2pnetwork.connection.Information;
+import de.a_berisha.testp2pnetwork.connection.Operator;
+import de.a_berisha.testp2pnetwork.connection.Server.ServerPeerConn;
+import de.a_berisha.testp2pnetwork.connection.ViewPeerInterface;
 
-public class MainActivity extends AppCompatActivity implements ViewPeerInterface{
+public class MainActivity extends AppCompatActivity implements ViewPeerInterface {
 
 
     // Views on the Activity
-    private Button btnDisconnect;
+    private Button btnSearch;
     private Button btnInfo;
     private Button btnSend;
     private Button btnCreate;
@@ -40,9 +45,13 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     public static final String ERROR = "ERROR";
 
     private String playerName = "Max Mustermann";
-    private PeerConnection peerConnection;
+
+    private Context context;
+    private ViewPeerInterface view;
 
     private LinkedHashMap<String, Information> infoMap = new LinkedHashMap<>();
+
+    private Operator operator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
 
         //Initialize Views
         textView = (TextView) findViewById(R.id.textV);
-        btnDisconnect = (Button) findViewById(R.id.buttonDisconnect);
+        btnSearch = (Button) findViewById(R.id.buttonDisconnect);
         btnInfo = (Button) findViewById(R.id.buttonInfo);
         btnSend = (Button) findViewById(R.id.buttonSend);
         btnCreate =(Button) findViewById(R.id.buttonCreate);
@@ -72,14 +81,16 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
         tab.setIndicator("Log");
         tabHost.addTab(tab);
 
-        peerConnection = new PeerConnection(this.getApplicationContext(), this, playerName);
+        context = this;
+        view = this;
 
-        // Disconnect Button
-        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+
+        // Search Button
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                peerConnection.disconnect();
-                peerConnection.searchLobby();
+                operator = ClientPeerConn.getInstance(context, view, playerName);
+                operator.setup("");
             }
         });
         // Send a Message from the Activity
@@ -88,9 +99,13 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
             public void onClick(View v) {
                 try {
                     String message = etMessage.getText().toString();
-                    peerConnection.sendMessage(message);
+                    if(operator != null) {
+                        operator.sendMessage(message);
+                    }else {
+                        Log.d("ERROR","Operator is null");
+                    }
                 }catch (Exception e){
-                    Log.d(ERROR, e.getMessage());
+                    Log.d(ERROR, e.getMessage()+"");
                 }
             }
         });
@@ -99,11 +114,9 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    Information curr = (Information) infoMap.values().toArray()[position];
-                    peerConnection.connectAsGameClient(curr.getAddress());
-
+                    operator.connectToGame(devList.get(position).deviceAddress);
                 }catch (Exception e){
-                    Log.d(ERROR, e.getMessage());
+                    Log.d(ERROR, e.getMessage()+"");
                 }
             }
         });
@@ -112,7 +125,24 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
             @Override
             public void onClick(View v) {
                 String lobbyName = etMessage.getText().toString();
-                peerConnection.startLobby(lobbyName);
+
+                operator = ServerPeerConn.getInstance(context, view, playerName);
+                operator.setup(lobbyName);
+            }
+        });
+
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operator.getConnectionInfo();
+                NetworkInfo networkInfo = getIntent().getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+                if(networkInfo != null){
+                    if(networkInfo.isConnected()){
+                        Log.d("INFO","Connected!");
+                    }
+                }else {
+                    Log.d("INFO","NetInfo is null (MainActivity)");
+                }
             }
         });
 
@@ -136,17 +166,27 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     }
 
     @Override
-    public void passMessage(String message) {
-        textView.append("Message: " + message +"\n");
+    public void passMessage(final String message) {
+        Log.d("INFO", "Received: "+ message);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                toTextLog(message);
+            }
+        });
+    }
+
+    public void toTextLog(String message){
+        textView.append(message+'\n');
     }
 
     @Override
     public void passInformation(Information info) {
-        if(infoMap.get(info.getAddress()).equals(info)){
-            return;
-        }
-        infoMap.put(info.getAddress(), info);
-        updateListView();
+//        if(infoMap.get(info.getAddress()).equals(info)){
+//            return;
+//        }
+//        infoMap.put(info.getAddress(), info);
+//        updateListView();
     }
     public void updateListView(){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
@@ -161,19 +201,15 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     @Override
     protected void onResume() {
         super.onResume();
-        peerConnection.registerReceiver();
     }
     @Override
     protected void onPause() {
         super.onPause();
-        peerConnection.unregisterReceiver();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
-        peerConnection.endSearching();
-        peerConnection.closeConnections();
+        operator.closeConnections();
     }
 
     @Override

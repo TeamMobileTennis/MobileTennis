@@ -1,12 +1,9 @@
-package de.a_berisha.testp2pnetwork;
+package de.a_berisha.testp2pnetwork.connection;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static de.a_berisha.testp2pnetwork.Constants.CMD.*;
 
 /**
  * Created by Adrian Berisha on 07.04.2017.
@@ -28,8 +25,27 @@ public class Messages {
         HashMap<String, String> map = getDataMap(rawData);
         if(map == null){
             return "";
+        }else if(map.isEmpty()){
+            return "";
         }
-        return map.get(KEY);
+        return map.get(Constants.CMD.KEY);
+    }
+
+    /**
+     *
+     * @param rawData   A data string with the correct syntax
+     *                  An example with the correct syntax at the top
+     * @param key       A string key to get a value from the message
+     * @return          Returns the value, or a empty string, if the key is not found
+     */
+    public static String getValue(String rawData, String key){
+        HashMap<String,String> map = getDataMap(rawData);
+        if(map == null){
+            return "";
+        }else if(map.isEmpty()){
+            return "";
+        }
+        return map.get(key);
     }
 
     /**
@@ -52,7 +68,7 @@ public class Messages {
     public static String getDataStr(String cmd, HashMap<String, String> data){
         if(data == null)
             data = new HashMap<>();
-        data.put(KEY, cmd);
+        data.put(Constants.CMD.KEY, cmd);
         return getDataStr(data);
     }
     /**
@@ -79,7 +95,7 @@ public class Messages {
             return data;
 
         }else {
-            return null;
+            return data;
         }
     }
 

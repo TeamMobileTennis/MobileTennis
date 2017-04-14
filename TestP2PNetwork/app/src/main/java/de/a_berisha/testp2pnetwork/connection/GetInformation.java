@@ -1,4 +1,4 @@
-package de.a_berisha.testp2pnetwork;
+package de.a_berisha.testp2pnetwork.connection;
 
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
@@ -12,12 +12,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.security.spec.ECField;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static de.a_berisha.testp2pnetwork.Constants.*;
-import static de.a_berisha.testp2pnetwork.Constants.CMD.*;
 
 /**
  * Created by Adrian Berisha on 07.04.2017.
@@ -124,12 +119,12 @@ public class GetInformation extends Thread {
                                                         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                                                         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-                                                        writer.println(Messages.getDataStr(GETINFO));
+                                                        writer.println(Messages.getDataStr(Constants.CMD.GETINFO));
                                                         String message = reader.readLine();
-                                                        if (Messages.getCommand(message).equals(INFO)) {
+                                                        if (Messages.getCommand(message).equals(Constants.CMD.INFO)) {
                                                             view.passInformation(new Information(message));
                                                         }
-                                                        writer.println(Messages.getDataStr(CLOSE));
+                                                        writer.println(Messages.getDataStr(Constants.CMD.CLOSE));
                                                         writer.close();
                                                         reader.close();
                                                         socket.close();

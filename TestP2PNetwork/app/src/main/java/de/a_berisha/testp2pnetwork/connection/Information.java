@@ -1,7 +1,6 @@
-package de.a_berisha.testp2pnetwork;
+package de.a_berisha.testp2pnetwork.connection;
 
 import java.util.HashMap;
-import static de.a_berisha.testp2pnetwork.Constants.CMD.*;
 
 /**
  * Created by Adrian Berisha on 05.04.2017.
@@ -26,6 +25,13 @@ public class Information extends Messages{
         this.address = address;
     }
 
+    public Information(){
+        this.lobbyName = "";
+        this.player1 = "";
+        this.player2 = "";
+        this.address = "";
+    }
+
     /**
      *  {cmd:"INFO",lobbyname: "Name of the Lobby",player1:"Name of Player 1",player2:"Name of Player 2",mac:"mac-address"}
      */
@@ -39,7 +45,7 @@ public class Information extends Messages{
         data.put(p1, player1);
         data.put(p2, player2);
         data.put(mac, address);
-    	return getDataStr(INFO, data);
+    	return getDataStr(Constants.CMD.INFO, data);
     }
     public void strToInfo(String info)throws Exception{
         HashMap<String, String> data = getDataMap(info);

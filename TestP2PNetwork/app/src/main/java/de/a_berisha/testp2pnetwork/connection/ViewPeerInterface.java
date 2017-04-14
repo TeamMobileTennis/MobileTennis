@@ -1,4 +1,4 @@
-package de.a_berisha.testp2pnetwork;
+package de.a_berisha.testp2pnetwork.connection;
 
 import android.net.wifi.p2p.WifiP2pDevice;
 
