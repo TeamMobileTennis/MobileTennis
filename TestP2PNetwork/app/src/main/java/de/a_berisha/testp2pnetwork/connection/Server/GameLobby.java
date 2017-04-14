@@ -1,4 +1,4 @@
-package de.a_berisha.testp2pnetwork;
+package de.a_berisha.testp2pnetwork.connection.Server;
 
 import android.util.Log;
 
@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 
+import de.a_berisha.testp2pnetwork.connection.Information;
+import de.a_berisha.testp2pnetwork.connection.ViewPeerInterface;
+
 /**
  * Created by Adrian Berisha on 06.04.2017.
  */
 
-public class GameLobby extends Thread implements ConnectionHandler{
+public class GameLobby extends Thread{
 
     private Information lobbyInformation;
     private ServerSocket serverSocket;
@@ -29,17 +32,22 @@ public class GameLobby extends Thread implements ConnectionHandler{
         lobbyInformation = new Information(lobbyName, "", "", address);
 
         serverSocket = new ServerSocket();
-        serverSocket.setReuseAddress(true);         // ReUse Address
+        serverSocket.setReuseAddress(true);             // ReUse Address
         serverSocket.bind(new InetSocketAddress(port));
+
+        Log.d("INFO","Binded Serversocket to Port "+port);
     }
 
     /**
      * @param message   The Message to be send to all Game-Clients
      */
-    @Override
     public void sendMessage(String message) {
         for(int i=0; i<gameClients.length; i++){
-            gameClients[i].sendMessage(message);
+            if(gameClients[i] != null) {
+                if(gameClients[i].isAlive()) {
+                    gameClients[i].sendMessage(message);
+                }
+            }
         }
     }
 
@@ -47,7 +55,6 @@ public class GameLobby extends Thread implements ConnectionHandler{
      *
      * @throws IOException  Throws an IOException if a connection cannot be closed.
      */
-    @Override
     public void closeConn() throws IOException {
         for(int i=0; i<gameClients.length; i++){
             gameClients[i].closeConn();
