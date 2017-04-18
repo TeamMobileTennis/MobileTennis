@@ -31,7 +31,7 @@ public class ScreenManager {
         this.mt = mt;
 
         initScreens();
-        setScreen(STATE.MENU);
+        setScreen(STATE.PLAY);
     }
 
 

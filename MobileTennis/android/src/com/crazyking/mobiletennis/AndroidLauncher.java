@@ -51,7 +51,6 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		//FIXME: buttons views etc
 		//Initialize Views
 		textView = (TextView) findViewById(R.id.textV);
 
@@ -70,7 +69,7 @@ public class AndroidLauncher extends AndroidApplication {
 
 
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new MobileTennis(this), config);
+		initialize(new MobileTennisCore(), config);
 	}
 
 	// Start to discover for peers and creating a group
