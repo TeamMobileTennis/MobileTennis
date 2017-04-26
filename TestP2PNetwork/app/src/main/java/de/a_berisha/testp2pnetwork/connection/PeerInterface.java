@@ -16,6 +16,10 @@ public interface PeerInterface {
     void startPeerDiscover();
 
     /**
+     * Stop the Peer didscovery
+     */
+    void stopPeerDiscover();
+    /**
      * Get connection information, about the current p2p connection
      */
     void getConnectionInfo();

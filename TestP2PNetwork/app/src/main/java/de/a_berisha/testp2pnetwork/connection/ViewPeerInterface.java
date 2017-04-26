@@ -9,11 +9,18 @@ import java.util.ArrayList;
  */
 
 public interface ViewPeerInterface {
+    /**
+     *
+     * @param peerList  A ArrayList of WifiP2pDevices which
+     *                  contains all current WifiP2pDevices
+     *                  in the environment
+     */
     void fillPeerList(ArrayList<WifiP2pDevice> peerList);
 
     /**
      * A Random Message without any Command Messages
-     * @param message
+     * @param message A String which contains a message
+     *                which received the client or the server
      */
     void passMessage(String message);
 
@@ -21,7 +28,9 @@ public interface ViewPeerInterface {
      * Information class include a mac-address as string
      * to identify this information.
      *
-     * @param info
+     * @param info  A information object which contains
+     *              the current information about the
+     *              game lobby
      */
     void passInformation(Information info);
 

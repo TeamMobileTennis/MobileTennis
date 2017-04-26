@@ -91,6 +91,20 @@ public class ServerPeerConn implements Operator {
 
 
     @Override
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
+        if(peerConnection != null){
+            peerConnection.setView(view);
+        }
+        if(receiver != null){
+            receiver.setView(view);
+        }
+        if(lobby != null){
+            lobby.setView(view);
+        }
+    }
+
+    @Override
     public void setup(String lobbyName){
         try {
             manager.createGroup(channel, null);

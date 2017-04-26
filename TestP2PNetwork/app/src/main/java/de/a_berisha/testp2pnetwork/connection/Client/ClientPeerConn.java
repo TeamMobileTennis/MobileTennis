@@ -1,9 +1,6 @@
 package de.a_berisha.testp2pnetwork.connection.Client;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pInfo;
@@ -96,7 +93,6 @@ public class ClientPeerConn implements Operator {
         registerReceiver();
     }
 
-
     @Override
     public void sendMessage(String message) {
         if(client != null) {
@@ -116,7 +112,7 @@ public class ClientPeerConn implements Operator {
             }
             peerConnection.closeConnections();
         }catch (Exception e){
-            Log.d("ERROR", e.getMessage()+"");
+            e.printStackTrace();
         }
     }
 
@@ -168,6 +164,21 @@ public class ClientPeerConn implements Operator {
     public void setup(String name) {
         Log.d("INFO","Search for Lobbys");
         peerConnection.startPeerDiscover();
+    }
+    public void setup(){
+        setup("");
+    }
+
+    @Override
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
+        if(peerConnection != null)
+            peerConnection.setView(view);
+        if(receiver != null)
+            receiver.setView(view);
+        if(client != null){
+            client.setView(view);
+        }
     }
 
     @Override
