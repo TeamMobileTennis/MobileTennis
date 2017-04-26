@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.crazyking.mobiletennis.MobileTennis;
+import com.crazyking.mobiletennis.MobileTennisCore;
 import com.crazyking.mobiletennis.managers.ScreenManager;
 
 import static com.crazyking.mobiletennis.utils.B2DConstants.PPM;
@@ -21,11 +21,11 @@ public class GameScreen extends AbstractScreen{
     World world;
     Box2DDebugRenderer b2dr;
 
-    public GameScreen(MobileTennis mt){
+    public GameScreen(MobileTennisCore mt){
         super(mt);
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, MobileTennis.V_WIDTH, MobileTennis.V_HEIGHT);
+        camera.setToOrtho(false, MobileTennisCore.V_WIDTH, MobileTennisCore.V_HEIGHT);
 
 
         world = new World(new Vector2(0f, 0f), false);  // Vector2 := gravity // bool if something is sleeping offscreen
@@ -41,7 +41,7 @@ public class GameScreen extends AbstractScreen{
 
     @Override
     public void update(float delta) {
-        world.step(1 / MobileTennis.APP_FPS, 6, 2);
+        world.step(1 / MobileTennisCore.APP_FPS, 6, 2);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             mt.screenManager.setScreen(ScreenManager.STATE.MENU);

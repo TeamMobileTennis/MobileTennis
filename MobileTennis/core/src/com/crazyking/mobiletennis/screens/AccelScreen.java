@@ -3,23 +3,11 @@ package com.crazyking.mobiletennis.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.crazyking.mobiletennis.MobileTennis;
+import com.crazyking.mobiletennis.MobileTennisCore;
 import com.crazyking.mobiletennis.managers.ScreenManager;
 import com.crazyking.mobiletennis.ui.StyleBuilder;
 import com.crazyking.mobiletennis.ui.UIBuilder;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
-import static java.awt.SystemColor.text;
 
 
 public class AccelScreen extends AbstractScreen {
@@ -27,7 +15,7 @@ public class AccelScreen extends AbstractScreen {
     float xPos = 0, yPos = 0, zPos = 0;
     Label xlabel, ylabel, zlabel;
 
-    public AccelScreen(MobileTennis mt){
+    public AccelScreen(MobileTennisCore mt){
         super(mt);
 
         Label.LabelStyle style = StyleBuilder.createStyle(15, Color.BLACK);
@@ -60,7 +48,6 @@ public class AccelScreen extends AbstractScreen {
         xPos = Gdx.input.getAccelerometerX();
         yPos = Gdx.input.getAccelerometerY();
         zPos = Gdx.input.getAccelerometerZ();
-
 
         xlabel.setText("X: " + xPos);
         ylabel.setText("Y: " + yPos);

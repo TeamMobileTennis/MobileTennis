@@ -2,11 +2,39 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\CrazyKing\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.9.6\47d1e9b890e364ec28f128e9bb3b9a12a94c164\gdx-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="047d1e9b890e364ec28f128e9bb3b9a12a94c164">
+        <dex dex="G:\GitHub\MobileTennis\MobileTennis\android\build\intermediates\pre-dexed\debug\gdx-1.9.6_b97efad80ae5d62f3e5c80aab2841c88b557a4f4.jar" />
+    </item>
+    <item
         jar="G:\GitHub\MobileTennis\MobileTennis\core\build\libs\core-1.0.jar"
         jumboMode="false"
         revision="25.0.2"
-        sha1="d108b7d5c3e5a800a4b4f3706a66d734938029fa">
+        sha1="ebba9de41b33713ddda641a88f976de536e15ea9">
         <dex dex="G:\GitHub\MobileTennis\MobileTennis\android\build\intermediates\pre-dexed\debug\core-1.0_a6760cbe68a0a089de71322ef3e7dae8e645370f.jar" />
+    </item>
+    <item
+        jar="C:\Users\CrazyKing\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.9.6\57c2831c870743712b808384187ea856e541878f\gdx-backend-android-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="57c2831c870743712b808384187ea856e541878f">
+        <dex dex="G:\GitHub\MobileTennis\MobileTennis\android\build\intermediates\pre-dexed\debug\gdx-backend-android-1.9.6_ce1c5dc4a66d578f89254f93e1a32608dea3bdd4.jar" />
+    </item>
+    <item
+        jar="C:\Users\CrazyKing\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.9.6\c249ef4060a4fada952f278455c8f7b9cba3c18a\gdx-box2d-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="c249ef4060a4fada952f278455c8f7b9cba3c18a">
+        <dex dex="G:\GitHub\MobileTennis\MobileTennis\android\build\intermediates\pre-dexed\debug\gdx-box2d-1.9.6_351dff8ed2cc18cbc9c7f2f5c283b7bafdb18ade.jar" />
+    </item>
+    <item
+        jar="C:\Users\CrazyKing\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-freetype\1.9.6\69187cc3c8062f191df435b43671b0e5ffcbf353\gdx-freetype-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="69187cc3c8062f191df435b43671b0e5ffcbf353">
+        <dex dex="G:\GitHub\MobileTennis\MobileTennis\android\build\intermediates\pre-dexed\debug\gdx-freetype-1.9.6_31ca70dfa5045e0eacb2a7d5eb7519a96229da50.jar" />
     </item>
 
 </items>

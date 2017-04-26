@@ -1,6 +1,6 @@
 package com.crazyking.mobiletennis.screens;
 
-import com.crazyking.mobiletennis.MobileTennis;
+import com.crazyking.mobiletennis.MobileTennisCore;
 
 /**
  * Created by CrazyKing on 26.03.2017.
@@ -8,7 +8,7 @@ import com.crazyking.mobiletennis.MobileTennis;
 
 public class PaddleScreen extends AbstractScreen{
 
-    public PaddleScreen(MobileTennis mt){
+    public PaddleScreen(MobileTennisCore mt){
         super(mt);
     }
 

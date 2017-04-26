@@ -1,6 +1,6 @@
 package com.crazyking.mobiletennis.managers;
 
-import com.crazyking.mobiletennis.MobileTennis;
+import com.crazyking.mobiletennis.MobileTennisCore;
 import com.crazyking.mobiletennis.screens.AbstractScreen;
 import com.crazyking.mobiletennis.screens.AccelScreen;
 import com.crazyking.mobiletennis.screens.CreateLobbyScreen;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class ScreenManager {
 
-    public MobileTennis mt;
+    public MobileTennisCore mt;
     private HashMap<STATE, AbstractScreen> screens;
 
     public enum STATE {
@@ -27,7 +27,7 @@ public class ScreenManager {
         PADDLE
     }
 
-    public ScreenManager(MobileTennis mt){
+    public ScreenManager(MobileTennisCore mt){
         this.mt = mt;
 
         initScreens();
