@@ -201,7 +201,9 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     @Override
     protected void onStop() {
         super.onStop();
-        operator.closeConnections();
+        if(operator != null) {
+            operator.closeConnections();
+        }
     }
 
     @Override

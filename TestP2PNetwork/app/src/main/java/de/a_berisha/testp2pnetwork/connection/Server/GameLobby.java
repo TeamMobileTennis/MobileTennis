@@ -180,6 +180,17 @@ public class GameLobby extends Thread{
         if(pos >= 0){
             clients[pos] = null;
         }
+        pos = -1;
+        for(int i=0; i<gameClients.length; i++){
+            if(gameClients[i] == client){
+                pos = i;
+                break;
+            }
+        }
+        if(pos >=0){
+            gameClients[pos] = null;
+        }
+
     }
 
     /**

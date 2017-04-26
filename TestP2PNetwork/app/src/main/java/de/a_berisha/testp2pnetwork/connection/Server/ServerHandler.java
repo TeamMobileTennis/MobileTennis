@@ -48,6 +48,12 @@ public class ServerHandler extends Thread{
     }
 
     public void closeConn()throws IOException{
+        if(!close) {
+            requestClose();
+            Log.d("INFO","Request to close");
+        }
+    }
+    private void stopConn()throws IOException{
         close = true;
         reader.close();
         writer.close();
@@ -60,14 +66,15 @@ public class ServerHandler extends Thread{
     public void requestClose(){
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_REQ)));
     }
-    private void acceptClose(){
+    private void acceptClose()throws IOException{
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
+        stopConn();
     }
     private boolean handleClose(int code)throws IOException{
         if(code == CLOSE_REQ)
             acceptClose();
         else if(code == CLOSE_ACCEPT){
-            closeConn();
+            stopConn();
         }else if(code == CLOSE_REFUSE){
             return false;
         }else {
@@ -106,14 +113,14 @@ public class ServerHandler extends Thread{
 
             }
             Log.d("INFO","Connection with a Client closed");
-            closeConn();
+            stopConn();
 
         }catch(Exception io){
             Log.d("ERROR",io.getMessage()+"");
         }
     }
 
-    public void handleCommands(String message)throws Exception{
+    private void handleCommands(String message)throws Exception{
         String cmd = Messages.getCommand(message);
 
         if (!cmd.isEmpty()) {
