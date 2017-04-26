@@ -65,7 +65,7 @@ public class MenuScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        
+
     }
 
     @Override
@@ -88,18 +88,18 @@ public class MenuScreen extends AbstractScreen {
         float width = Gdx.graphics.getWidth() / 2;
         float height = Gdx.graphics.getHeight() / 10;
 
-        title = UIBuilder.createLabel("Menu", mt.skin, "default", mt.titleStyle, width, height, 0.85f);
+        title = UIBuilder.createLabel("Menu",  mt.titleStyle, width, height, 0.85f);
 
-        createLobby = UIBuilder.createButton("Create Lobby", mt.skin, "default", mt.buttonStyle, width, height, 0.7f);
+        createLobby = UIBuilder.createButton("Create Lobby",  mt.buttonStyle, width, height, 0.7f);
         createLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.CREATE_LOBBY));
 
-        joinLobby = UIBuilder.createButton("Join Lobby", mt.skin, "default", mt.buttonStyle, width, height, 0.5f);
+        joinLobby = UIBuilder.createButton("Join Lobby",  mt.buttonStyle, width, height, 0.5f);
         joinLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.JOIN_LOBBY));
 
-        settings = UIBuilder.createButton("Settings", mt.skin, "default", mt.buttonStyle, width, height, 0.3f);
+        settings = UIBuilder.createButton("Settings",  mt.buttonStyle, width, height, 0.3f);
         settings.addListener(new ButtonHandler(mt, ScreenManager.STATE.SETTINGS));
 
-        accelTest = UIBuilder.createButton("Accelerometer", mt.skin, "default", mt.buttonStyle, width, height, 0.1f);
+        accelTest = UIBuilder.createButton("Accelerometer",  mt.buttonStyle, width, height, 0.1f);
         accelTest.addListener(new ButtonHandler(mt, ScreenManager.STATE.ACCEL_TEST));
 
         stage.addActor(title);

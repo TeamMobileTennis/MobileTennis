@@ -15,7 +15,7 @@ public class SettingsScreen extends AbstractScreen {
 
         float width = Gdx.graphics.getWidth() / 2;
         float height = Gdx.graphics.getHeight() / 10;
-        Label title = UIBuilder.createLabel("Settings", mt.skin, "default", mt.titleStyle, width, height, 0.85f);
+        Label title = UIBuilder.createLabel("Settings",  mt.titleStyle, width, height, 0.85f);
 
         stage.addActor(title);
     }

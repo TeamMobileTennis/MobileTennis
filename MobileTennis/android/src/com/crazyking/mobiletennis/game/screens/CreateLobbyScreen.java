@@ -15,7 +15,7 @@ public class CreateLobbyScreen extends AbstractScreen {
 
         float width = Gdx.graphics.getWidth() / 2;
         float height = Gdx.graphics.getHeight() / 10;
-        Label title = UIBuilder.createLabel("Create Lobby", mt.skin, "default", mt.titleStyle, width, height, 0.85f);
+        Label title = UIBuilder.createLabel("Lobby", mt.titleStyle, width, height, 0.85f);
 
         stage.addActor(title);
     }
@@ -25,6 +25,8 @@ public class CreateLobbyScreen extends AbstractScreen {
     public void show() {
         // input only on the stage elements
         Gdx.input.setInputProcessor(stage);
+
+        mt.activity.CreateServer();
     }
 
     @Override

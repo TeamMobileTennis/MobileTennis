@@ -5,11 +5,15 @@ import android.app.Activity;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.crazyking.mobiletennis.AndroidLauncher;
+import com.crazyking.mobiletennis.connection.ConnectionInterface;
+import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.StyleBuilder;
 
@@ -21,7 +25,7 @@ public class MobileTennis extends Game {
 	public static int V_HEIGHT = 200;
 
 	// reference to activity
-	public Activity activity;
+	public final AndroidLauncher activity;
 
 	// Managers
 	public AssetManager assets;
@@ -30,13 +34,13 @@ public class MobileTennis extends Game {
 	// Batches
 	public SpriteBatch batch;
 	public ShapeRenderer shapeBatch;
-	public Skin skin;
+	public static Skin skin;
 
 	// font titleStyle
 	public Label.LabelStyle titleStyle;
 	public Label.LabelStyle buttonStyle;
 
-	public MobileTennis(Activity act){
+	public MobileTennis(AndroidLauncher act){
 		activity = act;
 	}
 

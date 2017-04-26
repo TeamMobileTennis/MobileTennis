@@ -1,5 +1,6 @@
 package com.crazyking.mobiletennis.connection.Client;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 
+import com.crazyking.mobiletennis.AndroidLauncher;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 import java.util.ArrayList;
@@ -72,6 +74,8 @@ public class ClientReceiver extends BroadcastReceiver {
                 if (netInfo != null) {
                     if (netInfo.isConnected()) {
                         peer.getConnectionInfo();
+
+                        ((AndroidLauncher)context).ClientConnect();
                     }
                 }
                 wifiGroup = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_GROUP);

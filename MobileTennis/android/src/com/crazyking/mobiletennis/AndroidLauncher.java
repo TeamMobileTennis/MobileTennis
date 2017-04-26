@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.crazyking.mobiletennis.connection.Client.ClientPeerConn;
+import com.crazyking.mobiletennis.connection.ConnectionInterface;
 import com.crazyking.mobiletennis.connection.Information;
 import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.Server.ServerPeerConn;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
-public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface {
+public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface, ConnectionInterface {
 
 
 	// Views on the Activity
@@ -205,21 +206,67 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 	}
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 	}
 	@Override
-	protected void onStop() {
+	public void onStop() {
 		super.onStop();
 		operator.closeConnections();
 	}
 
 	@Override
-	protected void onDestroy() {
+	public void onDestroy() {
 		super.onDestroy();
 	}
+
+
+
+	// Methods for Connection to use
+	@Override
+	public ArrayList<WifiP2pDevice> SearchingDevices() {
+		operator = ClientPeerConn.getInstance(context, view, "Player");
+		operator.setup("");
+
+		return devList;
+	}
+
+	@Override
+	public void ConnectToDevice(WifiP2pDevice device) {
+		try {
+			operator.connectToGame(device.deviceAddress);
+		}catch (Exception e){
+			Log.d(ERROR, e.getMessage()+"");
+			throw  e;
+		}
+	}
+
+	@Override
+	public void CreateServer() {
+		operator = ServerPeerConn.getInstance(context, view, "Server");
+		operator.setup("Spiel");
+	}
+
+
+
+	//FIXME: JUST TESTING
+	// some testing stuff
+
+	private ArrayList<TestInterface> List = new ArrayList<TestInterface>();
+
+	public void ClientConnect(){
+		for(TestInterface ti : List){
+			ti.TestFunction();
+		}
+	}
+
+	public void addEvent(TestInterface ti){
+		List.add(ti);
+	}
 }
+
+

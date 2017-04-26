@@ -22,17 +22,17 @@ public class AccelScreen extends AbstractScreen {
 
         float width = Gdx.graphics.getWidth() / 2;
         float height = Gdx.graphics.getHeight() / 6;
-        Label title = UIBuilder.createLabel("Accelerometer", mt.skin, "default", mt.titleStyle, width, height, 0.85f);
+        Label title = UIBuilder.createLabel("Accelerometer", mt.titleStyle, width, height, 0.85f);
 
         stage.addActor(title);
 
-        xlabel = UIBuilder.createLabel("X:", mt.skin, "default", style, width, height, 0.6f);
+        xlabel = UIBuilder.createLabel("X:", style, width, height, 0.6f);
         stage.addActor(xlabel);
 
-        ylabel = UIBuilder.createLabel("Y:", mt.skin, "default", style, width, height, 0.4f);
+        ylabel = UIBuilder.createLabel("Y:", style, width, height, 0.4f);
         stage.addActor(ylabel);
 
-        zlabel = UIBuilder.createLabel("Z:", mt.skin, "default", style, width, height, 0.2f);
+        zlabel = UIBuilder.createLabel("Z:", style, width, height, 0.2f);
         stage.addActor(zlabel);
     }
 
