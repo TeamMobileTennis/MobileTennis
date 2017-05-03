@@ -1,10 +1,14 @@
 [
     {
-        "merged": "G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
-        "source": "G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\drawable-hdpi\\ic_launcher.png"
+        "merged": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
-        "source": "G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\drawable-hdpi\\ic_launcher.png"
+        "merged": "/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/Users/adrianberisha/MobileTennis/MobileTennis/android/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\drawable-hdpi\\ic_launcher.png"
     }
 ]

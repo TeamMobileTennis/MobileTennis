@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.crazyking.mobiletennis.connection.Client.ClientPeerConn;
-import com.crazyking.mobiletennis.connection.ConnectionInterface;
 import com.crazyking.mobiletennis.connection.Information;
 import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.Server.ServerPeerConn;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
-public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface, ConnectionInterface {
+public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface {
 
 
 	// Views on the Activity
@@ -227,7 +226,6 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 
 	// Methods for Connection to use
-	@Override
 	public ArrayList<WifiP2pDevice> SearchingDevices() {
 		operator = ClientPeerConn.getInstance(context, view, "Player");
 		operator.setup("");
@@ -235,7 +233,6 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 		return devList;
 	}
 
-	@Override
 	public void ConnectToDevice(WifiP2pDevice device) {
 		try {
 			operator.connectToGame(device.deviceAddress);
@@ -245,7 +242,6 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 		}
 	}
 
-	@Override
 	public void CreateServer() {
 		operator = ServerPeerConn.getInstance(context, view, "Server");
 		operator.setup("Spiel");

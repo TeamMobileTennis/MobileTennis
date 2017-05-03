@@ -13,10 +13,20 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 /**
  * Created by Adrian Berisha on 06.04.2017.
  */
 
+
+/**
+ * Need to call registerReceiver at onResume() and if you want call unregisterReceiver at
+ * onPause() to save battery life.
+ *
+ * startLobby() to create a Lobby on this device
+ * getInformation() to get all Information from lobby's around you
+ * sendMessage() to send a Message if a connection is up
+ */
 public class PeerConnection implements PeerInterface{
 
     private Context context;
@@ -38,16 +48,11 @@ public class PeerConnection implements PeerInterface{
     private String playerName = "";
 
 
-
     private static PeerConnection instance;
 
+
     /**
-     * Need to call registerReceiver at onResume() and if you want call unregisterReceiver at
-     * onPause() to save battery life.
-     *
-     * startLobby() to create a Lobby on this device
-     * getInformation() to get all Information from lobby's around you
-     * sendMessage() to send a Message if a connection is up
+     * Private Constructor for a singleton
      *
      * @param context   A Android Context
      * @param view      A View which implements methods to pass any information's
@@ -58,6 +63,15 @@ public class PeerConnection implements PeerInterface{
 
         initialize();
     }
+
+    /**
+     * Private Constructor for a singleton
+     *
+     * @param context       A context, which will be need to set up wifi p2p
+     *                      and other things
+     * @param view          The view to send messages, information and so on
+     * @param playerName    The player name of the current device
+     */
     private PeerConnection(Context context, ViewPeerInterface view, String playerName){
         this.context = context;
         this.view = view;
@@ -66,12 +80,28 @@ public class PeerConnection implements PeerInterface{
         initialize();
     }
 
+    /**
+     *
+     * @param context   A context, which will be need to set up wifi p2p
+     *                  and other things
+     * @param view      The view to send messages, information and so on
+     * @return          Return the instance of the singleton
+     */
     public static PeerConnection getInstance(Context context, ViewPeerInterface view){
         if(instance == null){
             instance = new PeerConnection(context, view);
         }
         return instance;
     }
+
+    /**
+     *
+     * @param context       A context, which will be need to set up wifi p2p
+     *                      and other things
+     * @param view          The view to send message, information and so on
+     * @param playerName    The player name of the current device
+     * @return              Return the instance of the singleton
+     */
     public static PeerConnection getInstance(Context context, ViewPeerInterface view, String playerName){
         if(instance == null){
             instance = new PeerConnection(context, view, playerName);
@@ -79,8 +109,9 @@ public class PeerConnection implements PeerInterface{
         return instance;
     }
 
-
-
+    /**
+     * initialize the peer connection and the receiver
+     */
     private void initialize(){
         manager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         channel = manager.initialize(context, Looper.getMainLooper(),null);
@@ -92,25 +123,15 @@ public class PeerConnection implements PeerInterface{
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
     }
 
-    public void setPeerList(ArrayList<WifiP2pDevice> deviceList){
-        this.peerList = deviceList;
-    }
-
-    // Call that Functions on an Activity-Class in onStop and onResume
-    public void registerReceiver(){
-        context.registerReceiver(receiver, intentFilter);
-    }
-    public void unregisterReceiver(){
-        context.unregisterReceiver(receiver);
-    }
 
 
-    public void closeConnections() throws IOException{
-        unregisterReceiver();
-        if(manager != null)
-            manager.removeGroup(channel, null);
-    }
 
+
+    /**
+     * Connect to a specific P2P Device
+     *
+     * @param dev   The P2P-Device which to connect
+     */
     @Override
     public void connect(WifiP2pDevice dev) {
 
@@ -129,6 +150,9 @@ public class PeerConnection implements PeerInterface{
         });
     }
 
+    /**
+     * Disconnect from the current Peer Group
+     */
     @Override
     public void disconnect() {
         manager.removeGroup(channel, new WifiP2pManager.ActionListener() {
@@ -144,20 +168,42 @@ public class PeerConnection implements PeerInterface{
         });
     }
 
+    /**
+     * Start searching for Peers in environment
+     *
+     * Stop searching if device connect to a p2pDevice
+     * or if the user stop searching for the peers
+     * with stopPeerDiscover()
+     */
     @Override
     public void startPeerDiscover(){
-        manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-            }
+        if(manager != null && channel != null) {
+            manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
+                @Override
+                public void onSuccess() {
+                }
 
-            @Override
-            public void onFailure(int reason) {
-                Log.d(ERROR, "Discover Peers failed");
-            }
-        });
+                @Override
+                public void onFailure(int reason) {
+                    Log.d(ERROR, "Discover Peers failed");
+                }
+            });
+        }
     }
 
+    /**
+     * Stop searching for peers in environment
+     */
+    @Override
+    public void stopPeerDiscover() {
+        if(manager != null && channel != null){
+            manager.stopPeerDiscovery(channel,null);
+        }
+    }
+
+    /**
+     * Get information about the current connection
+     */
     @Override
     public void getConnectionInfo() {
         manager.requestConnectionInfo(channel, new WifiP2pManager.ConnectionInfoListener() {
@@ -174,13 +220,81 @@ public class PeerConnection implements PeerInterface{
         });
     }
 
+    /**
+     * register the receiver from current context
+     */
+    public void registerReceiver(){
+        try {
+            context.registerReceiver(receiver, intentFilter);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * unregister the receiver from current context
+     */
+    public void unregisterReceiver(){
+        try {
+            context.unregisterReceiver(receiver);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Close all active connections from this object
+     * @throws IOException  Throws a IOException
+     */
+    public void closeConnections() throws IOException{
+        unregisterReceiver();
+        if(manager != null && channel != null)
+            manager.removeGroup(channel, null);
+    }
+
+
     /*
-            GETTERS and SETTERS
+            SETTERS
      */
 
+    /**
+     *
+     * @param view  The view to send messages, information and so on
+     */
+    public void setView(ViewPeerInterface view){
+        this.view = view;
+    }
+
+    /**
+     *
+     * @param info  Set the actually Wifi-Info about the connection
+     */
     public void setWifiInfo(WifiP2pInfo info){
         this.wifiInfo = info;
     }
+
+    /**
+     *
+     * @param deviceList    A list of all founded peers
+     */
+    public void setPeerList(ArrayList<WifiP2pDevice> deviceList){
+        this.peerList = deviceList;
+    }
+
+    /**
+     *
+     * @param receiver  Set the Receiver
+     */
+    public void setReceiver(BroadcastReceiver receiver) {
+        this.receiver = receiver;
+    }
+
+
+
+    /*
+            GETTERS
+     */
     public WifiP2pInfo getWifiInfo(){
         return this.wifiInfo;
     }
@@ -197,10 +311,6 @@ public class PeerConnection implements PeerInterface{
         return view;
     }
 
-    public IntentFilter getIntentFilter() {
-        return intentFilter;
-    }
-
     public WifiP2pManager.Channel getChannel() {
         return channel;
     }
@@ -209,15 +319,9 @@ public class PeerConnection implements PeerInterface{
         return manager;
     }
 
-    public BroadcastReceiver getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(BroadcastReceiver receiver) {
-        this.receiver = receiver;
-    }
-
     public int getPORT() {
         return PORT;
     }
+
+
 }

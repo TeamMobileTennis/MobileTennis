@@ -7,14 +7,13 @@ import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import com.crazyking.mobiletennis.connection.Constants;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.PeerConnection;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
-
-import java.util.ArrayList;
-
 
 /**
  * Created by Adrian Berisha on 14.04.2017.
@@ -94,7 +93,6 @@ public class ClientPeerConn implements Operator {
         registerReceiver();
     }
 
-
     @Override
     public void sendMessage(String message) {
         if(client != null) {
@@ -114,7 +112,7 @@ public class ClientPeerConn implements Operator {
             }
             peerConnection.closeConnections();
         }catch (Exception e){
-            Log.d("ERROR", e.getMessage()+"");
+            e.printStackTrace();
         }
     }
 
@@ -166,6 +164,21 @@ public class ClientPeerConn implements Operator {
     public void setup(String name) {
         Log.d("INFO","Search for Lobbys");
         peerConnection.startPeerDiscover();
+    }
+    public void setup(){
+        setup("");
+    }
+
+    @Override
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
+        if(peerConnection != null)
+            peerConnection.setView(view);
+        if(receiver != null)
+            receiver.setView(view);
+        if(client != null){
+            client.setView(view);
+        }
     }
 
     @Override

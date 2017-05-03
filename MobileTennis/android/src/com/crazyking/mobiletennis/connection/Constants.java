@@ -32,6 +32,13 @@ public final class Constants {
     public final static int CLOSE_ACCEPT = 1;   // Like 3-way handshake, if a device close the connection, the other send a close, too. But with code 1
     public final static int CLOSE_REFUSE = 2;   // Refuse the connection request
 
+    public final static String INFO_LOBBY = "lobbyname";
+    public final static String INFO_P1 = "player1";
+    public final static String INFO_P2 = "player2";
+    public final static String INFO_ADR = "adr";
+
+
+
 
 
 }

@@ -9,10 +9,9 @@ import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 
-import com.crazyking.mobiletennis.connection.ViewPeerInterface;
-
 import java.util.ArrayList;
 
+import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 /**
  * Created by Adrian Berisha on 14.04.2017.
@@ -35,9 +34,13 @@ public class ServerReceiver extends BroadcastReceiver {
         this.view = view;
     }
 
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();         // Action that the Receiver received
+        String action = intent.getAction();         // Action that the Server-Receiver received
 
         if(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)){
             if(manager != null) {

@@ -7,12 +7,11 @@ import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.PeerConnection;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
-
-import java.util.ArrayList;
-
 
 /**
  * Created by Adrian Berisha on 14.04.2017.
@@ -90,6 +89,20 @@ public class ServerPeerConn implements Operator {
         registerReceiver();
     }
 
+
+    @Override
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
+        if(peerConnection != null){
+            peerConnection.setView(view);
+        }
+        if(receiver != null){
+            receiver.setView(view);
+        }
+        if(lobby != null){
+            lobby.setView(view);
+        }
+    }
 
     @Override
     public void setup(String lobbyName){

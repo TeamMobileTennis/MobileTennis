@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.crazyking.mobiletennis.AndroidLauncher;
-import com.crazyking.mobiletennis.connection.ConnectionInterface;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.StyleBuilder;

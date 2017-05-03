@@ -1,12 +1,8 @@
 package com.crazyking.mobiletennis.connection.Client;
 
+import android.app.Notification;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.util.Log;
-
-import com.crazyking.mobiletennis.connection.Constants;
-import com.crazyking.mobiletennis.connection.Information;
-import com.crazyking.mobiletennis.connection.Messages;
-import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +11,14 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+
+import com.crazyking.mobiletennis.connection.Constants;
+
+import static com.crazyking.mobiletennis.connection.Constants.*;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.*;
+import com.crazyking.mobiletennis.connection.Information;
+import com.crazyking.mobiletennis.connection.Messages;
+import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 /**
  * Created by Adrian Berisha on 03.04.2017.
@@ -59,7 +63,6 @@ public class Client extends Thread{
         this.host = wifiInfo.groupOwnerAddress;
         this.port = port;
         Log.d("INFO", "Created Client");
-        Log.d("INFO", "Host: " + host.getHostAddress() + " Port: " + port);
     }
 
     public void sendMessage(final String message) {
@@ -78,14 +81,39 @@ public class Client extends Thread{
     }
 
     public void closeConn()throws IOException{
+        if(!close) {
+            requestClose();
+            Log.d("INFO","Request to close");
+        }
+    }
+
+    private void stopConn()throws IOException{
         close = true;
         reader.close();
         writer.close();
         server.close();
-        this.interrupt();
+        if(this.isAlive())
+            this.interrupt();
     }
+
     public void requestClose(){
-        sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_REQ)));
+        sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(CLOSE_REQ)));
+    }
+    private void acceptClose()throws IOException{
+        sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
+        stopConn();
+    }
+    private boolean handleClose(int code)throws IOException{
+        if(code == CLOSE_REQ)
+            acceptClose();
+        else if(code == CLOSE_ACCEPT){
+            stopConn();
+        }else if(code == CLOSE_REFUSE){
+            return false;
+        }else {
+            return false;
+        }
+        return true;
     }
 
     public boolean checkConn(){
@@ -103,6 +131,10 @@ public class Client extends Thread{
         return true;
     }
 
+    public void setView(ViewPeerInterface view){
+        this.view = view;
+    }
+
 
     @Override
     public void run() {
@@ -113,8 +145,6 @@ public class Client extends Thread{
             server.setReuseAddress(true);
             server.connect(new InetSocketAddress(host, port));
 
-            Log.d("INFO", "Created Socket");
-
             reader = new BufferedReader(new InputStreamReader(server.getInputStream()));
             writer = new PrintWriter(server.getOutputStream(), true);
 
@@ -124,67 +154,9 @@ public class Client extends Thread{
                 message = reader.readLine();
 
                 if (message != null) {
-                    if(message.equalsIgnoreCase(Constants.CMD.CLOSE)){
-                        requestClose();
-                    }
 
-                    if (message.equals("exit") || message.isEmpty()) {   // Connection will close
-                        break;
-                    }
                     try {
-                        String cmd = Messages.getCommand(message);
-
-                        if (!cmd.isEmpty()) {
-
-                            if (cmd.equalsIgnoreCase(Constants.CMD.RESP)) {
-                                int code = Integer.parseInt(Messages.getValue(message, Constants.CODE));
-                                if (code == 0) {
-                                    game = true;
-                                    view.passMessage("Log: " + "Connecting to Game successful");
-                                } else {
-                                    game = false;
-                                    view.passMessage("Log: " + "Lobby is full! Try another one.");
-                                    Log.d("INFO", "Lobby is full");
-                                }
-                            } else if (cmd.equalsIgnoreCase(Constants.CMD.INFO)) {
-                                information.strToInfo(message);
-                                view.passInformation(information);
-                                view.passMessage(information.getLobbyName() + " Dev-Addr: " + information.getAddress());
-                            } else if (cmd.equalsIgnoreCase(Constants.CMD.START)) {
-                                view.passMessage("Log: " + "Game starts!");
-                            } else if (cmd.equalsIgnoreCase(Constants.CMD.PAUSE)) {
-                                view.passMessage("Log: " + "Game paused!");
-                            } else if (cmd.equalsIgnoreCase(Constants.CMD.END)) {
-                                view.passMessage("Log: " + "Game ends!");
-                            } else if (cmd.equalsIgnoreCase(Constants.CMD.CLOSE)) {
-                                if (Messages.getDataMap(message).size() <= 1) {
-                                    sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
-                                } else {
-
-                                    String strCode = Messages.getValue(message, Constants.CODE);
-                                    if (!strCode.isEmpty()) {
-                                        int code = -1;
-                                        try {
-                                            code = Integer.parseInt(strCode);
-                                        } catch (NumberFormatException e) {
-                                            e.printStackTrace();
-                                        }
-                                        if (code == Constants.CLOSE_REQ) {
-                                            sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
-                                        } else if (code == Constants.CLOSE_ACCEPT) {
-                                            view.passMessage("Log: " + "Connection closed.");
-                                            break;
-                                        } else if (code == Constants.CLOSE_REFUSE) {
-                                            view.passMessage("Cannot close the connection");
-                                        }
-                                    }
-                                }
-
-                            }
-
-                        } else {
-                            view.passMessage(message);
-                        }
+                        handleCommands(message);
 
                     } catch (Exception e) {
                         Log.d("ERROR", e.getMessage() + "");
@@ -195,10 +167,70 @@ public class Client extends Thread{
             }
 
             Log.d("INFO","Connection with Server closed");
-            closeConn();
+            stopConn();
 
         }catch(Exception io){
             Log.d("ERROR",io.getMessage()+"");
+        }
+    }
+
+    private void handleCommands(String message)throws Exception{
+        String cmd = Messages.getCommand(message);
+
+        if (!cmd.isEmpty()) {
+
+            switch (cmd){
+                case RESP:
+                    if(Integer.parseInt(Messages.getValue(message, Constants.CODE)) == 0) {
+                        view.passMessage("Log: Connecting to game successful");
+                        game = true;
+                    }else {
+                        view.passMessage("Log: Lobby is full. Try another one");
+                        game = false;
+                    }
+                    break;
+                case INFO:
+                    information.strToInfo(message);
+                    view.passInformation(information);
+                    break;
+
+                case START:
+                    view.passMessage("Log: Game starts");
+                    break;
+
+                case PAUSE:
+                    view.passMessage("Log: Game paused");
+                    break;
+
+                case END:
+                    view.passMessage("Log: Game ends");
+                    break;
+
+                case CLOSE:
+                    if(Messages.getDataMap(message).size()<=1){
+                        acceptClose();
+                    }else {
+                        String strCode = Messages.getValue(message, CODE);
+                        if(!strCode.isEmpty()){
+                            int code = -1;
+                            try {
+                                code = Integer.parseInt(strCode);
+                            }catch (NumberFormatException e){
+                                e.printStackTrace();
+                            }
+                            if(!handleClose(code)){
+                                Log.d("INFO","Connection failed to closed");
+                            }
+
+                        }
+                    }
+                    break;
+                default:
+                    view.passMessage(message);
+            }
+
+        }else {
+            view.passMessage(message);
         }
     }
 

@@ -1,3 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="/Users/adrianberisha/MobileTennis/MobileTennis/core/build/libs/core-1.0.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="ba4fe9f05f117ec72b2d508e5aac580f7041cfcf">
+        <dex dex="/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/pre-dexed/debug/core-1.0_32c4991c7e8abe4e0acdfe278049aeecb39bf514.jar" />
+    </item>
+    <item
+        jar="/Users/adrianberisha/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.9.6/57c2831c870743712b808384187ea856e541878f/gdx-backend-android-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="57c2831c870743712b808384187ea856e541878f">
+        <dex dex="/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/pre-dexed/debug/gdx-backend-android-1.9.6_2781cac50cf7f9cc8ae3691826d03a11315a1ca5.jar" />
+    </item>
+    <item
+        jar="/Users/adrianberisha/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.6/47d1e9b890e364ec28f128e9bb3b9a12a94c164/gdx-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="047d1e9b890e364ec28f128e9bb3b9a12a94c164">
+        <dex dex="/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/pre-dexed/debug/gdx-1.9.6_277e16f5c9da22d7fbeaa9815cc1717ab7eda4e9.jar" />
+    </item>
+    <item
+        jar="/Users/adrianberisha/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.9.6/c249ef4060a4fada952f278455c8f7b9cba3c18a/gdx-box2d-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="c249ef4060a4fada952f278455c8f7b9cba3c18a">
+        <dex dex="/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/pre-dexed/debug/gdx-box2d-1.9.6_ae07d27dc44c9ea18193b8b8db3951bcae3a75d6.jar" />
+    </item>
+    <item
+        jar="/Users/adrianberisha/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.9.6/69187cc3c8062f191df435b43671b0e5ffcbf353/gdx-freetype-1.9.6.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="69187cc3c8062f191df435b43671b0e5ffcbf353">
+        <dex dex="/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/pre-dexed/debug/gdx-freetype-1.9.6_449d17106815d5ed58ddfb9944ae9e63b88fe06b.jar" />
+    </item>
+
+</items>

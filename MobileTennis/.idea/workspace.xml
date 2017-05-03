@@ -40,40 +40,8 @@
       <file leaf-file-name="AndroidLauncher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="250" column="32" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
-              <folding>
-                <element signature="e#3538#3831#0" expanded="true" />
-                <element signature="e#3830#3831#0" expanded="true" />
-                <element signature="e#3866#4106#0" expanded="true" />
-                <element signature="e#4105#4106#0" expanded="true" />
-                <element signature="e#5903#5904#0" expanded="true" />
-                <element signature="e#5926#5927#0" expanded="true" />
-                <element signature="e#5962#5963#0" expanded="true" />
-                <element signature="e#5984#5985#0" expanded="true" />
-                <element signature="e#6792#6807#0" expanded="true" />
-                <element signature="e#6943#6944#0" expanded="true" />
-                <element signature="e#6962#6963#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestInterface.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/TestInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConnectionInterface.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,21 +49,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerReceiver.java">
+      <file leaf-file-name="MobileTennis.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/MobileTennis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+            <state relative-caret-position="195">
+              <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MobileTennis.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/MobileTennis.java">
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+            <state relative-caret-position="74">
+              <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -104,43 +72,18 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-678">
-              <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+            <state relative-caret-position="0">
+              <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientReceiver.java">
+      <file leaf-file-name="ClientPeerConn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientPeerConn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="77" column="67" selection-start-line="77" selection-start-column="67" selection-end-line="77" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JoinLobbyScreen.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/JoinLobbyScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="611">
-              <caret line="132" column="36" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
-              <folding>
-                <element signature="e#942#957#0" expanded="true" />
-                <element signature="e#1014#1021#0" expanded="true" />
-                <element signature="e#3334#3335#0" expanded="true" />
-                <element signature="e#3380#3381#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UIBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/UIBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+            <state relative-caret-position="180">
+              <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -162,7 +105,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\CrazyKing\.gradle\wrapper\dists\gradle-2.10-all\a4w5fzrkeut1ox71xslb49gst\gradle-2.10" />
+        <entry key="$PROJECT_DIR$" value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.10-all/a4w5fzrkeut1ox71xslb49gst/gradle-2.10" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -2082,6 +2025,7 @@
     </option>
     <option name="modificationStamps">
       <map>
+        <entry key="$PROJECT_DIR$" value="8947773287000" />
         <entry key="G:\AndroidStudio\MobileTennis" value="8941558738031" />
         <entry key="G:\GitHub\MobileTennis\MobileTennis" value="8943225704321" />
         <entry key="G:\GitHub\MobileTennis\MobileTennis\MobileTennis" value="8944689088891" />
@@ -2135,7 +2079,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-util/1.13.1/c8487ceb499b9ced96694731810acd1a70e13aca/aether-util-1.13.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/5d2b0a5bd852103294760829538702241d186520/plexus-classworlds-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/ef38ff5c25f83a4a02fcd9843d85f3e47012873e/plexus-classworlds-2.4.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/3940d1ca998744cca98da76c3d01974c1c54149f/plexus-utils-3.0.8-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/faba5d28a07fcde50c8c26d3f002774acf11843e/plexus-utils-3.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/a4b945e0346815b2f2becff6610e4b777e6f785a/sisu-inject-plexus-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/255c67e6e968472ca98dbe7804fab2aa156fc5e7/sisu-inject-plexus-2.2.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-model/3.0.4/a898e2e67a6f9bfcdfbc558f59923ade648a79b5/maven-model-3.0.4-sources.jar" />
@@ -2146,7 +2091,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-repository-metadata/3.0.4/a5c737d02ab9365d272a1d0fc724420808ab4df8/maven-repository-metadata-3.0.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/bf04578cea30cc20e2662d001c6506cd3446f810/aether-impl-1.13.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/ba2656934fa7c0f20c0c3882873dc705e16ae201/aether-impl-1.13.1.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/b10462efcf1ac1915797958d479c724d1bd5008d/plexus-component-annotations-1.5.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/c72f2660d0cbed24246ddb55d7fdc4f7374d2078/plexus-component-annotations-1.5.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/4c70479c6c872ace68cc5c95b2e28ed7f9facaa3/wagon-http-shared4-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/5b79b79e390dac2813739d3bc5c7588d6ce50455/wagon-http-shared4-2.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.3/3328e73c4c97cc62e1077ff754308c98ab1564a/httpclient-4.2.3-sources.jar" />
@@ -2196,7 +2142,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-debug-all/5.0.1/asm-debug-all-5.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/52f7743efa04258b55832de2348981b7563d1495/sisu-inject-bean-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/cd68ecfedcfb2e8a93cf8feea190f0cf86cdfa05/sisu-inject-bean-2.2.3.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/ec4b1ecf8064ff5e40dce45ae3f62776faa6f6b8/plexus-interpolation-1.14-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/c88dd864fe8b8256c25558ce7cd63be66ba07693/plexus-interpolation-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/3bae518d66e64f706fa3b7edd3f69781e3c48f8b/jsoup-1.7.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/b0ff13ce3deb12f2731533a5136b9503921befdf/jsoup-1.7.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
@@ -2213,7 +2160,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/ST4/4.0.8/ST4-4.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/92e8494ee816573299c1d46e58e3a492a35b244e/lint-api-24.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/7d93eb96a2f07860ab8d9ae761ebe5c416777fcf/lint-api-24.5.0.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/c7126aded0e8e13fed5f913559a0dd7b770a10f3/asm-analysis-5.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/61495cea98c9c63b16b87ae4e79b7e478405e40b/antlr4-runtime-4.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/5067478827a98f5ab77d9fc577903edc57af3da4/antlr4-runtime-4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-annotations/4.5/8d24c9255a970c3c85fc5c88dfe9d4e8627d56e2/antlr4-annotations-4.5-sources.jar" />
@@ -2276,7 +2224,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-util/1.13.1/c8487ceb499b9ced96694731810acd1a70e13aca/aether-util-1.13.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/5d2b0a5bd852103294760829538702241d186520/plexus-classworlds-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/ef38ff5c25f83a4a02fcd9843d85f3e47012873e/plexus-classworlds-2.4.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/3940d1ca998744cca98da76c3d01974c1c54149f/plexus-utils-3.0.8-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/faba5d28a07fcde50c8c26d3f002774acf11843e/plexus-utils-3.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/a4b945e0346815b2f2becff6610e4b777e6f785a/sisu-inject-plexus-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/255c67e6e968472ca98dbe7804fab2aa156fc5e7/sisu-inject-plexus-2.2.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-model/3.0.4/a898e2e67a6f9bfcdfbc558f59923ade648a79b5/maven-model-3.0.4-sources.jar" />
@@ -2287,7 +2236,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-repository-metadata/3.0.4/a5c737d02ab9365d272a1d0fc724420808ab4df8/maven-repository-metadata-3.0.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/bf04578cea30cc20e2662d001c6506cd3446f810/aether-impl-1.13.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/ba2656934fa7c0f20c0c3882873dc705e16ae201/aether-impl-1.13.1.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/b10462efcf1ac1915797958d479c724d1bd5008d/plexus-component-annotations-1.5.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/c72f2660d0cbed24246ddb55d7fdc4f7374d2078/plexus-component-annotations-1.5.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/4c70479c6c872ace68cc5c95b2e28ed7f9facaa3/wagon-http-shared4-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/5b79b79e390dac2813739d3bc5c7588d6ce50455/wagon-http-shared4-2.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.3/3328e73c4c97cc62e1077ff754308c98ab1564a/httpclient-4.2.3-sources.jar" />
@@ -2337,7 +2287,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-debug-all/5.0.1/asm-debug-all-5.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/52f7743efa04258b55832de2348981b7563d1495/sisu-inject-bean-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/cd68ecfedcfb2e8a93cf8feea190f0cf86cdfa05/sisu-inject-bean-2.2.3.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/ec4b1ecf8064ff5e40dce45ae3f62776faa6f6b8/plexus-interpolation-1.14-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/c88dd864fe8b8256c25558ce7cd63be66ba07693/plexus-interpolation-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/3bae518d66e64f706fa3b7edd3f69781e3c48f8b/jsoup-1.7.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/b0ff13ce3deb12f2731533a5136b9503921befdf/jsoup-1.7.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
@@ -2354,7 +2305,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/ST4/4.0.8/ST4-4.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/92e8494ee816573299c1d46e58e3a492a35b244e/lint-api-24.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/7d93eb96a2f07860ab8d9ae761ebe5c416777fcf/lint-api-24.5.0.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/c7126aded0e8e13fed5f913559a0dd7b770a10f3/asm-analysis-5.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/61495cea98c9c63b16b87ae4e79b7e478405e40b/antlr4-runtime-4.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/5067478827a98f5ab77d9fc577903edc57af3da4/antlr4-runtime-4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-annotations/4.5/8d24c9255a970c3c85fc5c88dfe9d4e8627d56e2/antlr4-annotations-4.5-sources.jar" />
@@ -2417,7 +2369,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-util/1.13.1/c8487ceb499b9ced96694731810acd1a70e13aca/aether-util-1.13.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/5d2b0a5bd852103294760829538702241d186520/plexus-classworlds-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/ef38ff5c25f83a4a02fcd9843d85f3e47012873e/plexus-classworlds-2.4.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/3940d1ca998744cca98da76c3d01974c1c54149f/plexus-utils-3.0.8-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/faba5d28a07fcde50c8c26d3f002774acf11843e/plexus-utils-3.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/a4b945e0346815b2f2becff6610e4b777e6f785a/sisu-inject-plexus-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/255c67e6e968472ca98dbe7804fab2aa156fc5e7/sisu-inject-plexus-2.2.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-model/3.0.4/a898e2e67a6f9bfcdfbc558f59923ade648a79b5/maven-model-3.0.4-sources.jar" />
@@ -2428,7 +2381,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-repository-metadata/3.0.4/a5c737d02ab9365d272a1d0fc724420808ab4df8/maven-repository-metadata-3.0.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/bf04578cea30cc20e2662d001c6506cd3446f810/aether-impl-1.13.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/ba2656934fa7c0f20c0c3882873dc705e16ae201/aether-impl-1.13.1.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/b10462efcf1ac1915797958d479c724d1bd5008d/plexus-component-annotations-1.5.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/c72f2660d0cbed24246ddb55d7fdc4f7374d2078/plexus-component-annotations-1.5.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/4c70479c6c872ace68cc5c95b2e28ed7f9facaa3/wagon-http-shared4-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/5b79b79e390dac2813739d3bc5c7588d6ce50455/wagon-http-shared4-2.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.3/3328e73c4c97cc62e1077ff754308c98ab1564a/httpclient-4.2.3-sources.jar" />
@@ -2478,7 +2432,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-debug-all/5.0.1/asm-debug-all-5.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/52f7743efa04258b55832de2348981b7563d1495/sisu-inject-bean-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/cd68ecfedcfb2e8a93cf8feea190f0cf86cdfa05/sisu-inject-bean-2.2.3.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/ec4b1ecf8064ff5e40dce45ae3f62776faa6f6b8/plexus-interpolation-1.14-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/c88dd864fe8b8256c25558ce7cd63be66ba07693/plexus-interpolation-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/3bae518d66e64f706fa3b7edd3f69781e3c48f8b/jsoup-1.7.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/b0ff13ce3deb12f2731533a5136b9503921befdf/jsoup-1.7.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
@@ -2495,7 +2450,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/ST4/4.0.8/ST4-4.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/92e8494ee816573299c1d46e58e3a492a35b244e/lint-api-24.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/7d93eb96a2f07860ab8d9ae761ebe5c416777fcf/lint-api-24.5.0.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/c7126aded0e8e13fed5f913559a0dd7b770a10f3/asm-analysis-5.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/61495cea98c9c63b16b87ae4e79b7e478405e40b/antlr4-runtime-4.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/5067478827a98f5ab77d9fc577903edc57af3da4/antlr4-runtime-4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-annotations/4.5/8d24c9255a970c3c85fc5c88dfe9d4e8627d56e2/antlr4-annotations-4.5-sources.jar" />
@@ -2558,7 +2514,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-util/1.13.1/c8487ceb499b9ced96694731810acd1a70e13aca/aether-util-1.13.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/5d2b0a5bd852103294760829538702241d186520/plexus-classworlds-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/ef38ff5c25f83a4a02fcd9843d85f3e47012873e/plexus-classworlds-2.4.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/3940d1ca998744cca98da76c3d01974c1c54149f/plexus-utils-3.0.8-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/faba5d28a07fcde50c8c26d3f002774acf11843e/plexus-utils-3.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/a4b945e0346815b2f2becff6610e4b777e6f785a/sisu-inject-plexus-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/255c67e6e968472ca98dbe7804fab2aa156fc5e7/sisu-inject-plexus-2.2.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-model/3.0.4/a898e2e67a6f9bfcdfbc558f59923ade648a79b5/maven-model-3.0.4-sources.jar" />
@@ -2569,7 +2526,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-repository-metadata/3.0.4/a5c737d02ab9365d272a1d0fc724420808ab4df8/maven-repository-metadata-3.0.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/bf04578cea30cc20e2662d001c6506cd3446f810/aether-impl-1.13.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/ba2656934fa7c0f20c0c3882873dc705e16ae201/aether-impl-1.13.1.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/b10462efcf1ac1915797958d479c724d1bd5008d/plexus-component-annotations-1.5.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/c72f2660d0cbed24246ddb55d7fdc4f7374d2078/plexus-component-annotations-1.5.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/4c70479c6c872ace68cc5c95b2e28ed7f9facaa3/wagon-http-shared4-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/5b79b79e390dac2813739d3bc5c7588d6ce50455/wagon-http-shared4-2.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.3/3328e73c4c97cc62e1077ff754308c98ab1564a/httpclient-4.2.3-sources.jar" />
@@ -2619,7 +2577,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-debug-all/5.0.1/asm-debug-all-5.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/52f7743efa04258b55832de2348981b7563d1495/sisu-inject-bean-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/cd68ecfedcfb2e8a93cf8feea190f0cf86cdfa05/sisu-inject-bean-2.2.3.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/ec4b1ecf8064ff5e40dce45ae3f62776faa6f6b8/plexus-interpolation-1.14-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/c88dd864fe8b8256c25558ce7cd63be66ba07693/plexus-interpolation-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/3bae518d66e64f706fa3b7edd3f69781e3c48f8b/jsoup-1.7.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/b0ff13ce3deb12f2731533a5136b9503921befdf/jsoup-1.7.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
@@ -2636,7 +2595,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/ST4/4.0.8/ST4-4.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/92e8494ee816573299c1d46e58e3a492a35b244e/lint-api-24.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/7d93eb96a2f07860ab8d9ae761ebe5c416777fcf/lint-api-24.5.0.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/c7126aded0e8e13fed5f913559a0dd7b770a10f3/asm-analysis-5.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/61495cea98c9c63b16b87ae4e79b7e478405e40b/antlr4-runtime-4.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/5067478827a98f5ab77d9fc577903edc57af3da4/antlr4-runtime-4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-annotations/4.5/8d24c9255a970c3c85fc5c88dfe9d4e8627d56e2/antlr4-annotations-4.5-sources.jar" />
@@ -2699,7 +2659,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-util/1.13.1/c8487ceb499b9ced96694731810acd1a70e13aca/aether-util-1.13.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/5d2b0a5bd852103294760829538702241d186520/plexus-classworlds-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-classworlds/2.4/ef38ff5c25f83a4a02fcd9843d85f3e47012873e/plexus-classworlds-2.4.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/3940d1ca998744cca98da76c3d01974c1c54149f/plexus-utils-3.0.8-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/3.0.8/faba5d28a07fcde50c8c26d3f002774acf11843e/plexus-utils-3.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/a4b945e0346815b2f2becff6610e4b777e6f785a/sisu-inject-plexus-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-plexus/2.2.3/255c67e6e968472ca98dbe7804fab2aa156fc5e7/sisu-inject-plexus-2.2.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-model/3.0.4/a898e2e67a6f9bfcdfbc558f59923ade648a79b5/maven-model-3.0.4-sources.jar" />
@@ -2710,7 +2671,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-repository-metadata/3.0.4/a5c737d02ab9365d272a1d0fc724420808ab4df8/maven-repository-metadata-3.0.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/bf04578cea30cc20e2662d001c6506cd3446f810/aether-impl-1.13.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.aether/aether-impl/1.13.1/ba2656934fa7c0f20c0c3882873dc705e16ae201/aether-impl-1.13.1.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/b10462efcf1ac1915797958d479c724d1bd5008d/plexus-component-annotations-1.5.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-component-annotations/1.5.5/c72f2660d0cbed24246ddb55d7fdc4f7374d2078/plexus-component-annotations-1.5.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/4c70479c6c872ace68cc5c95b2e28ed7f9facaa3/wagon-http-shared4-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.wagon/wagon-http-shared4/2.4/5b79b79e390dac2813739d3bc5c7588d6ce50455/wagon-http-shared4-2.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.3/3328e73c4c97cc62e1077ff754308c98ab1564a/httpclient-4.2.3-sources.jar" />
@@ -2760,7 +2722,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-debug-all/5.0.1/asm-debug-all-5.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/52f7743efa04258b55832de2348981b7563d1495/sisu-inject-bean-2.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.sonatype.sisu/sisu-inject-bean/2.2.3/cd68ecfedcfb2e8a93cf8feea190f0cf86cdfa05/sisu-inject-bean-2.2.3.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/ec4b1ecf8064ff5e40dce45ae3f62776faa6f6b8/plexus-interpolation-1.14-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-interpolation/1.14/c88dd864fe8b8256c25558ce7cd63be66ba07693/plexus-interpolation-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/3bae518d66e64f706fa3b7edd3f69781e3c48f8b/jsoup-1.7.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/b0ff13ce3deb12f2731533a5136b9503921befdf/jsoup-1.7.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
@@ -2777,7 +2740,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/ST4/4.0.8/ST4-4.0.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/92e8494ee816573299c1d46e58e3a492a35b244e/lint-api-24.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.5.0/7d93eb96a2f07860ab8d9ae761ebe5c416777fcf/lint-api-24.5.0.jar" />
-                            <option value="$USER_HOME$/.m2/repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.0.3/c7126aded0e8e13fed5f913559a0dd7b770a10f3/asm-analysis-5.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/61495cea98c9c63b16b87ae4e79b7e478405e40b/antlr4-runtime-4.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-runtime/4.5/5067478827a98f5ab77d9fc577903edc57af3da4/antlr4-runtime-4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tunnelvisionlabs/antlr4-annotations/4.5/8d24c9255a970c3c85fc5c88dfe9d4e8627d56e2/antlr4-annotations-4.5-sources.jar" />
@@ -2960,8 +2924,6 @@
         <option value="$PROJECT_DIR$/core/src/com/crazyking/mobiletennis/screens/GameScreen.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/ViewPeerInterface.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/PeerInterface.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientPeerConn.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/Client.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerPeerConn.java" />
@@ -2975,20 +2937,22 @@
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/CreateLobbyScreen.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerReceiver.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionInterface.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/MobileTennis.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/TestInterface.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/UIBuilder.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientReceiver.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/JoinLobbyScreen.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/Client.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientPeerConn.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/MobileTennis.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="813" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -3015,16 +2979,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane />
       </pane>
@@ -3086,136 +3040,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobiletennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobiletennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="screens" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobiletennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobiletennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobiletennis" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3579,11 +3417,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="0" y="23" width="1440" height="813" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27282852" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27259684" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3595,8 +3433,8 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1977612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26752505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32855093" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3628,17 +3466,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/core/build/libs/core-1.0.jar!/com/crazyking/mobiletennis/MobileTennis.class" />
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -3672,226 +3499,76 @@
     <entry file="file://$PROJECT_DIR$/core/src/com/crazyking/mobiletennis/screens/GameScreen.java" />
     <entry file="file://$PROJECT_DIR$/core/src/com/crazyking/mobiletennis/ui/UIBuilder.java" />
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/ViewPeerInterface.java" />
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Receiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/PeerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ViewPeerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerPeerConn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Receiver.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/PeerInterface.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ViewPeerInterface.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerPeerConn.java" />
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/MainActivity.java" />
-    <entry file="file://$PROJECT_DIR$/android/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/android/res/layout/activity_main.xml" />
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/Gerät.java" />
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/ConnectInterface.java" />
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/MobileTennisOld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/MobileTennisOld.java" />
     <entry file="file://$PROJECT_DIR$/core/src/com/crazyking/mobiletennis/MobileTennisCore.java" />
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/utils/B2DConstants.java">
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/utils/B2DConstants.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/PaddleScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/body/BodyBuilder.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/StyleBuilder.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/managers/ScreenManager.java" />
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/net/wifi/p2p/WifiP2pDevice.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/AbstractScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/SettingsScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/GameScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/AccelScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/ButtonHandler.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/MenuScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/PeerConnection.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/CreateLobbyScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionInterface.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/TestInterface.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/UIBuilder.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/JoinLobbyScreen.java" />
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/PaddleScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/body/BodyBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/StyleBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/managers/ScreenManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="38" column="53" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/net/wifi/p2p/WifiP2pDevice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/AbstractScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/SettingsScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/GameScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="74" column="52" selection-start-line="74" selection-start-column="52" selection-end-line="74" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/AccelScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/ButtonHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="74">
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-678">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/MenuScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/PeerConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="90" column="80" selection-start-line="90" selection-start-column="46" selection-end-line="90" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientPeerConn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+        <state relative-caret-position="180">
+          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/CreateLobbyScreen.java">
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
-          <folding />
+        <state relative-caret-position="285">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionInterface.java">
+    <entry file="file://$PROJECT_DIR$/desktop/src/com/crazyking/mobiletennis/desktop/DesktopLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3900,66 +3577,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/MobileTennis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+        <state relative-caret-position="195">
+          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/TestInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/ui/UIBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="250" column="32" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
-          <folding>
-            <element signature="e#3538#3831#0" expanded="true" />
-            <element signature="e#3830#3831#0" expanded="true" />
-            <element signature="e#3866#4106#0" expanded="true" />
-            <element signature="e#4105#4106#0" expanded="true" />
-            <element signature="e#5903#5904#0" expanded="true" />
-            <element signature="e#5926#5927#0" expanded="true" />
-            <element signature="e#5962#5963#0" expanded="true" />
-            <element signature="e#5984#5985#0" expanded="true" />
-            <element signature="e#6792#6807#0" expanded="true" />
-            <element signature="e#6943#6944#0" expanded="true" />
-            <element signature="e#6962#6963#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="77" column="67" selection-start-line="77" selection-start-column="67" selection-end-line="77" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/game/screens/JoinLobbyScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="132" column="36" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
-          <folding>
-            <element signature="e#942#957#0" expanded="true" />
-            <element signature="e#1014#1021#0" expanded="true" />
-            <element signature="e#3334#3335#0" expanded="true" />
-            <element signature="e#3380#3381#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

@@ -2,13 +2,12 @@ package com.crazyking.mobiletennis.connection.Server;
 
 import android.util.Log;
 
-import com.crazyking.mobiletennis.connection.Information;
-import com.crazyking.mobiletennis.connection.ViewPeerInterface;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 
+import com.crazyking.mobiletennis.connection.Information;
+import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 /**
  * Created by Adrian Berisha on 06.04.2017.
@@ -24,8 +23,8 @@ public class GameLobby extends Thread{
 
     // With P2P 254 Connections are allowed, because of the IP-Address.
     // The Default IP-Address Range is between 192.168.49.1 to 192.168.49.255
-    private ServerHandler[] clients = new ServerHandler[254-2];       // Connection to Clients
-    private ServerHandler[] gameClients = new ServerHandler[2];     // Only 2 Game Clients are allowed
+    private ServerHandler[] clients = new ServerHandler[254-2];         // Connection to Clients
+    private ServerHandler[] gameClients = new ServerHandler[2];         // Only 2 Game Clients are allowed
 
 
 
@@ -35,8 +34,6 @@ public class GameLobby extends Thread{
         serverSocket = new ServerSocket();
         serverSocket.setReuseAddress(true);             // ReUse Address
         serverSocket.bind(new InetSocketAddress(port));
-
-        Log.d("INFO","Binded Serversocket to Port "+port);
     }
 
     /**
@@ -113,6 +110,25 @@ public class GameLobby extends Thread{
     }
 
     /**
+     * Update all with the new View
+     *
+     * @param view  The new view, to send messages and Co
+     */
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
+        for(ServerHandler handler : clients){
+            if(handler != null){
+                handler.setView(view);
+            }
+        }
+        for(ServerHandler handler : gameClients){
+            if(handler != null){
+                handler.setView(view);
+            }
+        }
+    }
+
+    /**
      *  Register the Client as Game-Client and check if lobby is full or not
      *
      * @param client        Object which connect to the GameClient
@@ -126,7 +142,7 @@ public class GameLobby extends Thread{
         }else {
             gameClients[pos] = client;
             clients[search(client)] = null;
-            if(!lobbyInformation.setPlayerName(playerName)){
+            if(!lobbyInformation.setPlayerName(pos+1,playerName)){
                 return false;
             }
             return true;
@@ -164,6 +180,17 @@ public class GameLobby extends Thread{
         if(pos >= 0){
             clients[pos] = null;
         }
+        pos = -1;
+        for(int i=0; i<gameClients.length; i++){
+            if(gameClients[i] == client){
+                pos = i;
+                break;
+            }
+        }
+        if(pos >=0){
+            gameClients[pos] = null;
+        }
+
     }
 
     /**

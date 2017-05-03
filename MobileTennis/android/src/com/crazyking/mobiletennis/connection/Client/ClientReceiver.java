@@ -1,6 +1,5 @@
 package com.crazyking.mobiletennis.connection.Client;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +11,9 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 
-import com.crazyking.mobiletennis.AndroidLauncher;
-import com.crazyking.mobiletennis.connection.ViewPeerInterface;
-
 import java.util.ArrayList;
+
+import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 /**
  * Created by Adrian Berisha on 14.04.2017.
@@ -23,11 +21,11 @@ import java.util.ArrayList;
 
 public class ClientReceiver extends BroadcastReceiver {
 
-    private Context context;
-    private WifiP2pManager manager;
-    private WifiP2pManager.Channel channel;
-    private ClientPeerConn peer;
-    private ViewPeerInterface view;
+    private Context context;                    // Current Context
+    private WifiP2pManager manager;             // Wifi-P2P-Manager
+    private WifiP2pManager.Channel channel;     // Wifi Channel
+    private ClientPeerConn peer;                // The Client Peer Connection
+    private ViewPeerInterface view;             // The View to send messages and information
 
     private WifiP2pGroup wifiGroup;
     private WifiP2pInfo wifiInfo;
@@ -43,7 +41,7 @@ public class ClientReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();         // Action that the Receiver received
+        String action = intent.getAction();         // Action that the Client-Receiver received
 
         if(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)){
             if(manager != null) {
@@ -74,8 +72,6 @@ public class ClientReceiver extends BroadcastReceiver {
                 if (netInfo != null) {
                     if (netInfo.isConnected()) {
                         peer.getConnectionInfo();
-
-                        ((AndroidLauncher)context).ClientConnect();
                     }
                 }
                 wifiGroup = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_GROUP);
@@ -91,6 +87,10 @@ public class ClientReceiver extends BroadcastReceiver {
 
     }
 
+    public void setView(ViewPeerInterface view){
+        this.view = view;
+    }
+
     public boolean isConnected(){
         if(wifiGroup.getClientList().size() <= 0){
             return false;
@@ -101,7 +101,6 @@ public class ClientReceiver extends BroadcastReceiver {
         if(wifiInfo != null){
             if(wifiInfo.groupFormed)
                 return true;
-            return false;
         }
         return false;
     }

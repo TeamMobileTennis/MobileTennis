@@ -1,6 +1,7 @@
 package com.crazyking.mobiletennis.connection;
 
 import java.util.HashMap;
+import static com.crazyking.mobiletennis.connection.Constants.*;
 
 /**
  * Created by Adrian Berisha on 05.04.2017.
@@ -11,11 +12,6 @@ public class Information extends Messages{
     private String player1;
     private String player2;
     private String address;
-
-    private final String lName = "lobbyname";
-    private final String p1 = "player1";
-    private final String p2 = "player2";
-    private final String mac = "mac";
 
 
     public Information(String lobbyName, String player1, String player2, String address){
@@ -41,19 +37,19 @@ public class Information extends Messages{
 
     public String toString(){
         HashMap<String, String> data = new HashMap<>();
-        data.put(lName, lobbyName);
-        data.put(p1, player1);
-        data.put(p2, player2);
-        data.put(mac, address);
+        data.put(INFO_LOBBY, lobbyName);
+        data.put(INFO_P1, player1);
+        data.put(INFO_P2, player2);
+        data.put(INFO_ADR, address);
     	return getDataStr(Constants.CMD.INFO, data);
     }
     public void strToInfo(String info)throws Exception{
         HashMap<String, String> data = getDataMap(info);
 
-        lobbyName = data.get(lName);
-        player1 = data.get(p1);
-        player2 = data.get(p2);
-        address = data.get(mac);
+        lobbyName = data.get(INFO_LOBBY);
+        player1 = data.get(INFO_P1);
+        player2 = data.get(INFO_P2);
+        address = data.get(INFO_ADR);
     }
     
     public String getLobbyName() {
@@ -64,15 +60,14 @@ public class Information extends Messages{
     }
 
 
-    public boolean setPlayerName(String playerName){
-        if(player1.isEmpty()) {
-            player1 = playerName;
-            return true;
-        }else if(player2.isEmpty()) {
-            player2 = playerName;
-            return true;
-        }
-        return false;
+    public boolean setPlayerName(int player, String playerName){
+        if(player == 1)
+            this.player1 = playerName;
+        else if (player == 2)
+            this.player2 = playerName;
+        else
+            return false;
+        return true;
     }
 
     public boolean equals(Information obj) {
