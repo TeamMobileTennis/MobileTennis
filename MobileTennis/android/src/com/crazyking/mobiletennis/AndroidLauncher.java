@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.crazyking.mobiletennis.connection.Client.ClientPeerConn;
+import com.crazyking.mobiletennis.connection.Constants;
 import com.crazyking.mobiletennis.connection.Information;
+import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.Server.ServerPeerConn;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
@@ -27,6 +29,9 @@ import com.crazyking.mobiletennis.game.MobileTennis;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import static com.crazyking.mobiletennis.connection.Constants.*;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.*;
 
 
 public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface {
@@ -173,18 +178,64 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 	@Override
 	public void passMessage(final String message) {
-		Log.d("INFO", "Received: "+ message);
-		runOnUiThread(new Runnable() {
+		String cmd = Messages.getCommand(message);
+
+		if(!cmd.isEmpty()){
+			switch(cmd){
+				case RESP:
+					// Only handled by Client
+					if(Integer.parseInt(Messages.getValue(message, CODE)) == 0) {
+						// TODO - Connection accepts
+					}else {
+						// TODO - Connection refused
+					}
+					break;
+				case START:
+					// TODO - Game starts
+					break;
+				case PAUSE:
+					// TODO - Game paused
+					break;
+				case END:
+					// TODO - Game ends
+					break;
+
+				case CLOSE:
+					// TODO - Connection closed
+					break;
+
+				case CONN:
+					// Only handled by Server
+					String playerName = Messages.getValue(message,NAME);
+					// TODO - A Player connected
+
+					// Testing:
+					operator.sendMessage("Welcome in Lobby " + playerName);
+					countGame();
+				default:
+					break;
+			}
+		}
+
+	}
+	public void countGame() {
+		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				toTextLog(message);
+				try {
+					for (int i = 10; i > 0; i--) {
+						operator.sendMessage("Game starts in " + i + " seconds");
+						Thread.sleep(1000);
+					}
+					operator.sendMessage(Messages.getDataStr(Constants.CMD.START));
+					operator.sendMessage("Game has started");
+				} catch (InterruptedException e) {
+					Log.d("ERROR", e.getMessage() + "");
+				}
 			}
-		});
+		}).start();
 	}
 
-	public void toTextLog(String message){
-		textView.append(message+'\n');
-	}
 
 	@Override
 	public void passInformation(Information info) {

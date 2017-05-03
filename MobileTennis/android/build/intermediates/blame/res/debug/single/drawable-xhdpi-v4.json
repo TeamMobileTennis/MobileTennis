@@ -1,14 +1,18 @@
 [
     {
-        "merged": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
-        "source": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\drawable-xhdpi\\ic_launcher.png"
+        "merged": "D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\res\\drawable-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
-        "source": "/Users/adrianberisha/MobileTennis/MobileTennis/G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\drawable-xhdpi\\ic_launcher.png"
+        "merged": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\res\\drawable-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_launcher.png",
-        "source": "/Users/adrianberisha/MobileTennis/MobileTennis/android/res/drawable-xhdpi/ic_launcher.png"
+        "merged": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\drawable-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\drawable-xhdpi\\ic_launcher.png"
     }
 ]

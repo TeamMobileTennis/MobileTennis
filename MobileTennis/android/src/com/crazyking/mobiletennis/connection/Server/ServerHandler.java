@@ -134,9 +134,10 @@ public class ServerHandler extends Thread{
                         sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_SUCCESS)));
                         gameLobby.sendMessage(gameLobby.getInformation().toString());
 
-                        // Just for testing:
-                        sendMessage("Welcome in the Lobby");
-                        countGame();
+
+                        // Send only to view, if connection accepted
+                        view.passMessage(message);
+
                     } else
                         sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_FULL)));
                     break;
@@ -154,6 +155,8 @@ public class ServerHandler extends Thread{
                             }
                             if (!handleClose(code)) {
                                 Log.d("INFO", "Connection failed to closed");
+                            }else {
+                                view.passMessage(Messages.getDataStr(CLOSE));
                             }
 
                         }

@@ -180,30 +180,9 @@ public class Client extends Thread{
         if (!cmd.isEmpty()) {
 
             switch (cmd){
-                case RESP:
-                    if(Integer.parseInt(Messages.getValue(message, Constants.CODE)) == 0) {
-                        view.passMessage("Log: Connecting to game successful");
-                        game = true;
-                    }else {
-                        view.passMessage("Log: Lobby is full. Try another one");
-                        game = false;
-                    }
-                    break;
                 case INFO:
                     information.strToInfo(message);
                     view.passInformation(information);
-                    break;
-
-                case START:
-                    view.passMessage("Log: Game starts");
-                    break;
-
-                case PAUSE:
-                    view.passMessage("Log: Game paused");
-                    break;
-
-                case END:
-                    view.passMessage("Log: Game ends");
                     break;
 
                 case CLOSE:
@@ -220,6 +199,8 @@ public class Client extends Thread{
                             }
                             if(!handleClose(code)){
                                 Log.d("INFO","Connection failed to closed");
+                            }else {
+                                view.passMessage(Messages.getDataStr(CLOSE));
                             }
 
                         }
