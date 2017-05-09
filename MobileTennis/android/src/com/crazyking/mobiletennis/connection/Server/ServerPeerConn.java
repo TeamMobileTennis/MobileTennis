@@ -19,8 +19,6 @@ import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 
 public class ServerPeerConn implements Operator {
 
-    private String action = "";             // Action to do, after successful connection
-
     private GameLobby lobby = null;
 
     private PeerConnection peerConnection;
@@ -76,7 +74,9 @@ public class ServerPeerConn implements Operator {
     }
 
 
-
+    /**
+     * Initialize the peer connection
+     */
     private void initialize(){
         manager = peerConnection.getManager();
         channel = peerConnection.getChannel();
@@ -89,7 +89,25 @@ public class ServerPeerConn implements Operator {
         registerReceiver();
     }
 
+    /**
+     * Create a lobby
+     * @param lobbyName the name of lobby to create
+     */
+    public void createLobby(String lobbyName){
+        try {
+            manager.createGroup(channel, null);
+            lobby = new GameLobby(lobbyName, port, view,
+                    ((WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
+            lobby.start();
+        }catch (Exception e){
+            Log.d("ERROR", e.getMessage()+"");
+        }
+    }
 
+    /**
+     * Updates the view
+     * @param view  current view to pass messages and infos
+     */
     @Override
     public void setView(ViewPeerInterface view) {
         this.view = view;
@@ -104,19 +122,19 @@ public class ServerPeerConn implements Operator {
         }
     }
 
-    @Override
-    public void setup(String lobbyName){
-        try {
-            manager.createGroup(channel, null);
-            lobby = new GameLobby(lobbyName, port, view,
-                    ((WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress());
-            lobby.start();
-//            peerConnection.startPeerDiscover();
-        }catch (Exception e){
-            Log.d("ERROR", e.getMessage()+"");
-        }
-    }
+//    /**
+//     * Creates a game lobby
+//     * @param lobbyName Name of the game lobby
+//     */
+//    @Override
+//    public void setup(String lobbyName){
+//        createLobby(lobbyName);
+//    }
 
+    /**
+     * Send a message to all in lobby
+     * @param message A String with a message to send.
+     */
     @Override
     public void sendMessage(String message) {
         if(lobby != null){
@@ -126,6 +144,9 @@ public class ServerPeerConn implements Operator {
         }
     }
 
+    /**
+     * Close connections with lobby
+     */
     @Override
     public void closeConnections() {
         try {
@@ -140,21 +161,33 @@ public class ServerPeerConn implements Operator {
         }
     }
 
+    /**
+     * @param list  A ArrayList of WifiP2PDevices.
+     */
     @Override
     public void setPeerList(ArrayList<WifiP2pDevice> list) {
         peerConnection.setPeerList(list);
     }
 
+    /**
+     * Register the receiver
+     */
     @Override
     public void registerReceiver() {
         peerConnection.registerReceiver();
     }
 
+    /**
+     * Unregister the receiver
+     */
     @Override
     public void unregisterReceiver() {
         peerConnection.unregisterReceiver();
     }
 
+    /**
+     * Get current connection info
+     */
     @Override
     public void getConnectionInfo(){
         if(manager != null){
@@ -171,9 +204,14 @@ public class ServerPeerConn implements Operator {
         }
     }
 
-    @Override
-    public void connectToGame(String deviceAddress) {
-        // Don't need here
-    }
+//    /**
+//     * Don't need the server
+//     *
+//     * @param deviceAddress The Mac-Address of Server to connect
+//     */
+//    @Override
+//    public void connectToGame(String deviceAddress) {
+//        // Don't need here
+//    }
 
 }

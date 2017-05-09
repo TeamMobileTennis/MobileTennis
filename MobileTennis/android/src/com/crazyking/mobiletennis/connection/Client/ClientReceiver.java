@@ -29,7 +29,17 @@ public class ClientReceiver extends BroadcastReceiver {
 
     private WifiP2pGroup wifiGroup;
     private WifiP2pInfo wifiInfo;
+    private NetworkInfo networkInfo;
+    private int discoveryState = 0;
 
+    /**
+     * Constructor for Client-Receiver
+     * @param context   Context of Activity
+     * @param manager   WifiP2PManager of Activity
+     * @param channel   WifiP2P-Channel of Activity
+     * @param peer      Client Peer-Connection of Activity
+     * @param view      View to pass messages
+     */
     public ClientReceiver(Context context, WifiP2pManager manager, WifiP2pManager.Channel channel, ClientPeerConn peer, ViewPeerInterface view) {
         super();
         this.context = context;
@@ -68,9 +78,9 @@ public class ClientReceiver extends BroadcastReceiver {
         }else if(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
             if(manager != null) {
                 // Get Network-Info to check if we are connected to a p2p device
-                NetworkInfo netInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
-                if (netInfo != null) {
-                    if (netInfo.isConnected()) {
+                networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+                if (networkInfo != null) {
+                    if (networkInfo.isConnected()) {
                         peer.getConnectionInfo();
                     }
                 }
@@ -82,25 +92,42 @@ public class ClientReceiver extends BroadcastReceiver {
             if(manager != null) {
 //                WifiP2pDevice info = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
             }
+        }else if(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)){
+            if(manager != null){
+                discoveryState = intent.getParcelableExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE);
+            }
         }
 
 
     }
 
+    /**
+     * Update the view, with another one
+     * @param view  The View to pass messages and other things
+     */
     public void setView(ViewPeerInterface view){
         this.view = view;
     }
 
-    public boolean isConnected(){
-        if(wifiGroup.getClientList().size() <= 0){
-            return false;
-        }
-        return true;
-    }
+    /**
+     * Boolean with State of Connection
+     * @return  True, if device is connected and false if is not connected
+     */
     public boolean isConnect(){
         if(wifiInfo != null){
             if(wifiInfo.groupFormed)
                 return true;
+        }
+        return false;
+    }
+
+    /**
+     * Boolean with State of Discovery.
+     * @return   True, if discovery running and false, if discovery stopped
+     */
+    public boolean getDiscoveryState(){
+        if(discoveryState == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED){
+            return true;
         }
         return false;
     }

@@ -25,6 +25,17 @@ public class ServerReceiver extends BroadcastReceiver {
     private ServerPeerConn peer;
     private ViewPeerInterface view;
 
+    private NetworkInfo networkInfo;
+    private int discoveryState = 0;
+
+    /**
+     * Constructor for Server-Receiver, which receives actions from device, like changing of the peer list and so stuff
+     * @param context   Application Context
+     * @param manager   Wifi P2P Manager
+     * @param channel   Wifi P2P Channel
+     * @param peer      Wifi Server Peer-Connection
+     * @param view      ViewPeerInterface
+     */
     public ServerReceiver(Context context, WifiP2pManager manager, WifiP2pManager.Channel channel, ServerPeerConn peer, ViewPeerInterface view) {
         super();
         this.context = context;
@@ -34,6 +45,10 @@ public class ServerReceiver extends BroadcastReceiver {
         this.view = view;
     }
 
+    /**
+     * Updates the view
+     * @param view  ViewPeerInterface to pass messages
+     */
     public void setView(ViewPeerInterface view) {
         this.view = view;
     }
@@ -66,9 +81,9 @@ public class ServerReceiver extends BroadcastReceiver {
         }else if(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
             if(manager != null) {
                 // Get Network-Info to check if we are connected to a p2p device
-                NetworkInfo netInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
-                if (netInfo != null) {
-                    if (netInfo.isConnected()) {
+                networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+                if (networkInfo != null) {
+                    if (networkInfo.isConnected()) {
                         peer.getConnectionInfo();
                     }
                 }
@@ -77,6 +92,21 @@ public class ServerReceiver extends BroadcastReceiver {
             if (manager != null) {
 //                WifiP2pDevice info = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
             }
+        }else if(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)){
+            if(manager != null){
+                discoveryState = intent.getParcelableExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE);
+            }
         }
+    }
+
+    /**
+     * Boolean with State of Discovery
+     * @return  True, if discovery running and false, if discovery stopped
+     */
+    public boolean getDiscoveryState(){
+        if(discoveryState == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED){
+            return true;
+        }
+        return false;
     }
 }

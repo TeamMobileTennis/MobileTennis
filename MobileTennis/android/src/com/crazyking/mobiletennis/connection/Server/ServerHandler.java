@@ -33,6 +33,12 @@ public class ServerHandler extends Thread{
     private boolean close = false;
 
 
+    /**
+     * Constructor for Server-Handler (handle connection with clients)
+     * @param client    The socket for client connection
+     * @param gameLobby The current game lobby
+     * @param view      The view to pass messages and info
+     */
     public ServerHandler(Socket client, GameLobby gameLobby, ViewPeerInterface view){
         this.client = client;
         this.gameLobby = gameLobby;
@@ -40,6 +46,10 @@ public class ServerHandler extends Thread{
         Log.d("INFO","Created Connection with "+ this.client.getInetAddress().getHostAddress());
     }
 
+    /**
+     * Send Message to client
+     * @param message   A String that send to client
+     */
     public void sendMessage(String message){
         if(writer!=null) {
             writer.println(message);
@@ -47,12 +57,19 @@ public class ServerHandler extends Thread{
             Log.d("ERROR","Cannot send message");
     }
 
-    public void closeConn()throws IOException{
+    /**
+     * request close with client
+     */
+    public void closeConn(){
         if(!close) {
             requestClose();
-            Log.d("INFO","Request to close");
         }
     }
+
+    /**
+     * Stop connection with client
+     * @throws IOException  If an error occurs to close reader and writer
+     */
     private void stopConn()throws IOException{
         close = true;
         reader.close();
@@ -63,13 +80,28 @@ public class ServerHandler extends Thread{
             this.interrupt();
     }
 
+    /**
+     * Request to close connection with client
+     */
     public void requestClose(){
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_REQ)));
     }
+
+    /**
+     * Accepts the close request
+     * @throws IOException  if connection cannot be stopped
+     */
     private void acceptClose()throws IOException{
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
         stopConn();
     }
+
+    /**
+     * Handle the close codes
+     * @param code          The code receives from client
+     * @return              If it failed or not
+     * @throws IOException  If connection cannot be stopped
+     */
     private boolean handleClose(int code)throws IOException{
         if(code == CLOSE_REQ)
             acceptClose();
@@ -83,6 +115,11 @@ public class ServerHandler extends Thread{
         return true;
     }
 
+    /**
+     * Updates view to pass any messages
+     * @param view  ViewPeerInterface which implements Methods
+     *              for connection and game information
+     */
     public void setView(ViewPeerInterface view) {
         this.view = view;
     }
@@ -120,6 +157,11 @@ public class ServerHandler extends Thread{
         }
     }
 
+    /**
+     * Handles incoming Messages from client
+     * @param message       txtRecord with the right syntax
+     * @throws Exception    if error occurs with handling messages
+     */
     private void handleCommands(String message)throws Exception{
         String cmd = Messages.getCommand(message);
 
@@ -171,6 +213,9 @@ public class ServerHandler extends Thread{
         }
     }
 
+    /**
+     * Count Game from ten to zero
+     */
     public void countGame(){
         new Thread(new Runnable() {
             @Override

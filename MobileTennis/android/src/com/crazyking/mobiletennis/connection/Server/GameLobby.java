@@ -27,7 +27,14 @@ public class GameLobby extends Thread{
     private ServerHandler[] gameClients = new ServerHandler[2];         // Only 2 Game Clients are allowed
 
 
-
+    /**
+     * Constructor of Game Lobby
+     * @param lobbyName     Name of game lobby
+     * @param port          Port for sockets
+     * @param view          View to pass messages and info
+     * @param address       Mac-Address of current device
+     * @throws IOException  If serversocket binding failed
+     */
     public GameLobby(String lobbyName, int port, ViewPeerInterface view, String address) throws IOException{
         lobbyInformation = new Information(lobbyName, "", "", address);
 
@@ -37,6 +44,7 @@ public class GameLobby extends Thread{
     }
 
     /**
+     * Send Messages to all Clients
      * @param message   The Message to be send to all Game-Clients
      */
     public void sendMessage(String message) {
@@ -50,7 +58,7 @@ public class GameLobby extends Thread{
     }
 
     /**
-     *
+     * Close connection with all game-clients
      * @throws IOException  Throws an IOException if a connection cannot be closed.
      */
     public void closeConn() throws IOException {
@@ -153,14 +161,10 @@ public class GameLobby extends Thread{
      *  Close all Connections to clients, which are no Game-Clients
      */
     public void closeAllClients(){
-        try {
-            for (int i = 0; i < clients.length; i++) {
-                if(clients[i] != null)
-                    if(clients[i].isAlive())
-                        clients[i].closeConn();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
+        for (int i = 0; i < clients.length; i++) {
+            if(clients[i] != null)
+                if(clients[i].isAlive())
+                    clients[i].closeConn();
         }
     }
 

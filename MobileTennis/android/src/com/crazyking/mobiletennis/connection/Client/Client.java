@@ -57,6 +57,13 @@ public class Client extends Thread{
     private Information information = new Information();
 
 
+    /**
+     * Constructor for Client
+     * @param wifiInfo      WifiP2PInfo contains information for connection
+     * @param port          Port which to bind to
+     * @param view          View to pass messages and infos
+     * @param playerName    Player name of device
+     */
     public Client(WifiP2pInfo wifiInfo, int port, ViewPeerInterface view, String playerName){
         this.view = view;
         this.playerName = playerName;
@@ -65,6 +72,10 @@ public class Client extends Thread{
         Log.d("INFO", "Created Client");
     }
 
+    /**
+     *
+     * @param message   A Message that send to server
+     */
     public void sendMessage(final String message) {
         if(checkConn()) {
             writer.println(message);
@@ -80,13 +91,21 @@ public class Client extends Thread{
         }
     }
 
-    public void closeConn()throws IOException{
+    /**
+     * Close the connection with server
+     */
+    public void closeConn(){
         if(!close) {
             requestClose();
             Log.d("INFO","Request to close");
         }
     }
 
+
+    /**
+     * Stop the connection to server
+     * @throws IOException  If an error occurs to close reader and writer
+     */
     private void stopConn()throws IOException{
         close = true;
         reader.close();
@@ -96,13 +115,29 @@ public class Client extends Thread{
             this.interrupt();
     }
 
+    /**
+     * Request to close.
+     * Like TCP. Request to Close -> Other side accepts close -> Client receives and close Connection
+     */
     public void requestClose(){
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(CLOSE_REQ)));
     }
+
+    /**
+     * Accepts the incoming request to close the connection
+     * @throws IOException  if failed to stop the connection
+     */
     private void acceptClose()throws IOException{
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
         stopConn();
     }
+
+    /**
+     * Handle the incoming close request/accept
+     * @param code  contains the code (0 request, 1 accept, 2 refuse)
+     * @return      if its failed or not
+     * @throws IOException  if it failed to stop connection
+     */
     private boolean handleClose(int code)throws IOException{
         if(code == CLOSE_REQ)
             acceptClose();
@@ -116,6 +151,10 @@ public class Client extends Thread{
         return true;
     }
 
+    /**
+     * Check if a connection is still established
+     * @return  the state if connection is established
+     */
     public boolean checkConn(){
         if(server == null)
             return false;
@@ -131,6 +170,10 @@ public class Client extends Thread{
         return true;
     }
 
+    /**
+     * Update the view
+     * @param view  The current view to pass messages and infos
+     */
     public void setView(ViewPeerInterface view){
         this.view = view;
     }
@@ -174,6 +217,11 @@ public class Client extends Thread{
         }
     }
 
+    /**
+     * Handle the incoming commands from server
+     * @param message       contains the current command
+     * @throws Exception    if an error occurs
+     */
     private void handleCommands(String message)throws Exception{
         String cmd = Messages.getCommand(message);
 
