@@ -10,17 +10,17 @@ import java.util.ArrayList;
  */
 
 public interface Operator {
-    /**
-     * @param name At the Server the Lobby-Name and with
-     *             the client just a empty string
-     */
-    void setup(String name);
+//    /**
+//     * @param name At the Server the Lobby-Name and with
+//     *             the client just a empty string
+//     */
+//    void setup(String name);
 
-    /**
-     * @param deviceAddress The Mac-Address of Server to connect
-     *                      (Only for Client - No Usage for Server)
-     */
-    void connectToGame(String deviceAddress);
+//    /**
+//     * @param deviceAddress The Mac-Address of Server to connect
+//     *                      (Only for Client - No Usage for Server)
+//     */
+//    void connectToGame(String deviceAddress);
 
     /**
      * @param message A String with a message to send.

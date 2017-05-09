@@ -16,13 +16,13 @@ ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xm
 	xmlns:android
 		ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:2:11-69
 uses-sdk
-ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:7:5-73
+ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:7:5-74
 	android:targetSdkVersion
-		ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:7:41-70
+		ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:7:42-71
 		INJECTED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml
 		INJECTED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:7:15-40
+		ADDED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml:7:15-41
 		INJECTED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml
 		INJECTED from D:\Users\Berisha\MobileTennis\MobileTennis\android\AndroidManifest.xml
 application

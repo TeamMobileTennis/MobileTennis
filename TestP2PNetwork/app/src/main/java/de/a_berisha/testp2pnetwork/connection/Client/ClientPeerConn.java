@@ -78,7 +78,6 @@ public class ClientPeerConn implements Operator {
     }
 
 
-
     private void initialize(){
 
         context = peerConnection.getContext();

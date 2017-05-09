@@ -117,14 +117,12 @@ public class PeerConnection implements PeerInterface{
         channel = manager.initialize(context, Looper.getMainLooper(),null);
 
         intentFilter = new IntentFilter();
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);       // Check if available peers changed
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);       // Check if wifi p2p is enabled or disabled
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);  // Check if the state of the wifi p2p connectivity has changed
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION); // Check if this device details have changed
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);   // Check if discovery changed (started or stopped)
     }
-
-
-
 
 
     /**
@@ -295,30 +293,59 @@ public class PeerConnection implements PeerInterface{
     /*
             GETTERS
      */
+
+    /**
+     *
+     * @return  currents WifiInfo
+     */
     public WifiP2pInfo getWifiInfo(){
         return this.wifiInfo;
     }
 
+    /**
+     *
+     * @return  playername in String
+     */
     public String getPlayerName(){
         return playerName;
     }
 
+    /**
+     *
+     * @return  the current context of the activity
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     *
+     * @return  the current view to pass messages and info
+     */
     public ViewPeerInterface getView() {
         return view;
     }
 
+    /**
+     *
+     * @return  the current Wifi-P2P Channel
+     */
     public WifiP2pManager.Channel getChannel() {
         return channel;
     }
 
+    /**
+     *
+     * @return  the current WifiP2PManager
+     */
     public WifiP2pManager getManager() {
         return manager;
     }
 
+    /**
+     *
+     * @return  the current port for sockets
+     */
     public int getPORT() {
         return PORT;
     }

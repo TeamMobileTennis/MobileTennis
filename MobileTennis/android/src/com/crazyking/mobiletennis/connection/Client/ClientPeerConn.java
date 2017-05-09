@@ -78,7 +78,9 @@ public class ClientPeerConn implements Operator {
     }
 
 
-
+    /**
+     * Initialize the peer connection
+     */
     private void initialize(){
 
         context = peerConnection.getContext();
@@ -93,6 +95,17 @@ public class ClientPeerConn implements Operator {
         registerReceiver();
     }
 
+    /**
+     * Start to discover for nearby peers
+     */
+    public void startPeerDiscover(){
+        peerConnection.startPeerDiscover();
+    }
+
+    /**
+     * Send message to server
+     * @param message A String with a message to send.
+     */
     @Override
     public void sendMessage(String message) {
         if(client != null) {
@@ -101,6 +114,9 @@ public class ClientPeerConn implements Operator {
         }
     }
 
+    /**
+     * Close all connections
+     */
     @Override
     public void closeConnections(){
         try {
@@ -116,11 +132,18 @@ public class ClientPeerConn implements Operator {
         }
     }
 
+    /**
+     * The list of current Peer2Peer Devices in the near
+     * @param list  A ArrayList of WifiP2PDevices.
+     */
     @Override
     public void setPeerList(ArrayList<WifiP2pDevice> list){
         peerConnection.setPeerList(list);
     }
 
+    /**
+     * Get the current connection info and connect to server
+     */
     @Override
     public void getConnectionInfo(){
         if(manager != null){
@@ -160,15 +183,19 @@ public class ClientPeerConn implements Operator {
         }
     }
 
-    @Override
-    public void setup(String name) {
-        Log.d("INFO","Search for Lobbys");
-        peerConnection.startPeerDiscover();
-    }
-    public void setup(){
-        setup("");
-    }
+//    /**
+//     * Setup the peer connection (start searching for p2p devices)
+//     * @param name No need with client
+//     */
+//    @Override
+//    public void setup(String name) {
+//        startPeerDiscover();
+//    }
 
+    /**
+     *
+     * @param view  The view to pass messages and info
+     */
     @Override
     public void setView(ViewPeerInterface view) {
         this.view = view;
@@ -181,7 +208,11 @@ public class ClientPeerConn implements Operator {
         }
     }
 
-    @Override
+    /**
+     * Connect to a p2p device (game host)
+     * @param deviceAddress The Mac-Address of Server to connect
+     */
+//    @Override
     public void connectToGame(String deviceAddress){
 
         if(receiver.isConnect()){
@@ -207,15 +238,19 @@ public class ClientPeerConn implements Operator {
             }
         });
         Log.d("INFO", "connectToGame in Client");
-
-
     }
 
+    /**
+     * Register Receiver
+     */
     @Override
     public void registerReceiver() {
         peerConnection.registerReceiver();
     }
 
+    /**
+     * Unregister Receiver
+     */
     @Override
     public void unregisterReceiver() {
         peerConnection.unregisterReceiver();

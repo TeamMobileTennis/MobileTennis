@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.crazyking.mobiletennis.connection.Client.ClientPeerConn;
+import com.crazyking.mobiletennis.connection.ConnectionFactory;
 import com.crazyking.mobiletennis.connection.Constants;
 import com.crazyking.mobiletennis.connection.Information;
 import com.crazyking.mobiletennis.connection.Messages;
@@ -98,8 +99,9 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 		btnSearch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				operator = ClientPeerConn.getInstance(context, view, playerName);
-				operator.setup("");
+				//operator = ClientPeerConn.getInstance(context, view, playerName);
+				//operator.setup("");
+				operator = ConnectionFactory.createClient(context,view);
 			}
 		});
 		// Send a Message from the Activity
@@ -114,7 +116,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 						Log.d("ERROR","Operator is null");
 					}
 				}catch (Exception e){
-					Log.d(ERROR, e.getMessage()+"");
+					e.printStackTrace();
 				}
 			}
 		});
@@ -123,9 +125,10 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				try {
-					operator.connectToGame(devList.get(position).deviceAddress);
+//					operator.connectToGame(devList.get(position).deviceAddress);
+					ConnectionFactory.connectToGame(operator,devList.get(position).deviceAddress);
 				}catch (Exception e){
-					Log.d(ERROR, e.getMessage()+"");
+					e.printStackTrace();
 				}
 			}
 		});
@@ -135,8 +138,9 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 			public void onClick(View v) {
 				String lobbyName = etMessage.getText().toString();
 
-				operator = ServerPeerConn.getInstance(context, view, playerName);
-				operator.setup(lobbyName);
+				//operator = ServerPeerConn.getInstance(context, view, playerName);
+				//operator.setup(lobbyName);
+				operator = ConnectionFactory.createHost(context,view,lobbyName);
 			}
 		});
 
@@ -278,24 +282,27 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 	// Methods for Connection to use
 	public ArrayList<WifiP2pDevice> SearchingDevices() {
-		operator = ClientPeerConn.getInstance(context, view, "Player");
-		operator.setup("");
+//		operator = ClientPeerConn.getInstance(context, view, "Player");
+//		operator.setup("");
+		operator = ConnectionFactory.createClient(context,view);
 
 		return devList;
 	}
 
 	public void ConnectToDevice(WifiP2pDevice device) {
 		try {
-			operator.connectToGame(device.deviceAddress);
+//			operator.connectToGame(device.deviceAddress);
+			ConnectionFactory.connectToGame(operator,device.deviceAddress);
 		}catch (Exception e){
 			Log.d(ERROR, e.getMessage()+"");
-			throw  e;
+//			throw e;
 		}
 	}
 
 	public void CreateServer() {
-		operator = ServerPeerConn.getInstance(context, view, "Server");
-		operator.setup("Spiel");
+//		operator = ServerPeerConn.getInstance(context, view, "Server");
+//		operator.setup("Spiel");
+		operator = ConnectionFactory.createHost(context,view,"Server");
 	}
 
 
