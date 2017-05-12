@@ -13,6 +13,9 @@ import de.a_berisha.testp2pnetwork.connection.Constants;
 import de.a_berisha.testp2pnetwork.connection.Messages;
 import de.a_berisha.testp2pnetwork.connection.ViewPeerInterface;
 
+import static de.a_berisha.testp2pnetwork.connection.Constants.CMD.*;
+import static de.a_berisha.testp2pnetwork.connection.Constants.*;
+
 /**
  * Created by Adrian Berisha on 03.04.2017.
  */
@@ -45,16 +48,43 @@ public class ServerHandler extends Thread{
     }
 
     public void closeConn()throws IOException{
+        if(!close) {
+            requestClose();
+            Log.d("INFO","Request to close");
+        }
+    }
+    private void stopConn()throws IOException{
         close = true;
         reader.close();
         writer.close();
         client.close();
         gameLobby.stopServerHandler(this);
-        this.interrupt();
+        if(this.isAlive())
+            this.interrupt();
     }
 
     public void requestClose(){
         sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_REQ)));
+    }
+    private void acceptClose()throws IOException{
+        sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
+        stopConn();
+    }
+    private boolean handleClose(int code)throws IOException{
+        if(code == CLOSE_REQ)
+            acceptClose();
+        else if(code == CLOSE_ACCEPT){
+            stopConn();
+        }else if(code == CLOSE_REFUSE){
+            return false;
+        }else {
+            return false;
+        }
+        return true;
+    }
+
+    public void setView(ViewPeerInterface view) {
+        this.view = view;
     }
 
     @Override
@@ -67,73 +97,74 @@ public class ServerHandler extends Thread{
 
 
 
-            String message = "";
+            String message;
             while (!close) {
                 message = reader.readLine();
                 Log.d("INFO", message+"");
                 if(message != null) {
 
-                    if(message.equalsIgnoreCase(Constants.CMD.CLOSE)){
-                        requestClose();
-                    }
-                    if (message.equals("exit") || message.isEmpty()) {      // Connection will close
-                        break;
-                    }
                     try {
-                        String cmdStr = Messages.getCommand(message);
-                        Log.d("INFO", "Command: " + cmdStr);
-                        if (!cmdStr.isEmpty()) {
-                            if (cmdStr.equalsIgnoreCase(Constants.CMD.GETINFO)) {
-                                sendMessage(gameLobby.getInformation().toString());
-                            } else if (cmdStr.equalsIgnoreCase(Constants.CMD.CONN)) {
-                                playerName = Messages.getValue(message, Constants.NAME);
-                                if (gameLobby.connectAsGameClient(this, playerName)) {
-                                    sendMessage(Messages.getDataStr(Constants.CMD.RESP, Constants.CODE, Integer.toString(Constants.CONN_SUCCESS)));
-                                    Log.d("INFO", playerName + "connected.");
+                        handleCommands(message);
 
-                                    sendMessage("Welcome in the Lobby");
-                                    countGame();
-
-                                    // Information changed. Send new Information
-                                    gameLobby.sendMessage(gameLobby.getInformation().toString());
-                                } else
-                                    sendMessage(Messages.getDataStr(Constants.CMD.RESP, Constants.CODE, Integer.toString(Constants.CONN_FULL)));
-                            } else if (cmdStr.equalsIgnoreCase(Constants.CMD.CLOSE)) {
-
-                                if (Messages.getDataMap(message).size() <= 1) {
-                                    sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
-                                } else {
-
-                                    String strCode = Messages.getValue(message, Constants.CODE);
-                                    if (!strCode.isEmpty()) {
-                                        int code = Integer.parseInt(strCode);
-                                        if (code == Constants.CLOSE_REQ) {
-                                            sendMessage(Messages.getDataStr(Constants.CMD.CLOSE, Constants.CODE, Integer.toString(Constants.CLOSE_ACCEPT)));
-                                        } else if (code == Constants.CLOSE_ACCEPT) {
-                                            view.passMessage("Log: " + "Connection closed.");
-                                            break;
-                                        } else if (code == Constants.CLOSE_REFUSE) {
-                                            view.passMessage("Cannot close the connection");
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            view.passMessage(message);
-                        }
-                    } catch (NumberFormatException e) {
+                    }catch (Exception e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        Log.d("ERROR", e.getMessage() + "");
                     }
                 }
 
             }
             Log.d("INFO","Connection with a Client closed");
-            closeConn();
+            stopConn();
 
         }catch(Exception io){
             Log.d("ERROR",io.getMessage()+"");
+        }
+    }
+
+    private void handleCommands(String message)throws Exception{
+        String cmd = Messages.getCommand(message);
+
+        if (!cmd.isEmpty()) {
+            switch (cmd) {
+                case GETINFO:
+                    sendMessage(gameLobby.getInformation().toString());
+                    break;
+                case CONN:
+                    playerName = Messages.getValue(message, NAME);
+                    if (gameLobby.connectAsGameClient(this, playerName)) {
+                        sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_SUCCESS)));
+                        gameLobby.sendMessage(gameLobby.getInformation().toString());
+
+                        // Just for testing:
+                        sendMessage("Welcome in the Lobby");
+                        countGame();
+                    } else
+                        sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_FULL)));
+                    break;
+                case CLOSE:
+                    if (Messages.getDataMap(message).size() <= 1) {
+                        acceptClose();
+                    } else {
+                        String strCode = Messages.getValue(message, CODE);
+                        if (!strCode.isEmpty()) {
+                            int code = -1;
+                            try {
+                                code = Integer.parseInt(strCode);
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
+                            if (!handleClose(code)) {
+                                Log.d("INFO", "Connection failed to closed");
+                            }
+
+                        }
+                    }
+                    break;
+
+                default:
+                    view.passMessage(message);
+            }
+        }else {
+            view.passMessage(message);
         }
     }
 

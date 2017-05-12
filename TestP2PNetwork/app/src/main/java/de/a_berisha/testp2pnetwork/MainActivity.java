@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
                 try {
                     operator.connectToGame(devList.get(position).deviceAddress);
                 }catch (Exception e){
-                    Log.d(ERROR, e.getMessage()+"");
+                    e.printStackTrace();
                 }
             }
         });
@@ -135,14 +135,6 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
             @Override
             public void onClick(View v) {
                 operator.getConnectionInfo();
-                NetworkInfo networkInfo = getIntent().getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
-                if(networkInfo != null){
-                    if(networkInfo.isConnected()){
-                        Log.d("INFO","Connected!");
-                    }
-                }else {
-                    Log.d("INFO","NetInfo is null (MainActivity)");
-                }
             }
         });
 
@@ -209,7 +201,9 @@ public class MainActivity extends AppCompatActivity implements ViewPeerInterface
     @Override
     protected void onStop() {
         super.onStop();
-        operator.closeConnections();
+        if(operator != null) {
+            operator.closeConnections();
+        }
     }
 
     @Override
