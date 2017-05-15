@@ -4,6 +4,7 @@ package com.crazyking.mobiletennis.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -36,10 +37,10 @@ public class GameScreen extends AbstractScreen {
 
     Label playerScore, playertwoScore;
 
-    float ballSpeed = 100;
+    float ballSpeed = 500;
     float width, height;
 
-    ArrayList<Body> flaggedBodies = new ArrayList<Body>();
+    Body reset = null;
 
     public GameScreen(MobileTennis mt){
         super(mt);
@@ -92,12 +93,12 @@ public class GameScreen extends AbstractScreen {
                     if(contact.getFixtureB().getBody() == playerGoal) {
                         playertwoGoals++;
                         playertwoScore.setText(playertwoGoals + "");
-                        flaggedBodies.add(ball);
+                        reset = ball;
                     }
                     if(contact.getFixtureB().getBody() == playertwoGoal) {
                         playerGoals++;
                         playerScore.setText(playerGoals + "");
-                        flaggedBodies.add(ball);
+                        reset = ball;
                     }
 
                 } else if(contact.getFixtureB().getBody() == ball){
@@ -110,12 +111,12 @@ public class GameScreen extends AbstractScreen {
                     if(contact.getFixtureA().getBody() == playerGoal) {
                         playertwoGoals++;
                         playertwoScore.setText(playertwoGoals + "");
-                        flaggedBodies.add(ball);
+                        reset = ball;
                     }
                     if(contact.getFixtureA().getBody() == playertwoGoal) {
                         playerGoals++;
                         playerScore.setText(playerGoals + "");
-                        flaggedBodies.add(ball);
+                        reset = ball;
                     }
                 }
             }
@@ -145,8 +146,14 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void update(float delta) {
         world.step(1 / 60f, 6, 2);
+        resetBall();
 
-        deleteFlaggedBodies();
+        //TODO: just some paddle movement testing
+        float x = -1 * Gdx.input.getAccelerometerX() * 1000;
+        player.setLinearVelocity(x, 0);
+        float xx = MathUtils.clamp(player.getPosition().x, 70, width-70);
+        player.setTransform(xx, 20, 0);
+        playertwo.setTransform(xx, height-20, 0);
     }
 
     @Override
@@ -198,13 +205,11 @@ public class GameScreen extends AbstractScreen {
         ball.setLinearVelocity(direction);
     }
 
-    private void deleteFlaggedBodies(){
-        // only used for the ball at the moment
-        //FIXME: Do no
-        while(!flaggedBodies.isEmpty()) {
-            Body body = flaggedBodies.get(0);
-            flaggedBodies.remove(body);
-            world.destroyBody(body);
+    private void resetBall(){
+        if(reset != null){
+            reset.setTransform(width/2, height/2, reset.getAngle());
+            reset = null;
         }
     }
+
 }

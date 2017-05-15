@@ -16,23 +16,30 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.crazyking.mobiletennis.connection.Client.ClientPeerConn;
 import com.crazyking.mobiletennis.connection.ConnectionFactory;
 import com.crazyking.mobiletennis.connection.Constants;
 import com.crazyking.mobiletennis.connection.Information;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.connection.Operator;
-import com.crazyking.mobiletennis.connection.Server.ServerPeerConn;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.MobileTennis;
+import com.crazyking.mobiletennis.screens.CreateLobbyScreen;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import static com.crazyking.mobiletennis.connection.Constants.*;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.*;
+import static com.crazyking.mobiletennis.R.id.log;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.CLOSE;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.CONN;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.END;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.PAUSE;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.START;
+import static com.crazyking.mobiletennis.connection.Constants.CODE;
+import static com.crazyking.mobiletennis.connection.Constants.NAME;
 
 
 public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface {
@@ -87,7 +94,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 		// Tab 2 : Log
 		tab = tabHost.newTabSpec("Log");
-		tab.setContent(R.id.log);
+		tab.setContent(log);
 		tab.setIndicator("Log");
 		tabHost.addTab(tab);
 
@@ -183,6 +190,9 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	@Override
 	public void passMessage(final String message) {
 		String cmd = Messages.getCommand(message);
+
+		Log.d("Test", "Hier");
+		GetMessage(message);
 
 		if(!cmd.isEmpty()){
 			switch(cmd){
@@ -310,16 +320,20 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	//FIXME: JUST TESTING
 	// some testing stuff
 
-	private ArrayList<TestInterface> List = new ArrayList<TestInterface>();
+	private ArrayList<MessageInterface> List = new ArrayList<MessageInterface>();
 
-	public void ClientConnect(){
-		for(TestInterface ti : List){
-			ti.TestFunction();
+	public void GetMessage(String message){
+		for(MessageInterface i : List){
+			i.GetMessage(message);
 		}
 	}
 
-	public void addEvent(TestInterface ti){
+	public void addEvent(MessageInterface ti){
 		List.add(ti);
+	}
+
+	public void sendMessage(String message){
+		operator.sendMessage(message);
 	}
 }
 
