@@ -11,7 +11,7 @@ public class BodyBuilder {
     public static Body BuildBox(World world, float posX, float posY, float width, float height){
         Body body;
         BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.StaticBody;
+        def.type = BodyDef.BodyType.KinematicBody;
         def.position.set(posX, posY);
         def.fixedRotation = true;
         body = world.createBody(def);

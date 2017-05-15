@@ -8,25 +8,27 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.crazyking.mobiletennis.TestInterface;
-import com.crazyking.mobiletennis.connection.Client.ClientPeerConn;
+import com.crazyking.mobiletennis.MessageInterface;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 import java.util.ArrayList;
 
-import static com.badlogic.gdx.Input.Keys.U;
 import static com.crazyking.mobiletennis.game.ui.UIBuilder.createLabel;
 
 
-public class JoinLobbyScreen extends AbstractScreen implements TestInterface{
+public class JoinLobbyScreen extends AbstractScreen implements MessageInterface {
 
     private ArrayList<WifiP2pDevice> devices = new ArrayList<WifiP2pDevice>();
 
     private ArrayList<Label> devList = new ArrayList<Label>();
 
     Label connected;
+
+    int messages = 0;
+
+    TextButton btnMessage;
 
     public JoinLobbyScreen(final MobileTennis mt){
         super(mt);
@@ -43,14 +45,21 @@ public class JoinLobbyScreen extends AbstractScreen implements TestInterface{
             }
         });
 
+        btnMessage = UIBuilder.createButton("Send Message", mt.buttonStyle, 200, 50, 0.1f);
+        btnMessage.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                mt.activity.sendMessage("Test");
+            }
+        });
+        stage.addActor(btnMessage);
 
-        connected = UIBuilder.createLabel("", mt.titleStyle, 200, 50, 0.5f);
+        connected = UIBuilder.createLabel("", mt.buttonStyle, 200, 50, 0.5f);
         stage.addActor(connected);
 
         stage.addActor(title);
         stage.addActor(btnSearch);
 
-        mt.activity.addEvent(this);
     }
 
 
@@ -60,6 +69,8 @@ public class JoinLobbyScreen extends AbstractScreen implements TestInterface{
         Gdx.input.setInputProcessor(stage);
 
         search();
+
+        mt.activity.addEvent(this);
     }
 
     @Override
@@ -67,6 +78,8 @@ public class JoinLobbyScreen extends AbstractScreen implements TestInterface{
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             mt.screenManager.setScreen(ScreenManager.STATE.MENU);
         }
+
+        connected.setText(messages + " Messages empfangen\n" + Gdx.input.getAccelerometerX());
 
     }
 
@@ -129,7 +142,8 @@ public class JoinLobbyScreen extends AbstractScreen implements TestInterface{
 
 
     @Override
-    public void TestFunction() {
-        connected.setText("Connected");
+    public void GetMessage(String message) {
+        messages++;
+        //connected.setText(connected.getText() + " \n" + message);
     }
 }

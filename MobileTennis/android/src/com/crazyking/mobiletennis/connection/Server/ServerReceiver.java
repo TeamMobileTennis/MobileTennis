@@ -94,7 +94,7 @@ public class ServerReceiver extends BroadcastReceiver {
             }
         }else if(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)){
             if(manager != null){
-                discoveryState = intent.getParcelableExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE);
+                discoveryState = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE, 0);
             }
         }
     }

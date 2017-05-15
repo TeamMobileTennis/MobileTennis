@@ -14,5 +14,9 @@
     {
         "merged": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ic_launcher.png",
         "source": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\res\\drawable-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ic_launcher.png",
+        "source": "G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\drawable-xxxhdpi\\ic_launcher.png"
     }
 ]
