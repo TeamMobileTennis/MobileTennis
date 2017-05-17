@@ -40,10 +40,29 @@
       <file leaf-file-name="AndroidLauncher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4624">
-              <caret line="296" column="44" selection-start-line="296" selection-start-column="44" selection-end-line="296" selection-end-column="44" />
+            <state relative-caret-position="475">
+              <caret line="220" column="37" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="164" column="63" selection-start-line="164" selection-start-column="63" selection-end-line="164" selection-end-column="63" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#ServerHandler#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#sendMessage#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#closeConn#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#stopConn#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#requestClose#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#acceptClose#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#handleClose#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#run#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#handleCommands#0;class#ServerHandler#0" expanded="false" />
+                <element signature="method#countGame#0;class#ServerHandler#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -65,7 +84,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="D:\Users\Berisha\.gradle\wrapper\dists\gradle-2.10-all\a4w5fzrkeut1ox71xslb49gst\gradle-2.10" />
+        <entry key="$PROJECT_DIR$" value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.10-all/a4w5fzrkeut1ox71xslb49gst/gradle-2.10" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -1985,7 +2004,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="8947773287000" />
+        <entry key="$PROJECT_DIR$" value="8950846292000" />
         <entry key="D:\Users\Berisha\MobileTennis\MobileTennis" value="8948121076569" />
         <entry key="G:\AndroidStudio\MobileTennis" value="8941558738031" />
         <entry key="G:\GitHub\MobileTennis\MobileTennis" value="8943225704321" />
@@ -2899,24 +2918,23 @@
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientReceiver.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/PeerConnection.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/Client.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Operator.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/ClientPeerConn.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerPeerConn.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java" />
-        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerReceiver.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionFactory.java" />
         <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Information.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java" />
+        <option value="$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="817" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2943,21 +2961,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MobileTennis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3026,8 +3029,49 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MobileTennis" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobiletennis" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="connection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MobileTennis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3391,11 +3435,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="23" width="1440" height="817" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27073732" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26961485" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3407,7 +3451,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2671149" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26680973" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3436,11 +3480,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/SendData.java" />
     <entry file="file://$PROJECT_DIR$/android/build/generated/source/r/debug/com/crazyking/mobiletennis/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -3485,7 +3530,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3529,14 +3573,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="73" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Client/Client.java">
@@ -3572,43 +3616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="162" column="33" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
-          <folding>
-            <element signature="method#closeConn#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#run#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#closeLobby#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#setView#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#connectAsGameClient#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#closeAllClients#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#stopServerHandler#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#getFreePosAtServerHandler#0;class#GameLobby#0" expanded="false" />
-            <element signature="method#search#0;class#GameLobby#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="216" column="34" selection-start-line="216" selection-start-column="34" selection-end-line="216" selection-end-column="34" />
-          <folding>
-            <element signature="method#ServerHandler#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#sendMessage#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#closeConn#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#stopConn#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#requestClose#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#acceptClose#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#handleClose#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#run#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#handleCommands#0;class#ServerHandler#0" expanded="false" />
-            <element signature="method#countGame#0;class#ServerHandler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerPeerConn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
@@ -3628,12 +3635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="126" selection-end-column="7" />
-          <folding>
-            <element signature="method#ClientReceiver#0;class#ClientReceiver#0" expanded="false" />
-            <element signature="method#onReceive#0;class#ClientReceiver#0" expanded="false" />
-            <element signature="method#isConnect#0;class#ClientReceiver#0" expanded="false" />
-            <element signature="method#getDiscoveryState#0;class#ClientReceiver#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3641,36 +3642,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
-          <folding>
-            <element signature="method#ServerReceiver#0;class#ServerReceiver#0" expanded="false" />
-            <element signature="method#onReceive#0;class#ServerReceiver#0" expanded="false" />
-            <element signature="method#getDiscoveryState#0;class#ServerReceiver#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="68" column="83" selection-start-line="68" selection-start-column="83" selection-end-line="68" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createConnection#0;class#ConnectionFactory#0" expanded="false" />
-            <element signature="method#createHost#0;class#ConnectionFactory#0" expanded="false" />
-            <element signature="method#createClient#0;class#ConnectionFactory#0" expanded="false" />
-            <element signature="method#connectToGame#0;class#ConnectionFactory#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/ConnectionFactory.java" />
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Information.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2091">
@@ -3716,7 +3691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3728,13 +3702,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="41" column="87" selection-start-line="41" selection-start-column="87" selection-end-line="41" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Messages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/GameLobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="239" column="56" selection-start-line="239" selection-start-column="56" selection-end-line="239" selection-end-column="56" />
+          <folding>
+            <element signature="method#closeConn#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#run#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#closeLobby#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#setView#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#connectAsGameClient#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#closeAllClients#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#stopServerHandler#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#search#0;class#GameLobby#0" expanded="false" />
+            <element signature="method#getPlayerPos#0;class#GameLobby#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/connection/Server/ServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="164" column="63" selection-start-line="164" selection-start-column="63" selection-end-line="164" selection-end-column="63" />
+          <folding>
+            <element signature="method#ServerHandler#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#sendMessage#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#closeConn#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#stopConn#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#requestClose#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#acceptClose#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#handleClose#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#run#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#handleCommands#0;class#ServerHandler#0" expanded="false" />
+            <element signature="method#countGame#0;class#ServerHandler#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/crazyking/mobiletennis/AndroidLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4624">
-          <caret line="296" column="44" selection-start-line="296" selection-start-column="44" selection-end-line="296" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="475">
+          <caret line="220" column="37" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
