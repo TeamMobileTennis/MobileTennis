@@ -48,6 +48,7 @@ public class GameLobby extends Thread{
      * @param message   The Message to be send to all Game-Clients
      */
     public void sendMessage(String message) {
+        Log.d("INFO","To all Game-Clients in Lobby: "+message);
         for(int i=0; i<gameClients.length; i++){
             if(gameClients[i] != null) {
                 if(gameClients[i].isAlive()) {

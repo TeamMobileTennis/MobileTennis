@@ -77,6 +77,7 @@ public class Client extends Thread{
      * @param message   A Message that send to server
      */
     public void sendMessage(final String message) {
+        Log.d("INFO","Send "+ message + " to Server");
         if(checkConn()) {
             writer.println(message);
         }
@@ -195,6 +196,7 @@ public class Client extends Thread{
             while (!close) {
 
                 message = reader.readLine();
+                Log.d("INFO", message);
 
                 if (message != null) {
 

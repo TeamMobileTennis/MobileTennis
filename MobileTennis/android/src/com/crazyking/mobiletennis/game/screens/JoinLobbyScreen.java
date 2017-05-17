@@ -1,6 +1,7 @@
 package com.crazyking.mobiletennis.game.screens;
 
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -137,6 +138,7 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
         @Override
         public void clicked(InputEvent event, float x, float y) {
             mt.activity.ConnectToDevice(dev);
+            Log.d("INFO", "Connect to "+dev.deviceName);
         }
     }
 

@@ -59,10 +59,8 @@ public class ClientReceiver extends BroadcastReceiver {
                     @Override
                     public void onPeersAvailable(WifiP2pDeviceList peers) {
                         ArrayList<WifiP2pDevice> list = new ArrayList<>(peers.getDeviceList());
-                        if (list.size() > 0) {
-                            view.fillPeerList(list);
-                            peer.setPeerList(list);
-                        }
+                        view.fillPeerList(list);
+                        peer.setPeerList(list);
                     }
                 });
             }
@@ -114,8 +112,8 @@ public class ClientReceiver extends BroadcastReceiver {
      * @return  True, if device is connected and false if is not connected
      */
     public boolean isConnect(){
-        if(wifiInfo != null){
-            if(wifiInfo.groupFormed)
+        if(wifiInfo != null && wifiGroup != null){
+            if(wifiInfo.groupFormed && wifiGroup.getClientList().size() > 0)
                 return true;
         }
         return false;

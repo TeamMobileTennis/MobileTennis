@@ -1,6 +1,6 @@
 package com.crazyking.mobiletennis.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+/*import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 public class DesktopLauncher {
@@ -13,4 +13,4 @@ public class DesktopLauncher {
 		config.foregroundFPS = MobileTennisCore.APP_FPS;
 		new LwjglApplication(new MobileTennisCore(), config);
 	}
-}
+}*/
