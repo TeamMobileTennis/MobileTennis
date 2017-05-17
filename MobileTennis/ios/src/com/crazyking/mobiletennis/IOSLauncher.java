@@ -1,5 +1,6 @@
 package com.crazyking.mobiletennis;
 
+/*
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
@@ -18,4 +19,4 @@ public class IOSLauncher extends IOSApplication.Delegate {
         UIApplication.main(argv, null, IOSLauncher.class);
         pool.close();
     }
-}
+}*/

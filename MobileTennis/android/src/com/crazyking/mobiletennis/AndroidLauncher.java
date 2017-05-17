@@ -190,6 +190,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 					// Only handled by Client
 					if(Integer.parseInt(Messages.getValue(message, CODE)) == 0) {
 						// TODO - Connection accepts
+
 					}else {
 						// TODO - Connection refused
 					}

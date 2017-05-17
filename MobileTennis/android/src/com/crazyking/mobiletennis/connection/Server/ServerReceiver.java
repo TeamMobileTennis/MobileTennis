@@ -63,9 +63,7 @@ public class ServerReceiver extends BroadcastReceiver {
                     @Override
                     public void onPeersAvailable(WifiP2pDeviceList peers) {
                         ArrayList<WifiP2pDevice> list = new ArrayList<>(peers.getDeviceList());
-                        if (list.size() > 0) {
-                            peer.setPeerList(list);
-                        }
+                        peer.setPeerList(list);
                     }
                 });
             }
@@ -94,7 +92,7 @@ public class ServerReceiver extends BroadcastReceiver {
             }
         }else if(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)){
             if(manager != null){
-                discoveryState = intent.getParcelableExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE);
+                discoveryState = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE, 0);
             }
         }
     }
