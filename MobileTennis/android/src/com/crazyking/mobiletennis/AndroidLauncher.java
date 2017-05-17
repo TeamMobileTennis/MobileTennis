@@ -224,6 +224,15 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 					String playerName = Messages.getValue(message,NAME);
 					// TODO - A Player connected
 
+
+					// Example for identify two players
+					int n = Integer.parseInt(Messages.getValue(message,PLAYER_CODE));
+					if(n == 1){
+						// Message from Player 1
+					}else if(n == 2){
+						// Message from Player 2
+					}
+
 					// Testing:
 					operator.sendMessage("Welcome in Lobby " + playerName);
 					countGame();

@@ -234,5 +234,21 @@ public class GameLobby extends Thread{
         return pos;
     }
 
+    /**
+     * Used to get the player number of the current thread
+     * @param handler   ServerHandler Object of the current thread
+     * @return          Returns the number of the player
+     *                  Returns Zero if nothing is found
+     */
+    public int getPlayerPos(ServerHandler handler){
+        int pos = -1;
+        for(int i=0;i<gameClients.length;i++){
+            if(gameClients[i] == handler){
+                pos = i;
+                break;
+            }
+        }
+        return pos+1;
+    }
 
 }
