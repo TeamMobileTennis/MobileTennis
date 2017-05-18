@@ -37,6 +37,7 @@ public class GameLobby extends Thread{
      */
     public GameLobby(String lobbyName, int port, ViewPeerInterface view, String address) throws IOException{
         lobbyInformation = new Information(lobbyName, "", "", address);
+        this.view = view;
 
         serverSocket = new ServerSocket();
         serverSocket.setReuseAddress(true);             // ReUse Address

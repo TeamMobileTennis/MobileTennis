@@ -28,8 +28,6 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
 
     int messages = 0;
 
-    TextButton btnMessage;
-
     public JoinLobbyScreen(final MobileTennis mt){
         super(mt);
 
@@ -45,14 +43,6 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
             }
         });
 
-        btnMessage = UIBuilder.createButton("Send Message", mt.buttonStyle, 200, 50, 0.1f);
-        btnMessage.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                mt.activity.sendMessage("Test");
-            }
-        });
-        stage.addActor(btnMessage);
 
         connected = UIBuilder.createLabel("", mt.buttonStyle, 200, 50, 0.5f);
         stage.addActor(connected);
@@ -80,6 +70,7 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
         }
 
         connected.setText(messages + " Messages empfangen\n" + Gdx.input.getAccelerometerX());
+        mt.activity.sendMessage(Gdx.input.getAccelerometerX() + "");
 
     }
 
