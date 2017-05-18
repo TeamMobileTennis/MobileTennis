@@ -191,7 +191,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	public void passMessage(final String message) {
 		String cmd = Messages.getCommand(message);
 
-		Log.d("Test", "Hier");
+		Log.d("Message", "Empfangen");
 		GetMessage(message);
 
 		if(!cmd.isEmpty()){
@@ -235,7 +235,6 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 					// Testing:
 					operator.sendMessage("Welcome in Lobby " + playerName);
-					countGame();
 				default:
 					break;
 			}
@@ -343,6 +342,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	}
 
 	public void sendMessage(String message){
+		Log.d("Message", "Gesendet");
 		operator.sendMessage(message);
 	}
 }

@@ -63,7 +63,7 @@ public class CreateLobbyScreen extends AbstractScreen implements MessageInterfac
         }
 
 
-        //player1.setText("Spieler 1: " + (int)player1Axis + " Messages");
+        player1.setText("Spieler 1: " + player1Axis);
     }
 
     @Override
@@ -90,8 +90,6 @@ public class CreateLobbyScreen extends AbstractScreen implements MessageInterfac
 
     @Override
     public void GetMessage(String message) {
-        player1Axis++;
-        player1.setText("Test");
-        //player1Axis = Float.parseFloat(message);
+        player1Axis = Float.parseFloat(message);
     }
 }
