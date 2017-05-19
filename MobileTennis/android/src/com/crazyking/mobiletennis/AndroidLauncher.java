@@ -26,6 +26,7 @@ import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.MobileTennis;
+import com.crazyking.mobiletennis.game.managers.MessageHandler;
 import com.crazyking.mobiletennis.screens.CreateLobbyScreen;
 
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	private LinkedHashMap<String, Information> infoMap = new LinkedHashMap<>();
 
 	private Operator operator;
+
+    // The message Handler who to send the messages to handle
+    private MessageHandler messageHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -189,58 +193,16 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 	@Override
 	public void passMessage(final String message) {
-		String cmd = Messages.getCommand(message);
-
-		Log.d("Message", "Empfangen");
-		GetMessage(message);
-
-		if(!cmd.isEmpty()){
-			switch(cmd){
-				case RESP:
-					// Only handled by Client
-					if(Integer.parseInt(Messages.getValue(message, CODE)) == 0) {
-						// TODO - Connection accepts
-
-					}else {
-						// TODO - Connection refused
-					}
-					break;
-				case START:
-					// TODO - Game starts
-					break;
-				case PAUSE:
-					// TODO - Game paused
-					break;
-				case END:
-					// TODO - Game ends
-					break;
-
-				case CLOSE:
-					// TODO - Connection closed
-					break;
-
-				case CONN:
-					// Only handled by Server
-					String playerName = Messages.getValue(message,NAME);
-					// TODO - A Player connected
-
-
-					// Example for identify two players
-					int n = Integer.parseInt(Messages.getValue(message,PLAYER_CODE));
-					if(n == 1){
-						// Message from Player 1
-					}else if(n == 2){
-						// Message from Player 2
-					}
-
-					// Testing:
-					operator.sendMessage("Welcome in Lobby " + playerName);
-				default:
-					break;
-			}
-		}
-
+        if(message.isEmpty())
+            return;
+        messageHandler.HandleReceivedMessage(message);
 	}
+
+	public void SetMessagehandler(MessageHandler messageHandler){
+        this.messageHandler = messageHandler;
+    }
+
+
 	public void countGame() {
 		new Thread(new Runnable() {
 			@Override
@@ -322,23 +284,6 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 //		operator = ServerPeerConn.getInstance(context, view, "Server");
 //		operator.setup("Spiel");
 		operator = ConnectionFactory.createHost(context,view,"Server");
-	}
-
-
-
-	//FIXME: JUST TESTING
-	// some testing stuff
-
-	private ArrayList<MessageInterface> List = new ArrayList<MessageInterface>();
-
-	public void GetMessage(String message){
-		for(MessageInterface i : List){
-			i.GetMessage(message);
-		}
-	}
-
-	public void addEvent(MessageInterface ti){
-		List.add(ti);
 	}
 
 	public void sendMessage(String message){

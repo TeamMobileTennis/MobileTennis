@@ -1,5 +1,7 @@
 package com.crazyking.mobiletennis.game.screens;
 
+import android.util.Log;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -7,16 +9,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.crazyking.mobiletennis.MessageInterface;
+import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.connection.Server.ServerPeerConn;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
+import static android.R.attr.x;
 import static com.badlogic.gdx.Input.Keys.S;
+import static com.crazyking.mobiletennis.connection.Constants.ACCX;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
+import static com.crazyking.mobiletennis.connection.Constants.CODE;
 import static java.sql.Types.FLOAT;
 
 
-public class CreateLobbyScreen extends AbstractScreen implements MessageInterface {
+public class CreateLobbyScreen extends AbstractScreen {
 
     TextButton btnMessage;
 
@@ -52,8 +60,6 @@ public class CreateLobbyScreen extends AbstractScreen implements MessageInterfac
         Gdx.input.setInputProcessor(stage);
 
         mt.activity.CreateServer();
-
-        mt.activity.addEvent(this);
     }
 
     @Override
@@ -88,8 +94,19 @@ public class CreateLobbyScreen extends AbstractScreen implements MessageInterfac
 
     }
 
-    @Override
+
     public void GetMessage(String message) {
-        player1Axis = Float.parseFloat(message);
+        String cmd = Messages.getCommand(message);
+
+        switch (cmd){
+            case ACCEL:
+                int xx = Integer.parseInt(Messages.getValue(message, ACCX));
+                float x = xx / 1000f;
+                player1Axis = x;
+                break;
+            default:
+                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
+                break;
+        }
     }
 }

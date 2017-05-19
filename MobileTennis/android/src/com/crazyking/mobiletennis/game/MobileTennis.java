@@ -1,6 +1,7 @@
 package com.crazyking.mobiletennis.game;
 
 import android.app.Activity;
+import android.app.Notification;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.crazyking.mobiletennis.AndroidLauncher;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
+import com.crazyking.mobiletennis.game.managers.MessageHandler;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.StyleBuilder;
 
@@ -29,6 +31,7 @@ public class MobileTennis extends Game {
 	// Managers
 	public AssetManager assets;
 	public ScreenManager screenManager;
+	public MessageHandler messageHandler;
 
 	// Batches
 	public SpriteBatch batch;
@@ -56,6 +59,7 @@ public class MobileTennis extends Game {
 
 		// setup managers
 		assets = new AssetManager();
+		messageHandler = new MessageHandler(this, activity);
 		screenManager = new ScreenManager(this);
 	}
 

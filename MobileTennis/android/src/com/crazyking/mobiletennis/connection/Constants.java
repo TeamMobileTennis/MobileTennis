@@ -21,6 +21,8 @@ public final class Constants {
         public final static String CLOSE = "CLOSE";         // Lobby/Game closed
         public final static String OTHER = "OTHER";         // Received all other things, like Messages
 
+        public final static String ACCEL = "ACCEL";         // Info about Accelerometer
+
     }
     public final static String CODE = "code";               // Key for code, like connection response code or close response code
     public final static String NAME = "name";               // Key for a name
@@ -38,8 +40,13 @@ public final class Constants {
     public final static String INFO_P2 = "player2";         // Name of player 2
     public final static String INFO_ADR = "adr";            // Mac-Address of host
 
+
     public final static String PLAYER_CODE = "pcode";       // Code for identify the two players
     public final static String MESSAGE = "MSG";             // Key for received Message
+
+    public final static String ACCX = "xAxis";              // the x value of the accelerometer
+
+
 
 
 }

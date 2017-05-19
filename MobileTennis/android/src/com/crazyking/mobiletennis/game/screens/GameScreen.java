@@ -1,6 +1,8 @@
 package com.crazyking.mobiletennis.game.screens;
 
 
+import android.util.Log;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,33 +16,43 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.body.BodyBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
-import java.util.ArrayList;
+import static com.crazyking.mobiletennis.connection.Constants.ACCX;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
 
 
 public class GameScreen extends AbstractScreen {
 
+    // the camera
     OrthographicCamera camera;
 
     // Box2D
     World world;
     Box2DDebugRenderer b2dr;
 
-    Body player, playertwo;
+    // the Bodies
+    Body player1, player2;
     Body ball;
     Body leftBorder, rightBorder;
-    int playerGoals = 0, playertwoGoals = 0;
-    Body playerGoal, playertwoGoal;
+    Body player1Goal, player2Goal;
 
-    Label playerScore, playertwoScore;
+    // score
+    int player1Goals = 0, player2Goals = 0;
+    Label player1Score, player2Score;
 
+    // ball properties
     float ballSpeed = 500;
+    Body reset = null;
+
+    // the current accel
+    float player1Accel = 0, player2Accel = 0;
+
     float width, height;
 
-    Body reset = null;
 
     public GameScreen(MobileTennis mt){
         super(mt);
@@ -59,23 +71,23 @@ public class GameScreen extends AbstractScreen {
         leftBorder = BodyBuilder.BuildWall(world, 0, 0, 20, height);
         rightBorder = BodyBuilder.BuildWall(world, width-20, 0, 20, height);
 
-        // the player paddles
-        player = BodyBuilder.BuildBox(world, width/2, 20, 100, 20);
-        playertwo = BodyBuilder.BuildBox(world, width/2, height-20, 100, 20);
+        // the player1 paddles
+        player1 = BodyBuilder.BuildBox(world, width/2, 20, 100, 20);
+        player2 = BodyBuilder.BuildBox(world, width/2, height-20, 100, 20);
 
 
 
         // the goal of the players
-        playerGoal = BodyBuilder.BuildWall(world, 0, -10, width, 10);
-        playertwoGoal = BodyBuilder.BuildWall(world, 0, height, width, 10);
+        player1Goal = BodyBuilder.BuildWall(world, 0, -10, width, 10);
+        player2Goal = BodyBuilder.BuildWall(world, 0, height, width, 10);
 
-        playerScore = UIBuilder.createLabel("0", mt.buttonStyle, 50, 50, 0.4f);
-        playerScore.setPosition(100, 0.4f*height);
-        stage.addActor(playerScore);
+        player1Score = UIBuilder.createLabel("0", mt.buttonStyle, 50, 50, 0.4f);
+        player1Score.setPosition(100, 0.4f*height);
+        stage.addActor(player1Score);
 
-        playertwoScore = UIBuilder.createLabel("0", mt.buttonStyle, 50, 50, 0.4f);
-        playertwoScore.setPosition(100, 0.6f*height);
-        stage.addActor(playertwoScore);
+        player2Score = UIBuilder.createLabel("0", mt.buttonStyle, 50, 50, 0.4f);
+        player2Score.setPosition(100, 0.6f*height);
+        stage.addActor(player2Score);
 
         world.setContactListener(new ContactListener() {
             @Override
@@ -84,38 +96,38 @@ public class GameScreen extends AbstractScreen {
                 // if the ball collides with something, it should change the direction
                 //FIXME: can not hit the sides of the paddle
                 if(contact.getFixtureA().getBody() == ball){
-                    if(contact.getFixtureB().getBody() == player || contact.getFixtureB().getBody() == playertwo)
+                    if(contact.getFixtureB().getBody() == player1 || contact.getFixtureB().getBody() == player2)
                         ball.setLinearVelocity(ball.getLinearVelocity().scl(1, -1));
                     if(contact.getFixtureB().getBody() == rightBorder || contact.getFixtureB().getBody() == leftBorder)
                         ball.setLinearVelocity(ball.getLinearVelocity().scl(-1, 1));
 
-                    // if the ball hits a goal the goalcounter of the (opposite player) should go up
-                    if(contact.getFixtureB().getBody() == playerGoal) {
-                        playertwoGoals++;
-                        playertwoScore.setText(playertwoGoals + "");
+                    // if the ball hits a goal the goalcounter of the (opposite player1) should go up
+                    if(contact.getFixtureB().getBody() == player1Goal) {
+                        player2Goals++;
+                        player2Score.setText(player2Goals + "");
                         reset = ball;
                     }
-                    if(contact.getFixtureB().getBody() == playertwoGoal) {
-                        playerGoals++;
-                        playerScore.setText(playerGoals + "");
+                    if(contact.getFixtureB().getBody() == player2Goal) {
+                        player1Goals++;
+                        player1Score.setText(player1Goals + "");
                         reset = ball;
                     }
 
                 } else if(contact.getFixtureB().getBody() == ball){
-                    if(contact.getFixtureA().getBody() == player || contact.getFixtureA().getBody() == playertwo)
+                    if(contact.getFixtureA().getBody() == player1 || contact.getFixtureA().getBody() == player2)
                         ball.setLinearVelocity(ball.getLinearVelocity().scl(1, -1));
                     if(contact.getFixtureA().getBody() == rightBorder || contact.getFixtureA().getBody() == leftBorder)
                         ball.setLinearVelocity(ball.getLinearVelocity().scl(-1, 1));
 
-                    // if the ball hits a goal the goalcounter of the (opposite player) should go up
-                    if(contact.getFixtureA().getBody() == playerGoal) {
-                        playertwoGoals++;
-                        playertwoScore.setText(playertwoGoals + "");
+                    // if the ball hits a goal the goalcounter of the (opposite player1) should go up
+                    if(contact.getFixtureA().getBody() == player1Goal) {
+                        player2Goals++;
+                        player2Score.setText(player2Goals + "");
                         reset = ball;
                     }
-                    if(contact.getFixtureA().getBody() == playertwoGoal) {
-                        playerGoals++;
-                        playerScore.setText(playerGoals + "");
+                    if(contact.getFixtureA().getBody() == player2Goal) {
+                        player1Goals++;
+                        player1Score.setText(player1Goals + "");
                         reset = ball;
                     }
                 }
@@ -150,10 +162,10 @@ public class GameScreen extends AbstractScreen {
 
         //TODO: just some paddle movement testing
         float x = -1 * Gdx.input.getAccelerometerX() * 1000;
-        player.setLinearVelocity(x, 0);
-        float xx = MathUtils.clamp(player.getPosition().x, 70, width-70);
-        player.setTransform(xx, 20, 0);
-        playertwo.setTransform(xx, height-20, 0);
+        player1.setLinearVelocity(x, 0);
+        float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
+        player1.setTransform(xx, 20, 0);
+        player2.setTransform(xx, height-20, 0);
     }
 
     @Override
@@ -196,6 +208,22 @@ public class GameScreen extends AbstractScreen {
         world.dispose();
     }
 
+    @Override
+    public void GetMessage(String message) {
+        String cmd = Messages.getCommand(message);
+
+        switch (cmd){
+            case ACCEL:
+                int xx = Integer.parseInt(Messages.getValue(message, ACCX));
+                float x = xx / 1000f;
+                //int player = Integer.parseInt(Messages.getValue(message, PLAYER_))
+                break;
+            default:
+                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
+                break;
+        }
+    }
+
     private void createNewBall(){
         // game ball
         ball = BodyBuilder.BuildBall(world, width/2, height/2, 20);
@@ -208,6 +236,10 @@ public class GameScreen extends AbstractScreen {
     private void resetBall(){
         if(reset != null){
             reset.setTransform(width/2, height/2, reset.getAngle());
+            Vector2 direction = new Vector2();
+            direction.setToRandomDirection();
+            direction.setLength(ballSpeed);
+            ball.setLinearVelocity(direction);
             reset = null;
         }
     }

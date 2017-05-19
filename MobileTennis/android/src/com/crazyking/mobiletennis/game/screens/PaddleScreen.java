@@ -1,30 +1,54 @@
 package com.crazyking.mobiletennis.game.screens;
 
+import android.util.Log;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.MobileTennis;
 
-/**
- * Created by CrazyKing on 26.03.2017.
- */
+import static com.crazyking.mobiletennis.connection.Constants.ACCX;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
+import static com.crazyking.mobiletennis.game.ui.UIBuilder.createLabel;
+
 
 public class PaddleScreen extends AbstractScreen {
 
     public PaddleScreen(MobileTennis mt){
         super(mt);
+
+        float width = Gdx.graphics.getWidth() / 2;
+        float height = Gdx.graphics.getHeight() / 10;
+        Label title = createLabel("Lobby", mt.titleStyle, width, height, 0.85f);
+
+        stage.addActor(title);
     }
 
     @Override
     public void show() {
-
+        // input only on the stage elements
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void update(float delta) {
+        // FIXME: we do not want to send it yet
+        // we send always our axis
+        // get the string in the right format
+        float x = Gdx.input.getAccelerometerX();
+        int xx = (int)(x * 1000);
+        String message = Messages.getDataStr(ACCEL, ACCX, xx+"");
+        Log.d("String", message);
+        // send the message
+        mt.activity.sendMessage(message);
 
     }
 
     @Override
     public void render(float delta){
         super.render(delta);
+
+        stage.draw();
     }
 
     @Override
@@ -39,6 +63,11 @@ public class PaddleScreen extends AbstractScreen {
 
     @Override
     public void hide() {
+
+    }
+
+    @Override
+    public void GetMessage(String message){
 
     }
 }
