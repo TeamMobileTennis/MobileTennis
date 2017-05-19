@@ -1,6 +1,7 @@
 package com.crazyking.mobiletennis.game.screens;
 
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,24 +10,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.crazyking.mobiletennis.MessageInterface;
+import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 import java.util.ArrayList;
 
+import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
+import static com.crazyking.mobiletennis.connection.Constants.CODE;
 import static com.crazyking.mobiletennis.game.ui.UIBuilder.createLabel;
 
 
-public class JoinLobbyScreen extends AbstractScreen implements MessageInterface {
+public class JoinLobbyScreen extends AbstractScreen {
 
     private ArrayList<WifiP2pDevice> devices = new ArrayList<WifiP2pDevice>();
 
     private ArrayList<Label> devList = new ArrayList<Label>();
 
-    Label connected;
-
-    int messages = 0;
 
     public JoinLobbyScreen(final MobileTennis mt){
         super(mt);
@@ -44,9 +45,6 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
         });
 
 
-        connected = UIBuilder.createLabel("", mt.buttonStyle, 200, 50, 0.5f);
-        stage.addActor(connected);
-
         stage.addActor(title);
         stage.addActor(btnSearch);
 
@@ -59,8 +57,6 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
         Gdx.input.setInputProcessor(stage);
 
         search();
-
-        mt.activity.addEvent(this);
     }
 
     @Override
@@ -68,9 +64,6 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             mt.screenManager.setScreen(ScreenManager.STATE.MENU);
         }
-
-        connected.setText(messages + " Messages empfangen\n" + Gdx.input.getAccelerometerX());
-        mt.activity.sendMessage(Gdx.input.getAccelerometerX() + "");
 
     }
 
@@ -132,9 +125,26 @@ public class JoinLobbyScreen extends AbstractScreen implements MessageInterface 
     }
 
 
-    @Override
+    // how to handle the messages this screen receives
     public void GetMessage(String message) {
-        messages++;
-        //connected.setText(connected.getText() + " \n" + message);
+        //Log.d("Message Empfangen", Messages.getCommand(message));
+
+        String cmd = Messages.getCommand(message);
+
+        switch (cmd){
+            case RESP:
+                // Only handled by Client
+                if(Integer.parseInt(Messages.getValue(message, CODE)) == 0) {
+                    // we get a positive response
+                    // connection successfull
+                    mt.screenManager.setScreen(ScreenManager.STATE.PADDLE);
+                }else {
+                    // TODO - Connection refused
+                }
+                break;
+            default:
+                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet.");
+                break;
+        }
     }
 }

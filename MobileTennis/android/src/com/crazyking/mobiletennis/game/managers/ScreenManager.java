@@ -48,7 +48,11 @@ public class ScreenManager {
     }
 
     public void setScreen(STATE next){
+        // set this screen to the active display screen
         mt.setScreen(screens.get(next));
+
+        // set this screen to the screen who gets the messages
+        mt.messageHandler.SetActiveScreen(screens.get(next));
     }
 
     public void dispose(){
@@ -56,6 +60,10 @@ public class ScreenManager {
             if(screen != null)
                 screen.dispose();
         }
+    }
+
+    public AbstractScreen GetScreen(STATE state){
+        return screens.get(state);
     }
 
 }
