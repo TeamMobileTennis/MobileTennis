@@ -63,9 +63,7 @@ public class ServerReceiver extends BroadcastReceiver {
                     @Override
                     public void onPeersAvailable(WifiP2pDeviceList peers) {
                         ArrayList<WifiP2pDevice> list = new ArrayList<>(peers.getDeviceList());
-                        if (list.size() > 0) {
-                            peer.setPeerList(list);
-                        }
+                        peer.setPeerList(list);
                     }
                 });
             }

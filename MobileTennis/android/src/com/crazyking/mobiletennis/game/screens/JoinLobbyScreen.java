@@ -121,6 +121,7 @@ public class JoinLobbyScreen extends AbstractScreen {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             mt.activity.ConnectToDevice(dev);
+            Log.d("INFO", "Connect to "+dev.deviceName);
         }
     }
 

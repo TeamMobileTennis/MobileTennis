@@ -202,6 +202,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
         this.messageHandler = messageHandler;
     }
 
+
 	public void countGame() {
 		new Thread(new Runnable() {
 			@Override

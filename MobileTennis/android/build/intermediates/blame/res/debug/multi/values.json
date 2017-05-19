@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
         "map": [
             {
@@ -46,6 +47,9 @@
     },
     {
         "outputFile": "D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+=======
+        "outputFile": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+>>>>>>> wastene
         "map": [
             {
                 "to": {
@@ -56,7 +60,7 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -76,7 +80,7 @@
                     "endOffset": 563
                 },
                 "from": {
-                    "file": "D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\Berisha\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -90,7 +94,7 @@
         ]
     },
     {
-        "outputFile": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -101,7 +105,7 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -121,7 +125,7 @@
                     "endOffset": 563
                 },
                 "from": {
-                    "file": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -135,7 +139,7 @@
         ]
     },
     {
-        "outputFile": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "/Users/adrianberisha/MobileTennis/MobileTennis/android/build/intermediates/res/merged/debug/values/values.xml",
         "map": [
             {
                 "to": {
@@ -146,7 +150,7 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/android/res/values/strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -166,7 +170,7 @@
                     "endOffset": 563
                 },
                 "from": {
-                    "file": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/android/res/values/styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -180,7 +184,7 @@
         ]
     },
     {
-        "outputFile": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -191,7 +195,7 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -211,7 +215,52 @@
                     "endOffset": 563
                 },
                 "from": {
-                    "file": "D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 17,
+                        "endLine": 9,
+                        "endColumn": 12,
+                        "endOffset": 475
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 49,
+                    "endOffset": 100
+                },
+                "from": {
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 49,
+                        "endOffset": 101
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endLine": 10,
+                    "endColumn": 12,
+                    "endOffset": 563
+                },
+                "from": {
+                    "file": "/Users/adrianberisha/MobileTennis/MobileTennis/D:\\Users\\adrianberisha\\MobileTennis\\MobileTennis\\G:\\GitHub\\MobileTennis\\MobileTennis\\MobileTennis\\android\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

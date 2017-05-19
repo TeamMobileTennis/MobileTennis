@@ -178,7 +178,7 @@ public class ServerHandler extends Thread{
 
 
                         // Send only to view, if connection accepted
-                        view.passMessage(message);
+                        view.passMessage(addPlayerCode(message));
 
                     } else
                         sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_FULL)));
@@ -198,7 +198,7 @@ public class ServerHandler extends Thread{
                             if (!handleClose(code)) {
                                 Log.d("INFO", "Connection failed to closed");
                             }else {
-                                view.passMessage(Messages.getDataStr(CLOSE));
+                                view.passMessage(addPlayerCode(Messages.getDataStr(CLOSE)));
                             }
 
                         }
@@ -206,13 +206,25 @@ public class ServerHandler extends Thread{
                     break;
 
                 default:
-                    view.passMessage(message);
+                    view.passMessage(addPlayerCode(message));
             }
         }else {
-            view.passMessage(message);
+            view.passMessage(addPlayerCode(message));
+
         }
     }
-
+    private String addPlayerCode(String message){
+        if(Messages.getCommand(message).isEmpty()){
+            // Only message without Commands
+            // Convert to Data String and add PlayerCode
+            // with 1 or 2 to identify the players at the view
+            return Messages.getDataStr(KEY,OTHER,MESSAGE,message,PLAYER_CODE,Integer.toString(gameLobby.getPlayerPos(this)));
+        }else {
+            // Add the PlayerCode to the other Key-Value-Pairs
+            // to identify the players at the view
+            return Messages.getDataStr(Messages.getDataMap(message).put(PLAYER_CODE,Integer.toString(gameLobby.getPlayerPos(this))));
+        }
+    }
     /**
      * Count Game from ten to zero
      */
