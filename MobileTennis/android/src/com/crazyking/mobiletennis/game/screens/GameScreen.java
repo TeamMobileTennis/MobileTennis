@@ -163,7 +163,7 @@ public class GameScreen extends AbstractScreen {
         player1.setTransform(xx, 20, 0);
 
 
-        float y = -1 * player2Accel * 1000;
+        float y = player2Accel * 1000;
         player2.setLinearVelocity(y, 0);
         float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
         player2.setTransform(yy, height-20, 0);
