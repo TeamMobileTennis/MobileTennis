@@ -82,10 +82,10 @@ public class Messages {
         HashMap<String, String> data = new HashMap<>();
 
         // Regex to test if String is correct
-        String regex = "(?:\\{(?:(\\w+):\"((?:\\w[\\s]*)*)\"[,|\\}])*)?";
+        String regex = "(?:\\{(?:(\\w+):\"((?:\\w*[\\s]*[-.,]*)*)\"[,|\\}])*)?";
 
         // Regex to get all Keys and Values
-        String regexMatcher = "(\\w+):\"((?:\\w[\\s]*)*)\"";
+        String regexMatcher = "(\\w+):\"((?:\\w*[\\s]*[-.,]*)*)\"";
 
         if(rawData.matches(regex)){
             Matcher m = Pattern.compile(regexMatcher).matcher(rawData);
