@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashMap;
 
 import com.crazyking.mobiletennis.connection.Constants;
 import com.crazyking.mobiletennis.connection.Messages;
@@ -164,6 +165,7 @@ public class ServerHandler extends Thread{
      */
     private void handleCommands(String message)throws Exception{
         String cmd = Messages.getCommand(message);
+        Log.d("String_serve", message);
 
         if (!cmd.isEmpty()) {
             switch (cmd) {
@@ -218,11 +220,13 @@ public class ServerHandler extends Thread{
             // Only message without Commands
             // Convert to Data String and add PlayerCode
             // with 1 or 2 to identify the players at the view
-            return Messages.getDataStr(KEY,OTHER,MESSAGE,message,PLAYER_CODE,Integer.toString(gameLobby.getPlayerPos(this)));
+            return Messages.getDataStr(OTHER,MESSAGE,message,PLAYER_CODE,Integer.toString(gameLobby.getPlayerPos(this)));
         }else {
             // Add the PlayerCode to the other Key-Value-Pairs
             // to identify the players at the view
-            return Messages.getDataStr(Messages.getDataMap(message).put(PLAYER_CODE,Integer.toString(gameLobby.getPlayerPos(this))));
+            HashMap<String, String> map = Messages.getDataMap(message);
+            map.put(PLAYER_CODE,Integer.toString(gameLobby.getPlayerPos(this)));
+            return Messages.getDataStr(map);
         }
     }
     /**

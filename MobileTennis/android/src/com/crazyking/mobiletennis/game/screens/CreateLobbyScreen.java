@@ -8,25 +8,20 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.crazyking.mobiletennis.MessageInterface;
 import com.crazyking.mobiletennis.connection.Messages;
-import com.crazyking.mobiletennis.connection.Server.ServerPeerConn;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
-import static android.R.attr.x;
-import static com.badlogic.gdx.Input.Keys.S;
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
-import static com.crazyking.mobiletennis.connection.Constants.CODE;
-import static java.sql.Types.FLOAT;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.START;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
 
 
 public class CreateLobbyScreen extends AbstractScreen {
 
-    TextButton btnMessage;
+    TextButton btnMessage, btnStart;
 
     Label player1;
     float player1Axis = 0;
@@ -46,6 +41,19 @@ public class CreateLobbyScreen extends AbstractScreen {
             }
         });
         stage.addActor(btnMessage);
+
+        btnStart = UIBuilder.createButton("Start", mt.buttonStyle, width, height, 0.05f);
+        btnStart.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //TODO start the game
+                String message = Messages.getDataStr(START_GAME);
+                mt.activity.sendMessage(message);
+
+                mt.screenManager.setScreen(ScreenManager.STATE.PLAY);
+            }
+        });
+        stage.addActor(btnStart);
 
         player1 = UIBuilder.createLabel("", mt.buttonStyle, 200, 50, 0.6f);
         stage.addActor(player1);
@@ -97,6 +105,8 @@ public class CreateLobbyScreen extends AbstractScreen {
 
     public void GetMessage(String message) {
         String cmd = Messages.getCommand(message);
+        Log.d("String", message);
+        Log.d("String", cmd);
 
         switch (cmd){
             case ACCEL:

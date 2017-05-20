@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.crazyking.mobiletennis.connection.ConnectionFactory;
@@ -27,20 +26,11 @@ import com.crazyking.mobiletennis.connection.Operator;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.MessageHandler;
-import com.crazyking.mobiletennis.screens.CreateLobbyScreen;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static com.crazyking.mobiletennis.R.id.log;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.CLOSE;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.CONN;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.END;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.PAUSE;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.START;
-import static com.crazyking.mobiletennis.connection.Constants.CODE;
-import static com.crazyking.mobiletennis.connection.Constants.NAME;
 
 
 public class AndroidLauncher extends AndroidApplication implements ViewPeerInterface {
@@ -195,6 +185,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	public void passMessage(final String message) {
         if(message.isEmpty())
             return;
+		Log.d("String", message);
         messageHandler.HandleReceivedMessage(message);
 	}
 
@@ -288,6 +279,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 
 	public void sendMessage(String message){
 		Log.d("Message", "Gesendet");
+		Log.d("String", message);
 		operator.sendMessage(message);
 	}
 }
