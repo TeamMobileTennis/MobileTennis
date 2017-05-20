@@ -22,6 +22,7 @@ public final class Constants {
         public final static String OTHER = "OTHER";         // Received all other things, like Messages
 
         public final static String ACCEL = "ACCEL";         // Info about Accelerometer
+        public final static String START_GAME = "START_GAME";
 
     }
     public final static String CODE = "code";               // Key for code, like connection response code or close response code

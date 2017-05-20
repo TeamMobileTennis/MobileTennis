@@ -23,6 +23,7 @@ import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
+import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
 
 
 public class GameScreen extends AbstractScreen {
@@ -39,6 +40,9 @@ public class GameScreen extends AbstractScreen {
     Body ball;
     Body leftBorder, rightBorder;
     Body player1Goal, player2Goal;
+
+    // Body properties
+
 
     // score
     int player1Goals = 0, player2Goals = 0;
@@ -103,14 +107,10 @@ public class GameScreen extends AbstractScreen {
 
                     // if the ball hits a goal the goalcounter of the (opposite player1) should go up
                     if(contact.getFixtureB().getBody() == player1Goal) {
-                        player2Goals++;
-                        player2Score.setText(player2Goals + "");
-                        reset = ball;
+                        Goal(2);
                     }
                     if(contact.getFixtureB().getBody() == player2Goal) {
-                        player1Goals++;
-                        player1Score.setText(player1Goals + "");
-                        reset = ball;
+                        Goal(1);
                     }
 
                 } else if(contact.getFixtureB().getBody() == ball){
@@ -121,14 +121,10 @@ public class GameScreen extends AbstractScreen {
 
                     // if the ball hits a goal the goalcounter of the (opposite player1) should go up
                     if(contact.getFixtureA().getBody() == player1Goal) {
-                        player2Goals++;
-                        player2Score.setText(player2Goals + "");
-                        reset = ball;
+                        Goal(2);
                     }
                     if(contact.getFixtureA().getBody() == player2Goal) {
-                        player1Goals++;
-                        player1Score.setText(player1Goals + "");
-                        reset = ball;
+                        Goal(1);
                     }
                 }
             }
@@ -161,11 +157,16 @@ public class GameScreen extends AbstractScreen {
         resetBall();
 
         //TODO: just some paddle movement testing
-        float x = -1 * Gdx.input.getAccelerometerX() * 1000;
+        float x = -1 * player1Accel * 1000;
         player1.setLinearVelocity(x, 0);
         float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
         player1.setTransform(xx, 20, 0);
-        player2.setTransform(xx, height-20, 0);
+
+
+        float y = -1 * player2Accel * 1000;
+        player2.setLinearVelocity(y, 0);
+        float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
+        player2.setTransform(yy, height-20, 0);
     }
 
     @Override
@@ -216,7 +217,11 @@ public class GameScreen extends AbstractScreen {
             case ACCEL:
                 int xx = Integer.parseInt(Messages.getValue(message, ACCX));
                 float x = xx / 1000f;
-                //int player = Integer.parseInt(Messages.getValue(message, PLAYER_))
+                int player = Integer.parseInt(Messages.getValue(message, PLAYER_CODE));
+                if(player == 1)
+                    player1Accel = x;
+                else
+                    player2Accel = x;
                 break;
             default:
                 Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
@@ -242,6 +247,24 @@ public class GameScreen extends AbstractScreen {
             ball.setLinearVelocity(direction);
             reset = null;
         }
+    }
+
+    private void Goal(int player){
+        // player is the player who get the goal/point
+        if(player == 1) {
+            player1Goals++;
+            player1Score.setText(player1Goals + "");
+        } else {
+            player2Goals++;
+            player2Score.setText(player2Goals + "");
+        }
+
+
+        // let the ball reset in the next step
+        reset = ball;
+
+
+        // maybe message the player that someone shot a goal
     }
 
 }
