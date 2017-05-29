@@ -155,6 +155,10 @@ public class GameScreen extends AbstractScreen {
     public void update(float delta) {
         world.step(1 / 60f, 6, 2);
         resetBall();
+        //ball.applyLinearImpulse(ball.getLinearVelocity(), ball.getAngle(), true);
+        Vector2 vec2 = ball.getLinearVelocity();
+
+        ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
 
         //TODO: just some paddle movement testing
         float x = -1 * player1Accel * 1000;
