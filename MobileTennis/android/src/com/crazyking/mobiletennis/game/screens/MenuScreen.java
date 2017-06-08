@@ -27,7 +27,7 @@ public class MenuScreen extends AbstractScreen {
         background.setPosition(0, 0);
         background.setSize(MobileTennis.V_WIDTH, MobileTennis.V_HEIGHT);
 
-        createUI();
+        createUIElements();
 
         // input only on the stage elements
         Gdx.input.setInputProcessor(stage);
@@ -84,22 +84,22 @@ public class MenuScreen extends AbstractScreen {
         background.getTexture().dispose();
     }
 
-    private void createUI(){
-        float width = Gdx.graphics.getWidth() / 2;
-        float height = Gdx.graphics.getHeight() / 10;
+    private void createUIElements(){
+        float labelWidth = Gdx.graphics.getWidth() / 2;
+        float labelHeight = Gdx.graphics.getHeight() / 10;
 
-        title = UIBuilder.createLabel("Menu",  mt.titleStyle, width, height, 0.85f);
+        title = UIBuilder.CreateLabel("Menu",  mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
-        createLobby = UIBuilder.createButton("Create Lobby",  mt.buttonStyle, width, height, 0.7f);
+        createLobby = UIBuilder.CreateButton("Create Lobby",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.7f);
         createLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.CREATE_LOBBY));
 
-        joinLobby = UIBuilder.createButton("Join Lobby",  mt.buttonStyle, width, height, 0.5f);
+        joinLobby = UIBuilder.CreateButton("Join Lobby",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.5f);
         joinLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.JOIN_LOBBY));
 
-        settings = UIBuilder.createButton("Game Test",  mt.buttonStyle, width, height, 0.3f);
+        settings = UIBuilder.CreateButton("Game Test",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.3f);
         settings.addListener(new ButtonHandler(mt, ScreenManager.STATE.PLAY));
 
-        accelTest = UIBuilder.createButton("Accelerometer",  mt.buttonStyle, width, height, 0.1f);
+        accelTest = UIBuilder.CreateButton("Accelerometer",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.1f);
         accelTest.addListener(new ButtonHandler(mt, ScreenManager.STATE.ACCEL_TEST));
 
         stage.addActor(title);

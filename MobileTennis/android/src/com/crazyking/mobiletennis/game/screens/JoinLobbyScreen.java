@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
 import static com.crazyking.mobiletennis.connection.Constants.CODE;
-import static com.crazyking.mobiletennis.game.ui.UIBuilder.createLabel;
+import static com.crazyking.mobiletennis.game.ui.UIBuilder.CreateLabel;
 
 
 public class JoinLobbyScreen extends AbstractScreen {
@@ -31,21 +31,7 @@ public class JoinLobbyScreen extends AbstractScreen {
     public JoinLobbyScreen(final MobileTennis mt){
         super(mt);
 
-        float width = Gdx.graphics.getWidth() / 2;
-        float height = Gdx.graphics.getHeight() / 10;
-        Label title = createLabel("Join Lobby", mt.titleStyle, width, height, 0.85f);
-
-        TextButton btnSearch = UIBuilder.createButton("Search",  mt.buttonStyle, 200, 50, 0.2f);
-        btnSearch.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                search();
-            }
-        });
-
-
-        stage.addActor(title);
-        stage.addActor(btnSearch);
+        createUIElements();
 
     }
 
@@ -99,7 +85,7 @@ public class JoinLobbyScreen extends AbstractScreen {
         devList.clear();
         int i = 0;
         for (WifiP2pDevice dev : devices ) {
-            Label labelDev = createLabel(dev.deviceName, mt.buttonStyle, 200, 50, 0.7f - 0.1f * i);
+            Label labelDev = CreateLabel(dev.deviceName, mt.fntButton, 200, 50, width, height * (0.7f - 0.1f * i));
             labelDev.addListener(new LabelHandler(dev));
             devList.add(labelDev);
             stage.addActor(labelDev);
@@ -146,5 +132,23 @@ public class JoinLobbyScreen extends AbstractScreen {
                 Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet.");
                 break;
         }
+    }
+
+    private void createUIElements(){
+        float labelWidth = Gdx.graphics.getWidth() / 2;
+        float labelHeight = Gdx.graphics.getHeight() / 10;
+        Label title = CreateLabel("Join Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+
+        TextButton btnSearch = UIBuilder.CreateButton("Search",  mt.fntButton, 200, 50, width/2, height * 0.2f);
+        btnSearch.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                search();
+            }
+        });
+
+
+        stage.addActor(title);
+        stage.addActor(btnSearch);
     }
 }

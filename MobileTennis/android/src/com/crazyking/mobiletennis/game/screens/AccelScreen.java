@@ -12,28 +12,15 @@ import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 public class AccelScreen extends AbstractScreen {
 
+    // Own accel stats
     float xPos = 0, yPos = 0, zPos = 0;
     Label xlabel, ylabel, zlabel;
 
     public AccelScreen(MobileTennis mt){
         super(mt);
 
-        Label.LabelStyle style = StyleBuilder.createStyle(15, Color.BLACK);
+        createUIElements();
 
-        float width = Gdx.graphics.getWidth() / 2;
-        float height = Gdx.graphics.getHeight() / 6;
-        Label title = UIBuilder.createLabel("Accelerometer", mt.titleStyle, width, height, 0.85f);
-
-        stage.addActor(title);
-
-        xlabel = UIBuilder.createLabel("X:", style, width, height, 0.6f);
-        stage.addActor(xlabel);
-
-        ylabel = UIBuilder.createLabel("Y:", style, width, height, 0.4f);
-        stage.addActor(ylabel);
-
-        zlabel = UIBuilder.createLabel("Z:", style, width, height, 0.2f);
-        stage.addActor(zlabel);
     }
 
 
@@ -78,6 +65,29 @@ public class AccelScreen extends AbstractScreen {
     @Override
     public void hide() {
 
+    }
+
+    private void createUIElements(){
+        Label.LabelStyle font = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 15, Color.BLACK, 2, Color.BLACK);
+
+        float width = Gdx.graphics.getWidth();
+        float height = Gdx.graphics.getHeight();
+
+        float labelWidth = Gdx.graphics.getWidth() / 2;
+        float labelHeight = Gdx.graphics.getHeight() / 6;
+
+        //TODO: set the right width, height and position of the labels
+        Label title = UIBuilder.CreateLabel("Accelerometer", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+        stage.addActor(title);
+
+        xlabel = UIBuilder.CreateLabel("X:", font, labelWidth, labelHeight, width/2, height * 0.6f);
+        stage.addActor(xlabel);
+
+        ylabel = UIBuilder.CreateLabel("Y:", font, labelWidth, labelHeight, width/2, height * 0.4f);
+        stage.addActor(ylabel);
+
+        zlabel = UIBuilder.CreateLabel("Z:", font, labelWidth, labelHeight, width/2, height * 0.2f);
+        stage.addActor(zlabel);
     }
 
 }

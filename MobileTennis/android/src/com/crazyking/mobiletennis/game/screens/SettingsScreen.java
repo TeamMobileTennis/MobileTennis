@@ -13,9 +13,9 @@ public class SettingsScreen extends AbstractScreen {
     public SettingsScreen(MobileTennis mt){
         super(mt);
 
-        float width = Gdx.graphics.getWidth() / 2;
-        float height = Gdx.graphics.getHeight() / 10;
-        Label title = UIBuilder.createLabel("Settings",  mt.titleStyle, width, height, 0.85f);
+        float labelWidth = Gdx.graphics.getWidth() / 2;
+        float labelHeight = Gdx.graphics.getHeight() / 10;
+        Label title = UIBuilder.CreateLabel("Settings",  mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
         stage.addActor(title);
     }

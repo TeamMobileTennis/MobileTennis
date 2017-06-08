@@ -1,27 +1,20 @@
 package com.crazyking.mobiletennis.game;
 
-import android.app.Activity;
-import android.app.Notification;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.crazyking.mobiletennis.AndroidLauncher;
-import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.managers.MessageHandler;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.StyleBuilder;
 
 public class MobileTennis extends Game {
 
-
-	// Virtual game width and height for every aspect ratio
 	public static int V_WIDTH = 100;
 	public static int V_HEIGHT = 200;
 
@@ -38,9 +31,9 @@ public class MobileTennis extends Game {
 	public ShapeRenderer shapeBatch;
 	public static Skin skin;
 
-	// font titleStyle
-	public Label.LabelStyle titleStyle;
-	public Label.LabelStyle buttonStyle;
+	// font fntTitle
+	public Label.LabelStyle fntTitle;
+	public Label.LabelStyle fntButton;
 
 	public MobileTennis(AndroidLauncher act){
 		activity = act;
@@ -50,10 +43,13 @@ public class MobileTennis extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		shapeBatch = new ShapeRenderer();
+
+		// TODO: Most likely we dont need it anymore
 		// default gibldx skin
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-		createStyles();
+		// create the fonts we need
+		createFonts();
 
 		Gdx.input.setCatchBackKey(true);
 
@@ -66,7 +62,6 @@ public class MobileTennis extends Game {
 	@Override
 	public void render () {
 		super.render();
-
 	}
 	
 	@Override
@@ -78,8 +73,8 @@ public class MobileTennis extends Game {
 		screenManager.dispose();
 	}
 
-	private void createStyles(){
-		titleStyle = StyleBuilder.createStyle(10, Color.BLACK);
-		buttonStyle = StyleBuilder.createStyle(20, Color.WHITE);
+	private void createFonts(){
+		fntTitle = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 10, Color.BLACK, 2, Color.BLACK);
+		fntButton = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 20, Color.WHITE, 2, Color.BLACK);
 	}
 }

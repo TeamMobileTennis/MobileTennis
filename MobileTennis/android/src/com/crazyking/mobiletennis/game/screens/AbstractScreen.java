@@ -17,6 +17,10 @@ public abstract class AbstractScreen implements Screen {
     OrthographicCamera camera;
     Viewport viewport;
 
+    // the dimensions of the screen (real device)
+    float width = Gdx.graphics.getWidth();
+    float height = Gdx.graphics.getHeight();
+
     public AbstractScreen(MobileTennis mt){
         this.mt = mt;
         this.stage = new Stage();

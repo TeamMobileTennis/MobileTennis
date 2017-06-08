@@ -85,11 +85,11 @@ public class GameScreen extends AbstractScreen {
         player1Goal = BodyBuilder.BuildWall(world, 0, -10, width, 10);
         player2Goal = BodyBuilder.BuildWall(world, 0, height, width, 10);
 
-        player1Score = UIBuilder.createLabel("0", mt.buttonStyle, 50, 50, 0.4f);
+        player1Score = UIBuilder.CreateLabel("0", mt.fntButton, 50, 50, width, height * 0.4f);
         player1Score.setPosition(100, 0.4f*height);
         stage.addActor(player1Score);
 
-        player2Score = UIBuilder.createLabel("0", mt.buttonStyle, 50, 50, 0.4f);
+        player2Score = UIBuilder.CreateLabel("0", mt.fntButton, 50, 50, width, height * 0.4f);
         player2Score.setPosition(100, 0.6f*height);
         stage.addActor(player2Score);
 
