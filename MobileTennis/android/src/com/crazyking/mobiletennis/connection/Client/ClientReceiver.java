@@ -10,6 +10,7 @@ import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -80,7 +81,11 @@ public class ClientReceiver extends BroadcastReceiver {
                 if (networkInfo != null) {
                     if (networkInfo.isConnected()) {
                         peer.getConnectionInfo();
+                    }else {
+                        Log.d("INFO","Not connected");
                     }
+                }else {
+                    Log.d("INFO","Network Info is null");
                 }
                 wifiGroup = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_GROUP);
                 wifiInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_INFO);

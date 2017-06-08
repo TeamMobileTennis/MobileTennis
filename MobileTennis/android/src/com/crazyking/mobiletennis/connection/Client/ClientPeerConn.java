@@ -146,10 +146,13 @@ public class ClientPeerConn implements Operator {
      */
     @Override
     public void getConnectionInfo(){
+        Log.d("INFO","Requested Connection Info - Begin");
         if(manager != null){
+            Log.d("INFO","Requested Connection Info - Manager not null");
             manager.requestConnectionInfo(channel, new WifiP2pManager.ConnectionInfoListener() {
                 @Override
                 public void onConnectionInfoAvailable(WifiP2pInfo info) {
+                    Log.d("INFO","Requested Connection Info");
                     if(info != null) {
                         peerConnection.setWifiInfo(info);
                         if(info.groupFormed){
@@ -229,12 +232,13 @@ public class ClientPeerConn implements Operator {
         manager.connect(channel, config, new WifiP2pManager.ActionListener() {
             @Override
             public void onSuccess() {
+                Log.d("INFO","Connection success. Trying to open a socket");
                 action = Messages.getDataStr(Constants.CMD.CONN, Constants.NAME, playerName);
             }
 
             @Override
             public void onFailure(int reason) {
-                Log.d("ERROR", "Connection failed.");
+                Log.d("ERROR", "Connection failed. Reason: "+reason);
             }
         });
         Log.d("INFO", "connectToGame in Client");
