@@ -5,7 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 
-
+/**
+ * A simple ButtonHandler to handle the menu "movement"
+ */
 public class ButtonHandler extends ClickListener {
 
     MobileTennis mt;

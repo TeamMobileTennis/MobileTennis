@@ -6,16 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.MobileTennis;
-import com.crazyking.mobiletennis.game.managers.ScreenManager;
 
-import static android.R.attr.x;
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
-import static com.crazyking.mobiletennis.connection.Constants.CMD.START;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
-import static com.crazyking.mobiletennis.connection.Constants.CODE;
-import static com.crazyking.mobiletennis.game.ui.UIBuilder.createLabel;
+import static com.crazyking.mobiletennis.game.ui.UIBuilder.CreateLabel;
 
 
 public class PaddleScreen extends AbstractScreen {
@@ -26,9 +21,9 @@ public class PaddleScreen extends AbstractScreen {
     public PaddleScreen(MobileTennis mt){
         super(mt);
 
-        float width = Gdx.graphics.getWidth() / 2;
-        float height = Gdx.graphics.getHeight() / 10;
-        title = createLabel("Lobby", mt.titleStyle, width, height, 0.85f);
+        float labelWidth = Gdx.graphics.getWidth() / 2;
+        float labelHeight = Gdx.graphics.getHeight() / 10;
+        title = CreateLabel("Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
         stage.addActor(title);
     }
