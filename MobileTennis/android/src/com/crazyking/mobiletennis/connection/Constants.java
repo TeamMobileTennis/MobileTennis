@@ -23,6 +23,7 @@ public final class Constants {
 
         public final static String ACCEL = "ACCEL";         // Info about Accelerometer
         public final static String START_GAME = "START_GAME";
+        public final static String GAME_INFO = "GAME_INFO"; // information about the current lobby/game
 
     }
     public final static String CODE = "code";               // Key for code, like connection response code or close response code
@@ -47,6 +48,7 @@ public final class Constants {
 
     public final static String ACCX = "xAxis";              // the x value of the accelerometer
 
+    public static final String WINNING_POINTS = "WP";       // the points/goal needed to win the game
 
 
 

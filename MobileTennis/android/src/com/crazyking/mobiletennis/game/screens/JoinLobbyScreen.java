@@ -85,7 +85,7 @@ public class JoinLobbyScreen extends AbstractScreen {
         devList.clear();
         int i = 0;
         for (WifiP2pDevice dev : devices ) {
-            Label labelDev = CreateLabel(dev.deviceName, mt.fntButton, 200, 50, width, height * (0.7f - 0.1f * i));
+            Label labelDev = CreateLabel(dev.deviceName, mt.fntButton, 200, 50, width/2, height * (0.7f - 0.1f * i));
             labelDev.addListener(new LabelHandler(dev));
             devList.add(labelDev);
             stage.addActor(labelDev);
@@ -123,7 +123,7 @@ public class JoinLobbyScreen extends AbstractScreen {
                 if(Integer.parseInt(Messages.getValue(message, CODE)) == 0) {
                     // we get a positive response
                     // connection successfull
-                    mt.screenManager.setScreen(ScreenManager.STATE.PADDLE);
+                    mt.screenManager.setScreen(ScreenManager.STATE.PADDLE_LOBBY);
                 }else {
                     // TODO - Connection refused
                 }

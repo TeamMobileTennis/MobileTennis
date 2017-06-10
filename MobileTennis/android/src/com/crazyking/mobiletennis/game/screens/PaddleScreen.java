@@ -15,17 +15,11 @@ import static com.crazyking.mobiletennis.game.ui.UIBuilder.CreateLabel;
 
 public class PaddleScreen extends AbstractScreen {
 
-    Label title;
-    boolean running = false;
-
     public PaddleScreen(MobileTennis mt){
         super(mt);
 
-        float labelWidth = Gdx.graphics.getWidth() / 2;
-        float labelHeight = Gdx.graphics.getHeight() / 10;
-        title = CreateLabel("Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+        createUIElements();
 
-        stage.addActor(title);
     }
 
     @Override
@@ -36,17 +30,15 @@ public class PaddleScreen extends AbstractScreen {
 
     @Override
     public void update(float delta) {
-        // FIXME: we do not want to send it yet
         // we send always our axis
         // get the string in the right format
-        if(running) {
-            float x = Gdx.input.getAccelerometerX();
-            int xx = (int) (x * 1000);
-            String message = Messages.getDataStr(ACCEL, ACCX, xx + "");
-            Log.d("String", message);
-            // send the message
-            mt.activity.sendMessage(message);
-        }
+        float x = Gdx.input.getAccelerometerX();
+        int xx = (int) (x * 1000);
+        String message = Messages.getDataStr(ACCEL, ACCX, xx + "");
+        Log.d("String", message);
+        // send the message
+        mt.activity.sendMessage(message);
+
     }
 
     @Override
@@ -76,13 +68,17 @@ public class PaddleScreen extends AbstractScreen {
         String cmd = Messages.getCommand(message);
 
         switch (cmd){
-            case START_GAME:
-                title.setText("In Game");
-                running = true;
-                break;
             default:
                 Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet.");
                 break;
         }
+    }
+
+    private void createUIElements(){
+        float labelWidth = Gdx.graphics.getWidth() / 2;
+        float labelHeight = Gdx.graphics.getHeight() / 10;
+        Label title = CreateLabel("In Game", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+
+        stage.addActor(title);
     }
 }

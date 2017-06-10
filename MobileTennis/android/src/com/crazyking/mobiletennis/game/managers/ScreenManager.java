@@ -7,6 +7,7 @@ import com.crazyking.mobiletennis.game.screens.CreateLobbyScreen;
 import com.crazyking.mobiletennis.game.screens.GameScreen;
 import com.crazyking.mobiletennis.game.screens.JoinLobbyScreen;
 import com.crazyking.mobiletennis.game.screens.MenuScreen;
+import com.crazyking.mobiletennis.game.screens.PaddleLobbyScreen;
 import com.crazyking.mobiletennis.game.screens.PaddleScreen;
 import com.crazyking.mobiletennis.game.screens.SettingsScreen;
 
@@ -24,6 +25,7 @@ public class ScreenManager {
         CREATE_LOBBY,
         JOIN_LOBBY,
         ACCEL_TEST,
+        PADDLE_LOBBY,
         PADDLE
     }
 
@@ -44,6 +46,7 @@ public class ScreenManager {
         screens.put(STATE.JOIN_LOBBY, new JoinLobbyScreen(mt));
         screens.put(STATE.SETTINGS, new SettingsScreen(mt));
         screens.put(STATE.ACCEL_TEST, new AccelScreen(mt));
+        screens.put(STATE.PADDLE_LOBBY, new PaddleLobbyScreen(mt));
         screens.put(STATE.PADDLE, new PaddleScreen(mt));
     }
 
