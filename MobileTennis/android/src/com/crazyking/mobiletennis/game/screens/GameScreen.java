@@ -6,7 +6,6 @@ import android.util.Log;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -18,7 +17,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.GameVars;
@@ -29,7 +27,10 @@ import com.crazyking.mobiletennis.game.ui.UIBuilder;
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
 import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
-import static com.crazyking.mobiletennis.game.GameVars.ballSpeed;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleHeight;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleSprite;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleWidth;
+import static com.crazyking.mobiletennis.game.GameVars.WallSprite;
 
 
 public class GameScreen extends AbstractScreen {
@@ -43,10 +44,13 @@ public class GameScreen extends AbstractScreen {
     Array<Body> tmpBodies = new Array<Body>();
 
     // the Bodies
-    Body player1, player2;
+    Body player1;
+    Body player2;
     Body ball;
-    Body leftBorder, rightBorder;
-    Body player1Goal, player2Goal;
+    Body leftBorder;
+    Body rightBorder;
+    Body player1Goal;
+    Body player2Goal;
 
     // score
     int player1Goals = 0, player2Goals = 0;
@@ -54,9 +58,6 @@ public class GameScreen extends AbstractScreen {
 
     // ball properties
     Body reset = null;
-
-    // a simple ball sprite
-    Sprite ballSprite;
 
     // the current accel
     float player1Accel = 0, player2Accel = 0;
@@ -186,30 +187,18 @@ public class GameScreen extends AbstractScreen {
         b2dr = new Box2DDebugRenderer();
 
         // left and right border of the game
-        leftBorder = BodyBuilder.BuildWall(world, 10, height/2, 20, height);
-        rightBorder = BodyBuilder.BuildWall(world, width-10, height/2, 20, height);
+        leftBorder = BodyBuilder.BuildWall(world, 20, height, 10, height/2, WallSprite);
+        rightBorder = BodyBuilder.BuildWall(world, 20, height, width-10, height/2, WallSprite);
 
         // the player1 paddles
-        player1 = BodyBuilder.BuildBox(world, width/2, 20, 100, 20);
-        player2 = BodyBuilder.BuildBox(world, width/2, height-20, 100, 20);
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, width/2, 20, PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, width/2, height-20, PaddleSprite);
 
         // the goal of the players
-        player1Goal = BodyBuilder.BuildWall(world, width/2, -5, width, 10);
-        player2Goal = BodyBuilder.BuildWall(world, width/2, height+5, width, 10);
+        player1Goal = BodyBuilder.BuildWall(world, width, 10, width/2, -5);
+        player2Goal = BodyBuilder.BuildWall(world, width, 10, width/2, height+5);
 
-        //TODO: improve sprite system
-        // set some simple sprites
-        Sprite wallSprite = new Sprite(new Texture(Gdx.files.internal("sprites/wall.png")));
-        wallSprite.setSize(20, height);
-        leftBorder.setUserData(wallSprite);
-        rightBorder.setUserData(wallSprite);
-
-        Sprite paddleSprite = new Sprite(new Texture(Gdx.files.internal("sprites/paddle.png")));
-        paddleSprite.setSize(100, 20);
-        player1.setUserData(paddleSprite);
-        player2.setUserData(paddleSprite);
-        // end of sprite system
-
+        // Create the score display
         player1Score = UIBuilder.CreateLabel("0", mt.fntButton, 50, 50, width, height * 0.4f);
         player1Score.setPosition(100, 0.4f*height);
         stage.addActor(player1Score);
@@ -276,13 +265,7 @@ public class GameScreen extends AbstractScreen {
 
     private void createNewBall(){
         // game ball
-        ball = BodyBuilder.BuildBall(world, width/2, height/2, 20);
-        // and give it a sprite
-        ballSprite = new Sprite(new Texture(Gdx.files.internal("sprites/tennisball.png")));
-        ballSprite.setSize(40, 40);
-        ballSprite.setOrigin(20, 20);
-        ball.setUserData(ballSprite);
-
+        ball = BodyBuilder.BuildBall(world, 20, width/2, height/2, GameVars.BallSprite);
         Vector2 direction = new Vector2();
         direction.setToRandomDirection();
         direction.setLength(GameVars.ballSpeed);
@@ -333,6 +316,9 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void gameEnd(int winningPlayer){
+        // stop the ball
+        ball.setLinearVelocity(0, 0);
+
         Label winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
         stage.addActor(winner);
     }

@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -16,6 +18,8 @@ import com.crazyking.mobiletennis.game.GameVars;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
+
+import java.util.HashMap;
 
 import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
 import static com.crazyking.mobiletennis.connection.Constants.INFO_LOBBY;
@@ -30,10 +34,16 @@ public class CreateLobbyScreen extends AbstractScreen {
 
     // the value labels, that needs to get updated
     Label winningPointsValue;
-    Label selectBallValue;
+    Sprite selectBallValue;
+
+
+    public static HashMap<String, String> BallSprites = new HashMap<String, String>();
 
     public CreateLobbyScreen(final MobileTennis mt){
         super(mt);
+
+        // set up HashMap for different Ball sprites
+        BallSprites.put("Tennisball", "tennisball");
 
         // Create the UI elements of the screen
         creatUIElements();
@@ -64,13 +74,20 @@ public class CreateLobbyScreen extends AbstractScreen {
         // send the information for the lobby/game all the time?
         String wpupdate = Messages.getDataStr(INFO_LOBBY, WINNING_POINTS, (int)winningPoints.getValue() + "");
         mt.activity.sendMessage(wpupdate);
+
+        // update the ball sprite string
+        GameVars.BallSprite = selectBall.getSelected();
     }
 
     @Override
     public void render(float delta){
         super.render(delta);
 
+        stage.act();
         stage.draw();
+
+        mt.batch.begin();
+        mt.batch.end();
     }
 
     @Override
@@ -141,11 +158,16 @@ public class CreateLobbyScreen extends AbstractScreen {
 
         //FIXME: propably wanna do this with a list
         selectBall = new SelectBox<String>(mt.skin);
-        selectBall.setItems("Tennisball", "Fußball");
+        selectBall.setItems("Tennisball", "Fussball");
         selectBall.setSelected("Tennisball");
         selectBall.setSize(labelWidth, labelHeight/4);
         selectBall.setPosition(width/2, height * 0.6f, Align.center);
         stage.addActor(selectBall);
+
+        //selectBallValue = new Sprite(new Texture(Gdx.files.internal("sprites/tennisball.png")));
+        //selectBallValue.setSize(100, 100);
+        //selectBallValue.setScale(width/500);
+        //selectBallValue.setPosition(width/2, height * 0.6f);
         // end of the select menu
     }
 
