@@ -96,8 +96,8 @@ public class MenuScreen extends AbstractScreen {
         joinLobby = UIBuilder.CreateButton("Join Lobby",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.5f);
         joinLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.JOIN_LOBBY));
 
-        settings = UIBuilder.CreateButton("Game Test",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.3f);
-        settings.addListener(new ButtonHandler(mt, ScreenManager.STATE.PLAY));
+        settings = UIBuilder.CreateButton("Settings",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.3f);
+        settings.addListener(new ButtonHandler(mt, ScreenManager.STATE.SETTINGS));
 
         accelTest = UIBuilder.CreateButton("Accelerometer",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.1f);
         accelTest.addListener(new ButtonHandler(mt, ScreenManager.STATE.ACCEL_TEST));
