@@ -27,6 +27,7 @@ public abstract class AbstractScreen implements Screen {
 
         // Make a camera + Extendviewport and apply the camera to the viewport
         camera = new OrthographicCamera();
+        camera.setToOrtho(false, width, height);
         viewport = new ExtendViewport(MobileTennis.V_WIDTH, MobileTennis.V_HEIGHT, camera);
         viewport.apply();
 

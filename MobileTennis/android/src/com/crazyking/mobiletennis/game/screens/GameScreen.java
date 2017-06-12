@@ -4,9 +4,9 @@ package com.crazyking.mobiletennis.game.screens;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -18,7 +18,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.GameVars;
@@ -26,16 +25,21 @@ import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.body.BodyBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
+
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
 import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
-import static com.crazyking.mobiletennis.game.GameVars.ballSpeed;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleHeight;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleSprite;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleWidth;
+import static com.crazyking.mobiletennis.game.GameVars.WallSprite;
 
 
 public class GameScreen extends AbstractScreen {
 
     // the camera
     OrthographicCamera camera;
+    public static float PPM = 32;
 
     // Box2D
     World world;
@@ -43,10 +47,13 @@ public class GameScreen extends AbstractScreen {
     Array<Body> tmpBodies = new Array<Body>();
 
     // the Bodies
-    Body player1, player2;
+    Body player1;
+    Body player2;
     Body ball;
-    Body leftBorder, rightBorder;
-    Body player1Goal, player2Goal;
+    Body leftBorder;
+    Body rightBorder;
+    Body player1Goal;
+    Body player2Goal;
 
     // score
     int player1Goals = 0, player2Goals = 0;
@@ -55,8 +62,8 @@ public class GameScreen extends AbstractScreen {
     // ball properties
     Body reset = null;
 
-    // a simple ball sprite
-    Sprite ballSprite;
+    // some soundy thingys
+    Sound sound;
 
     // the current accel
     float player1Accel = 0, player2Accel = 0;
@@ -71,6 +78,8 @@ public class GameScreen extends AbstractScreen {
 
         setCollisionProperties();
 
+        // create some sound thingy
+        sound = Gdx.audio.newSound(Gdx.files.internal("sounds/boing.wav"));
     }
 
     @Override
@@ -85,19 +94,19 @@ public class GameScreen extends AbstractScreen {
         //ball.applyLinearImpulse(ball.getLinearVelocity(), ball.getAngle(), true);
         Vector2 vec2 = ball.getLinearVelocity();
 
-        ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
+        //ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
 
         //TODO: just some paddle movement testing
         float x = -1 * player1Accel * 1000;
         player1.setLinearVelocity(x, 0);
-        float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
-        player1.setTransform(xx, 20, 0);
+        //float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
+        //player1.setTransform(xx / PPM, 20 / PPM, 0);
 
 
         float y = player2Accel * 1000;
         player2.setLinearVelocity(y, 0);
-        float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
-        player2.setTransform(yy, height-20, 0);
+        //float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
+        //player2.setTransform(yy / PPM, height-20 / PPM, 0);
     }
 
     @Override
@@ -108,10 +117,11 @@ public class GameScreen extends AbstractScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // render our objects in the world, respective to our pixel per meter scale
-        //b2dr.render(world, camera.combined);
+        //b2dr.render(world, camera.combined.cpy().scl(PPM));
+
 
         // try to draw a sprite
-        mt.batch.setProjectionMatrix(camera.combined);
+        mt.batch.setProjectionMatrix(camera.combined.cpy().scl(PPM));
         mt.batch.begin();
         //FIXME: i cant get the bodies
         world.getBodies(tmpBodies);
@@ -124,6 +134,8 @@ public class GameScreen extends AbstractScreen {
             }
         }
         mt.batch.end();
+
+
 
         // draw our stage(UI) on top
         stage.draw();
@@ -186,30 +198,18 @@ public class GameScreen extends AbstractScreen {
         b2dr = new Box2DDebugRenderer();
 
         // left and right border of the game
-        leftBorder = BodyBuilder.BuildWall(world, 10, height/2, 20, height);
-        rightBorder = BodyBuilder.BuildWall(world, width-10, height/2, 20, height);
+        leftBorder = BodyBuilder.BuildWall(world, 20, height, 10, height/2, WallSprite);
+        rightBorder = BodyBuilder.BuildWall(world, 20, height, width-10, height/2, WallSprite);
 
         // the player1 paddles
-        player1 = BodyBuilder.BuildBox(world, width/2, 20, 100, 20);
-        player2 = BodyBuilder.BuildBox(world, width/2, height-20, 100, 20);
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, width/2, 20, PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, width/2, height-20, PaddleSprite);
 
         // the goal of the players
-        player1Goal = BodyBuilder.BuildWall(world, width/2, -5, width, 10);
-        player2Goal = BodyBuilder.BuildWall(world, width/2, height+5, width, 10);
+        player1Goal = BodyBuilder.BuildWall(world, width, 10, width/2, -5);
+        player2Goal = BodyBuilder.BuildWall(world, width, 10, width/2, height+5);
 
-        //TODO: improve sprite system
-        // set some simple sprites
-        Sprite wallSprite = new Sprite(new Texture(Gdx.files.internal("sprites/wall.png")));
-        wallSprite.setSize(20, height);
-        leftBorder.setUserData(wallSprite);
-        rightBorder.setUserData(wallSprite);
-
-        Sprite paddleSprite = new Sprite(new Texture(Gdx.files.internal("sprites/paddle.png")));
-        paddleSprite.setSize(100, 20);
-        player1.setUserData(paddleSprite);
-        player2.setUserData(paddleSprite);
-        // end of sprite system
-
+        // Create the score display
         player1Score = UIBuilder.CreateLabel("0", mt.fntButton, 50, 50, width, height * 0.4f);
         player1Score.setPosition(100, 0.4f*height);
         stage.addActor(player1Score);
@@ -224,6 +224,8 @@ public class GameScreen extends AbstractScreen {
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
+
+                sound.play();
 
                 // if the ball collides with something, it should change the direction
                 //FIXME: can not hit the sides of the paddle
@@ -276,13 +278,7 @@ public class GameScreen extends AbstractScreen {
 
     private void createNewBall(){
         // game ball
-        ball = BodyBuilder.BuildBall(world, width/2, height/2, 20);
-        // and give it a sprite
-        ballSprite = new Sprite(new Texture(Gdx.files.internal("sprites/tennisball.png")));
-        ballSprite.setSize(40, 40);
-        ballSprite.setOrigin(20, 20);
-        ball.setUserData(ballSprite);
-
+        ball = BodyBuilder.BuildBall(world, 20, width/2, height/2, GameVars.BallSprite);
         Vector2 direction = new Vector2();
         direction.setToRandomDirection();
         direction.setLength(GameVars.ballSpeed);
@@ -294,7 +290,7 @@ public class GameScreen extends AbstractScreen {
             reset.setTransform(width/2, height/2, reset.getAngle());
             Vector2 direction = new Vector2();
             direction.setToRandomDirection();
-            direction.setLength(GameVars.ballSpeed);
+            direction.scl(GameVars.ballSpeed);
             ball.setLinearVelocity(direction);
             reset = null;
         }
@@ -333,6 +329,9 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void gameEnd(int winningPlayer){
+        // stop the ball
+        ball.setLinearVelocity(0, 0);
+
         Label winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
         stage.addActor(winner);
     }
