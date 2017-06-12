@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
+import android.net.wifi.p2p.WifiP2pGroup;
+import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class ServerReceiver extends BroadcastReceiver {
     private ViewPeerInterface view;
 
     private NetworkInfo networkInfo;
+    private WifiP2pGroup wifiGroup = null;
     private int discoveryState = 0;
 
     /**
@@ -80,6 +83,7 @@ public class ServerReceiver extends BroadcastReceiver {
             if(manager != null) {
                 // Get Network-Info to check if we are connected to a p2p device
                 networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+                wifiGroup = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_GROUP);
                 if (networkInfo != null) {
                     if (networkInfo.isConnected()) {
                         peer.getConnectionInfo();
@@ -106,5 +110,13 @@ public class ServerReceiver extends BroadcastReceiver {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Get Information about the current connected Wifi-P2P-Group
+     * @return  The current WifiP2pGroup Information
+     */
+    public WifiP2pGroup getGroupInfo(){
+        return wifiGroup;
     }
 }

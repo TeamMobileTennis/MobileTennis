@@ -134,4 +134,12 @@ public class ClientReceiver extends BroadcastReceiver {
         }
         return false;
     }
+
+    /**
+     * Get Information about the current connected Wifi-P2P-Group
+     * @return  The current WifiP2pGroup Information
+     */
+    public WifiP2pGroup getGroupInfo(){
+        return wifiGroup;
+    }
 }
