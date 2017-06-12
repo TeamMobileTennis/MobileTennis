@@ -4,6 +4,7 @@ package com.crazyking.mobiletennis.game.screens;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -24,6 +25,7 @@ import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.body.BodyBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
+
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
 import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
@@ -37,6 +39,7 @@ public class GameScreen extends AbstractScreen {
 
     // the camera
     OrthographicCamera camera;
+    public static float PPM = 32;
 
     // Box2D
     World world;
@@ -59,6 +62,9 @@ public class GameScreen extends AbstractScreen {
     // ball properties
     Body reset = null;
 
+    // some soundy thingys
+    Sound sound;
+
     // the current accel
     float player1Accel = 0, player2Accel = 0;
 
@@ -72,6 +78,8 @@ public class GameScreen extends AbstractScreen {
 
         setCollisionProperties();
 
+        // create some sound thingy
+        sound = Gdx.audio.newSound(Gdx.files.internal("sounds/boing.wav"));
     }
 
     @Override
@@ -86,19 +94,19 @@ public class GameScreen extends AbstractScreen {
         //ball.applyLinearImpulse(ball.getLinearVelocity(), ball.getAngle(), true);
         Vector2 vec2 = ball.getLinearVelocity();
 
-        ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
+        //ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
 
         //TODO: just some paddle movement testing
         float x = -1 * player1Accel * 1000;
         player1.setLinearVelocity(x, 0);
-        float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
-        player1.setTransform(xx, 20, 0);
+        //float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
+        //player1.setTransform(xx / PPM, 20 / PPM, 0);
 
 
         float y = player2Accel * 1000;
         player2.setLinearVelocity(y, 0);
-        float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
-        player2.setTransform(yy, height-20, 0);
+        //float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
+        //player2.setTransform(yy / PPM, height-20 / PPM, 0);
     }
 
     @Override
@@ -109,10 +117,11 @@ public class GameScreen extends AbstractScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // render our objects in the world, respective to our pixel per meter scale
-        //b2dr.render(world, camera.combined);
+        //b2dr.render(world, camera.combined.cpy().scl(PPM));
+
 
         // try to draw a sprite
-        mt.batch.setProjectionMatrix(camera.combined);
+        mt.batch.setProjectionMatrix(camera.combined.cpy().scl(PPM));
         mt.batch.begin();
         //FIXME: i cant get the bodies
         world.getBodies(tmpBodies);
@@ -125,6 +134,8 @@ public class GameScreen extends AbstractScreen {
             }
         }
         mt.batch.end();
+
+
 
         // draw our stage(UI) on top
         stage.draw();
@@ -214,6 +225,8 @@ public class GameScreen extends AbstractScreen {
             @Override
             public void beginContact(Contact contact) {
 
+                sound.play();
+
                 // if the ball collides with something, it should change the direction
                 //FIXME: can not hit the sides of the paddle
                 if(contact.getFixtureA().getBody() == ball){
@@ -277,7 +290,7 @@ public class GameScreen extends AbstractScreen {
             reset.setTransform(width/2, height/2, reset.getAngle());
             Vector2 direction = new Vector2();
             direction.setToRandomDirection();
-            direction.setLength(GameVars.ballSpeed);
+            direction.scl(GameVars.ballSpeed);
             ball.setLinearVelocity(direction);
             reset = null;
         }

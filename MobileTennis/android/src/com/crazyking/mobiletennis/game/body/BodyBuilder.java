@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import static com.crazyking.mobiletennis.game.screens.GameScreen.PPM;
+
 public class BodyBuilder {
 
     /**
@@ -25,20 +27,20 @@ public class BodyBuilder {
         Body body;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.KinematicBody;
-        def.position.set(posX, posY);
+        def.position.set(posX / PPM, posY / PPM);
         def.fixedRotation = true;
         body = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width / 2, height / 2);
+        shape.setAsBox(width / 2 / PPM, height / 2 / PPM);
 
         body.createFixture(shape, 1.0f);
         shape.dispose();
 
         // Create the sprite
         Sprite paddleSprite = new Sprite(new Texture(Gdx.files.internal("sprites/" + sprite + ".png")));
-        paddleSprite.setSize(width, height);
-        paddleSprite.setOrigin(width/2, height/2);
+        paddleSprite.setSize(width / PPM, height / PPM);
+        paddleSprite.setOrigin(width/2 / PPM, height/2 / PPM);
         body.setUserData(paddleSprite);
 
         return body;
@@ -59,20 +61,20 @@ public class BodyBuilder {
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.StaticBody;
         def.fixedRotation = true;
+        def.position.set(xPos / PPM, yPos / PPM);
         body = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width / 2, height / 2);
+        shape.setAsBox(width / 2 / PPM, height / 2 / PPM);
 
         body.createFixture(shape, 1.0f);
-        body.setTransform(xPos, yPos, 0);
         shape.dispose();
 
         // Create the sprite
         if(!sprite.isEmpty()) {
             Sprite wallSprite = new Sprite(new Texture(Gdx.files.internal("sprites/" + sprite + ".png")));
-            wallSprite.setSize(width, height);
-            wallSprite.setOrigin(width / 2, height / 2);
+            wallSprite.setSize(width / PPM, height / PPM);
+            wallSprite.setOrigin(width / 2 / PPM, height / 2 / PPM);
             body.setUserData(wallSprite);
         }
 
@@ -105,13 +107,12 @@ public class BodyBuilder {
         Body body;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(posX, posY);
+        def.position.set(posX / PPM, posY / PPM);
         def.fixedRotation = true;
-        def.linearDamping = 0;
         body = world.createBody(def);
 
         CircleShape shape = new CircleShape();
-        shape.setRadius(radius);
+        shape.setRadius(radius / PPM);
 
         body.createFixture(shape, 1.0f);
         shape.dispose();
@@ -119,8 +120,8 @@ public class BodyBuilder {
         // and give it a sprite
         sprite = sprite.toLowerCase();
         Sprite ballSprite = new Sprite(new Texture(Gdx.files.internal("sprites/" + sprite + ".png")));
-        ballSprite.setSize(radius*2, radius*2);
-        ballSprite.setOrigin(radius, radius);
+        ballSprite.setSize(radius*2 / PPM, radius*2 / PPM);
+        ballSprite.setOrigin(radius / PPM, radius / PPM);
         body.setUserData(ballSprite);
 
         return body;

@@ -49,7 +49,6 @@ public final class Constants {
     public final static String ACCX = "xAxis";              // the x value of the accelerometer
 
     public static final String WINNING_POINTS = "WP";       // the points/goal needed to win the game
-
-
-
+    public static final String SELECTED_BALL = "SB";        // the currently selected ball sprite
+    public static final String BALL_SPEED = "BS";           // the starting speed of the ball
 }

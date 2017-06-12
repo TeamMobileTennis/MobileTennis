@@ -13,7 +13,7 @@ public class GameVars {
 
     // the staring values
     public static int winningPoints = 10;                           // how many points/goals to win the game
-    public static float ballSpeed = 500;                            // the starting speed of the ball
+    public static float ballSpeed = 5;                            // the starting speed of the ball
 
     // The string to the sprites
     public static String BallSprite = "tennisball";

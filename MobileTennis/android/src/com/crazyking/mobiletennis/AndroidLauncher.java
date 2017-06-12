@@ -161,6 +161,7 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 		});
 
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		config.useWakelock = true;
 		initialize(new MobileTennis(this), config);
 
 	}
