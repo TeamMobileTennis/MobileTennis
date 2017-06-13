@@ -21,6 +21,10 @@ public class MenuScreen extends AbstractScreen {
     public MenuScreen(final MobileTennis mt){
         super(mt);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Bene
         createUIElements();
 
         // input only on the stage elements
