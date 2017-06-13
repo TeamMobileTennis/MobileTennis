@@ -48,6 +48,7 @@ public class JoinLobbyScreen extends AbstractScreen {
     public void update(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             mt.screenManager.setScreen(ScreenManager.STATE.MENU);
+            mt.activity.disconnect();
         }
 
     }

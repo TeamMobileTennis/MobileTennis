@@ -69,96 +69,8 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		//Initialize Views
-		textView = (TextView) findViewById(R.id.textV);
-		btnSearch = (Button) findViewById(R.id.buttonDisconnect);
-		btnInfo = (Button) findViewById(R.id.buttonInfo);
-		btnSend = (Button) findViewById(R.id.buttonSend);
-		btnCreate =(Button) findViewById(R.id.buttonCreate);
-		etMessage = (EditText) findViewById(R.id.message);
-		peerListView = (ListView) findViewById(R.id.peerList);
-		tabHost = (TabHost) findViewById(R.id.tabHost);
-
-		tabHost.setup();
-		// Tab 1 : Connection with the ListView
-		TabHost.TabSpec tab = tabHost.newTabSpec("Connection");
-		tab.setContent(R.id.connection);
-		tab.setIndicator("Connection");
-		tabHost.addTab(tab);
-
-		// Tab 2 : Log
-		tab = tabHost.newTabSpec("Log");
-		tab.setContent(log);
-		tab.setIndicator("Log");
-		tabHost.addTab(tab);
-
 		context = this;
 		view = this;
-
-
-		// Search Button
-		btnSearch.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//operator = ClientPeerConn.getInstance(context, view, playerName);
-				//operator.setup("");
-				operator = ConnectionFactory.createClient(context,view);
-			}
-		});
-		// Send a Message from the Activity
-		btnSend.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				try {
-					String message = etMessage.getText().toString();
-					if(operator != null) {
-						operator.sendMessage(message);
-					}else {
-						Log.d("ERROR","Operator is null");
-					}
-				}catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-		});
-
-		peerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				try {
-//					operator.connectToGame(devList.get(position).deviceAddress);
-					ConnectionFactory.connectToGame(operator,devList.get(position).deviceAddress);
-				}catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-		});
-
-		btnCreate.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String lobbyName = etMessage.getText().toString();
-
-				//operator = ServerPeerConn.getInstance(context, view, playerName);
-				//operator.setup(lobbyName);
-				operator = ConnectionFactory.createHost(context,view,lobbyName);
-			}
-		});
-
-		btnInfo.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				operator.getConnectionInfo();
-				NetworkInfo networkInfo = getIntent().getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
-				if(networkInfo != null){
-					if(networkInfo.isConnected()){
-						Log.d("INFO","Connected!");
-					}
-				}else {
-					Log.d("INFO","NetInfo is null (MainActivity)");
-				}
-			}
-		});
 
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useWakelock = true;
@@ -172,14 +84,6 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 	public void fillPeerList(ArrayList<WifiP2pDevice> peerList) {
 		devList.clear();
 		devList.addAll(peerList);
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-
-		for(WifiP2pDevice dev : devList){
-			adapter.add(dev.deviceName);
-		}
-
-		peerListView.setAdapter(adapter);
 	}
 
 	@Override
@@ -282,6 +186,11 @@ public class AndroidLauncher extends AndroidApplication implements ViewPeerInter
 		Log.d("Message", "Gesendet");
 		Log.d("String", message);
 		operator.sendMessage(message);
+	}
+
+	public void disconnect(){
+		//if(operator!=null)
+			//operator.closeConnections();
 	}
 }
 

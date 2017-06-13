@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.GameVars;
 import com.crazyking.mobiletennis.game.MobileTennis;
@@ -40,6 +42,8 @@ public class GameScreen extends AbstractScreen {
     // the camera
     OrthographicCamera camera;
     public static float PPM = 32;
+
+    private Sprite background;
 
     // Box2D
     World world;
@@ -73,6 +77,11 @@ public class GameScreen extends AbstractScreen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
+
+        background = new Sprite(new Texture(Gdx.files.internal("sprites/Tennisplatz.jpg")));
+        //background.setScale(1/2);
+        background.setPosition(0, 0);
+        //background.setPosition(width/2-background.getWidth()/2,height/2-background.getHeight()/2);
 
         createGameObjects();
 
@@ -123,6 +132,7 @@ public class GameScreen extends AbstractScreen {
         // try to draw a sprite
         mt.batch.setProjectionMatrix(camera.combined.cpy().scl(PPM));
         mt.batch.begin();
+        background.draw(mt.batch);
         //FIXME: i cant get the bodies
         world.getBodies(tmpBodies);
         for(Body body : tmpBodies){
@@ -145,6 +155,7 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height){
+        //super.resize(width, height);
         camera.setToOrtho(false, width, height);
     }
 

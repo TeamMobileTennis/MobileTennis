@@ -15,7 +15,7 @@ public class StyleBuilder {
 
     /**
      * Creates a "Textfont" and returns it
-         * @param   size    The size of the font
+     * @param   size        The size of the font
      * @param   color       The color of the style
      * @return  style       The "Textfont"
      */

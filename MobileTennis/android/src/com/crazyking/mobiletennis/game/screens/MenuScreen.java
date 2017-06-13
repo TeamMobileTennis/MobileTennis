@@ -14,18 +14,12 @@ import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 public class MenuScreen extends AbstractScreen {
 
-    Sprite background;
 
     TextButton createLobby, joinLobby, settings, accelTest;
     Label title;
 
     public MenuScreen(final MobileTennis mt){
         super(mt);
-
-        // Make the background sprite and set it to 0/0
-        background = new Sprite(new Texture(Gdx.files.internal("menu.jpg")));
-        background.setPosition(0, 0);
-        background.setSize(MobileTennis.V_WIDTH, MobileTennis.V_HEIGHT);
 
         createUIElements();
 
@@ -50,7 +44,6 @@ public class MenuScreen extends AbstractScreen {
 
         mt.batch.setProjectionMatrix(camera.combined);
         mt.batch.begin();
-        background.draw(mt.batch);
         mt.batch.end();
 
         stage.act();
@@ -81,7 +74,6 @@ public class MenuScreen extends AbstractScreen {
     @Override
     public void dispose(){
         super.dispose();
-        background.getTexture().dispose();
     }
 
     private void createUIElements(){

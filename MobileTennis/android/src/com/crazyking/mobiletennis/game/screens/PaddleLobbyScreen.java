@@ -12,6 +12,7 @@ import com.crazyking.mobiletennis.game.ui.StyleBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 import static com.crazyking.mobiletennis.connection.Constants.BALL_SPEED;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.CLOSE;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
 import static com.crazyking.mobiletennis.connection.Constants.INFO_LOBBY;
 import static com.crazyking.mobiletennis.connection.Constants.SELECTED_BALL;
@@ -92,6 +93,8 @@ public class PaddleLobbyScreen extends AbstractScreen {
                     ballSpeedValue.setText(bs + "");
                 }
                 break;
+            case CLOSE:
+                mt.screenManager.setScreen(ScreenManager.STATE.MENU);
             default:
                 Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet.");
                 break;
