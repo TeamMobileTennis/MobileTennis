@@ -32,7 +32,7 @@ public interface ViewPeerInterface {
      *              the current information about the
      *              game lobby
      */
-    void passInformation(Information info);
+    //void passInformation(Information info);
 
 
 

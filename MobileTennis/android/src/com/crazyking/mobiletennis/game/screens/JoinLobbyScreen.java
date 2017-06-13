@@ -78,7 +78,7 @@ public class JoinLobbyScreen extends AbstractScreen {
     }
 
     private void search(){
-        devices = mt.activity.SearchingDevices();
+        devices = mt.activity.searchingDevices();
         // create device list in stage
         for (Label label : devList) {
             label.remove();
@@ -106,7 +106,7 @@ public class JoinLobbyScreen extends AbstractScreen {
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            mt.activity.ConnectToDevice(dev);
+            mt.activity.connectToDevice(dev);
             Log.d("INFO", "Connect to "+dev.deviceName);
         }
     }

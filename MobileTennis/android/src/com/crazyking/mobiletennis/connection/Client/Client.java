@@ -232,7 +232,7 @@ public class Client extends Thread{
             switch (cmd){
                 case INFO:
                     information.strToInfo(message);
-                    view.passInformation(information);
+                    //view.passInformation(information);
                     break;
 
                 case CLOSE:

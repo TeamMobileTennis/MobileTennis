@@ -23,9 +23,6 @@ import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import static com.crazyking.mobiletennis.connection.Constants.BALL_SPEED;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
 import static com.crazyking.mobiletennis.connection.Constants.INFO_LOBBY;
@@ -73,7 +70,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         // input only on the stage elements
         Gdx.input.setInputProcessor(stage);
 
-        mt.activity.CreateServer();
+        mt.activity.createServer();
     }
 
     @Override
