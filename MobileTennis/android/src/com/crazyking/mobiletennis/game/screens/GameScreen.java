@@ -20,11 +20,6 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-<<<<<<< HEAD
-=======
-import com.badlogic.gdx.utils.viewport.FitViewport;
->>>>>>> Bene
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.GameVars;
 import com.crazyking.mobiletennis.game.MobileTennis;
@@ -47,8 +42,6 @@ import static com.crazyking.mobiletennis.game.GameVars.WallSprite;
 public class GameScreen extends AbstractScreen {
 
     public static float PPM = 32;
-
-    private Sprite background;
 
     // Box2D
     World world;
@@ -85,11 +78,6 @@ public class GameScreen extends AbstractScreen {
         background = new Sprite(new Texture(Gdx.files.internal("sprites/Tennisplatz.jpg")));
         background.setPosition(0 / PPM, 0 / PPM);
         background.setSize(MobileTennis.V_WIDTH / PPM, MobileTennis.V_HEIGHT / PPM);
-
-        background = new Sprite(new Texture(Gdx.files.internal("sprites/Tennisplatz.jpg")));
-        //background.setScale(1/2);
-        background.setPosition(0, 0);
-        //background.setPosition(width/2-background.getWidth()/2,height/2-background.getHeight()/2);
 
         createGameObjects();
 
@@ -163,14 +151,9 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height){
-<<<<<<< HEAD
-        //super.resize(width, height);
-        camera.setToOrtho(false, width, height);
-=======
         //camera.setToOrtho(false, width, height);
         viewport.update(width, height);
         stage.getViewport().update(width, height, true);
->>>>>>> Bene
     }
 
     @Override

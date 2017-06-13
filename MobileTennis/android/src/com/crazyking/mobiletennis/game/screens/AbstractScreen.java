@@ -39,12 +39,7 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void render(float delta){
         update(delta);
-
-<<<<<<< HEAD
-        Gdx.gl.glClearColor(0.0f, 1f, 0.114f, 0.6f);
-=======
         Gdx.gl.glClearColor(0f, 1f, 0.114f, 0.6f);
->>>>>>> Bene
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
