@@ -53,6 +53,6 @@ public abstract class AbstractScreen implements Screen {
         stage.dispose();
     }
 
-    public void GetMessage(String message){}
+    public void getMessage(String message){}
 
 }

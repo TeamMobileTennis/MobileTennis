@@ -70,7 +70,10 @@ public class CreateLobbyScreen extends AbstractScreen {
         // input only on the stage elements
         Gdx.input.setInputProcessor(stage);
 
-        mt.activity.createServer();
+        // Delete existing connections
+        mt.disconnect();
+
+        mt.createServer();
     }
 
     @Override
@@ -102,7 +105,7 @@ public class CreateLobbyScreen extends AbstractScreen {
                                             BALL_SPEED,
                                             (int)ballSpeed.getValue() + ""
         );
-        mt.activity.sendMessage(update);
+        mt.sendMessage(update);
     }
 
     @Override
@@ -134,7 +137,7 @@ public class CreateLobbyScreen extends AbstractScreen {
     }
 
 
-    public void GetMessage(String message) {
+    public void getMessage(String message) {
         String cmd = Messages.getCommand(message);
         Log.d("String", message);
         Log.d("String", cmd);
@@ -158,7 +161,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         btnStart.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                StartGame();
+                startGame();
             }
         });
         stage.addActor(btnStart);
@@ -222,7 +225,7 @@ public class CreateLobbyScreen extends AbstractScreen {
     }
 
 
-    private void StartGame(){
+    private void startGame(){
         //TODO: get the information from the sliders
         // maybe like this
         GameVars.winningPoints = (int)winningPoints.getValue();
@@ -231,7 +234,8 @@ public class CreateLobbyScreen extends AbstractScreen {
 
         // send message to the paddles
         String message = Messages.getDataStr(START_GAME);
-        mt.activity.sendMessage(message);
+        //String message = Messages.getDataStr(START);
+        mt.sendMessage(message);
 
         // start the actual game
         mt.screenManager.setScreen(ScreenManager.STATE.PLAY);

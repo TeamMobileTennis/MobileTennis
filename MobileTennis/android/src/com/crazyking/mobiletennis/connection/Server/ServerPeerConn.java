@@ -122,14 +122,6 @@ public class ServerPeerConn implements Operator {
         }
     }
 
-//    /**
-//     * Creates a game lobby
-//     * @param lobbyName Name of the game lobby
-//     */
-//    @Override
-//    public void setup(String lobbyName){
-//        createLobby(lobbyName);
-//    }
 
     /**
      * Send a message to all in lobby

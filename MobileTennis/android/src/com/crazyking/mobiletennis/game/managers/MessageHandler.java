@@ -20,14 +20,14 @@ public class MessageHandler {
 
         // we are the current message handler
         // and say this to the activity
-        ((AndroidLauncher)activity).setMessageHandler(this);
+        mt.setMessageHandler(this);
     }
 
     public void HandleReceivedMessage(final String message){
         Log.d("Message Empfangen", "Empfangen");
         Log.d("String", message);
 
-        activeScreen.GetMessage(message);
+        activeScreen.getMessage(message);
 
     }
 

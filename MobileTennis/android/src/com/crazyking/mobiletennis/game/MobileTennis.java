@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.crazyking.mobiletennis.AndroidLauncher;
 import com.crazyking.mobiletennis.connection.ConnectionFactory;
 import com.crazyking.mobiletennis.connection.Operator;
+import com.crazyking.mobiletennis.connection.PeerListReceiver;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
 import com.crazyking.mobiletennis.game.managers.MessageHandler;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
@@ -50,6 +51,8 @@ public class MobileTennis extends Game implements ViewPeerInterface{
     private Operator operator;
 
     private ArrayList<WifiP2pDevice> devList = new ArrayList<>();
+
+    private ArrayList<PeerListReceiver> peerListReceivers = new ArrayList<>();
 
 	public MobileTennis(AndroidLauncher act){
 		activity = act;
@@ -100,6 +103,10 @@ public class MobileTennis extends Game implements ViewPeerInterface{
     public void fillPeerList(ArrayList<WifiP2pDevice> peerList) {
         devList.clear();
         devList.addAll(peerList);
+
+        for(PeerListReceiver peerListReceiver : peerListReceivers){
+            peerListReceiver.peerListChanged(devList);
+        }
     }
 
     @Override
@@ -115,10 +122,8 @@ public class MobileTennis extends Game implements ViewPeerInterface{
     }
 
     // Methods for Connection to use
-    public ArrayList<WifiP2pDevice> searchingDevices() {
+    public void searchingDevices() {
         operator = ConnectionFactory.createClient(context,view);
-
-        return devList;
     }
 
     public void connectToDevice(WifiP2pDevice device) {
@@ -139,7 +144,15 @@ public class MobileTennis extends Game implements ViewPeerInterface{
     }
 
     public void disconnect(){
-        //if(operator!=null)
-        //operator.closeConnections();
+        if(operator!=null)
+            operator.closeConnections();
+    }
+
+    public void registerPeerListReceiver(PeerListReceiver peerListReceiver){
+        this.peerListReceivers.add(peerListReceiver);
+    }
+
+    public void unregisterPeerListReceiver(PeerListReceiver peerListReceiver){
+        this.peerListReceivers.remove(peerListReceiver);
     }
 }

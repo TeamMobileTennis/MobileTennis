@@ -179,7 +179,7 @@ public class GameScreen extends AbstractScreen {
     }
 
     @Override
-    public void GetMessage(String message) {
+    public void getMessage(String message) {
         String cmd = Messages.getCommand(message);
 
         switch (cmd){
