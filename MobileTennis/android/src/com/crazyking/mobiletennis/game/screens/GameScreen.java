@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.GameVars;
 import com.crazyking.mobiletennis.game.MobileTennis;
@@ -26,9 +29,12 @@ import com.crazyking.mobiletennis.game.body.BodyBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 
+import static com.badlogic.gdx.scenes.scene2d.utils.ScissorStack.getViewport;
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
 import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
+import static com.crazyking.mobiletennis.game.GameVars.BorderHeight;
+import static com.crazyking.mobiletennis.game.GameVars.BorderWidth;
 import static com.crazyking.mobiletennis.game.GameVars.PaddleHeight;
 import static com.crazyking.mobiletennis.game.GameVars.PaddleSprite;
 import static com.crazyking.mobiletennis.game.GameVars.PaddleWidth;
@@ -37,8 +43,6 @@ import static com.crazyking.mobiletennis.game.GameVars.WallSprite;
 
 public class GameScreen extends AbstractScreen {
 
-    // the camera
-    OrthographicCamera camera;
     public static float PPM = 32;
 
     // Box2D
@@ -68,11 +72,14 @@ public class GameScreen extends AbstractScreen {
     // the current accel
     float player1Accel = 0, player2Accel = 0;
 
+    Sprite background;
+
     public GameScreen(MobileTennis mt){
         super(mt);
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, width, height);
+        background = new Sprite(new Texture(Gdx.files.internal("sprites/Tennisplatz.jpg")));
+        background.setPosition(0 / PPM, 0 / PPM);
+        background.setSize(MobileTennis.V_WIDTH / PPM, MobileTennis.V_HEIGHT / PPM);
 
         createGameObjects();
 
@@ -113,7 +120,7 @@ public class GameScreen extends AbstractScreen {
     public void render(float delta){
         super.render(delta);
 
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClearColor(0f, 1f, 0.114f, 0.6f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // render our objects in the world, respective to our pixel per meter scale
@@ -123,6 +130,7 @@ public class GameScreen extends AbstractScreen {
         // try to draw a sprite
         mt.batch.setProjectionMatrix(camera.combined.cpy().scl(PPM));
         mt.batch.begin();
+        background.draw(mt.batch);
         //FIXME: i cant get the bodies
         world.getBodies(tmpBodies);
         for(Body body : tmpBodies){
@@ -145,7 +153,9 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height){
-        camera.setToOrtho(false, width, height);
+        //camera.setToOrtho(false, width, height);
+        viewport.update(width, height);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -191,23 +201,21 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void createGameObjects(){
-        //FIXME: use the GameVars for this
-
         // create the world for the bodies
         world = new World(new Vector2(0f, 0f), false);  // Vector2 := gravity // bool if something is sleeping offscreen
         b2dr = new Box2DDebugRenderer();
 
         // left and right border of the game
-        leftBorder = BodyBuilder.BuildWall(world, 20, height, 10, height/2, WallSprite);
-        rightBorder = BodyBuilder.BuildWall(world, 20, height, width-10, height/2, WallSprite);
+        leftBorder = BodyBuilder.BuildWall(world, BorderWidth, BorderHeight, BorderWidth/2, MobileTennis.V_HEIGHT/2, WallSprite);
+        rightBorder = BodyBuilder.BuildWall(world, BorderWidth, BorderHeight, MobileTennis.V_WIDTH-BorderWidth/2, MobileTennis.V_HEIGHT/2, WallSprite);
 
         // the player1 paddles
-        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, width/2, 20, PaddleSprite);
-        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, width/2, height-20, PaddleSprite);
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, MobileTennis.V_WIDTH/2, 4, PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT-4, PaddleSprite);
 
         // the goal of the players
-        player1Goal = BodyBuilder.BuildWall(world, width, 10, width/2, -5);
-        player2Goal = BodyBuilder.BuildWall(world, width, 10, width/2, height+5);
+        player1Goal = BodyBuilder.BuildWall(world, MobileTennis.V_WIDTH, 2, MobileTennis.V_WIDTH/2, -1);
+        player2Goal = BodyBuilder.BuildWall(world, MobileTennis.V_WIDTH, 2, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT+1);
 
         // Create the score display
         player1Score = UIBuilder.CreateLabel("0", mt.fntButton, 50, 50, width, height * 0.4f);
@@ -278,7 +286,7 @@ public class GameScreen extends AbstractScreen {
 
     private void createNewBall(){
         // game ball
-        ball = BodyBuilder.BuildBall(world, 20, width/2, height/2, GameVars.BallSprite);
+        ball = BodyBuilder.BuildBall(world, 5, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT/2, GameVars.BallSprite);
         Vector2 direction = new Vector2();
         direction.setToRandomDirection();
         direction.setLength(GameVars.ballSpeed);

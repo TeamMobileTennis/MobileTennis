@@ -21,8 +21,11 @@ public class GameVars {
     public static String PaddleSprite = "paddle";
 
     // The properties of the body
-    public static int PaddleWidth = 100;
-    public static int PaddleHeight = 20;
+    public static int PaddleWidth = 20;
+    public static int PaddleHeight = 5;
+
+    public static int BorderWidth = 5;
+    public static int BorderHeight = MobileTennis.V_HEIGHT;
 
 
     //TODO: maybe use the variables in the game screen
