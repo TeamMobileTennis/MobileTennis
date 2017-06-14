@@ -25,8 +25,8 @@ import java.util.ArrayList;
 
 public class MobileTennis extends Game implements ViewPeerInterface{
 
-	public static int V_WIDTH = 100;
-	public static int V_HEIGHT = 200;
+	public static int V_WIDTH = 36;
+	public static int V_HEIGHT = 78;
 
 	// reference to activity
 	public final AndroidLauncher activity;

@@ -6,7 +6,6 @@ import android.util.Log;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -27,21 +26,23 @@ import com.crazyking.mobiletennis.game.body.BodyBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 
-import static com.badlogic.gdx.scenes.scene2d.utils.ScissorStack.getViewport;
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
 import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
+import static com.crazyking.mobiletennis.game.GameVars.BallRadius;
 import static com.crazyking.mobiletennis.game.GameVars.BorderHeight;
 import static com.crazyking.mobiletennis.game.GameVars.BorderWidth;
+import static com.crazyking.mobiletennis.game.GameVars.PaddleDist;
 import static com.crazyking.mobiletennis.game.GameVars.PaddleHeight;
 import static com.crazyking.mobiletennis.game.GameVars.PaddleSprite;
 import static com.crazyking.mobiletennis.game.GameVars.PaddleWidth;
 import static com.crazyking.mobiletennis.game.GameVars.WallSprite;
+import static com.crazyking.mobiletennis.game.GameVars.BallSpeed;
 
 
 public class GameScreen extends AbstractScreen {
 
-    public static float PPM = 32;
+    public static float PPM = 8;
 
     // Box2D
     World world;
@@ -102,16 +103,16 @@ public class GameScreen extends AbstractScreen {
         //ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
 
         //TODO: just some paddle movement testing
-        float x = -1 * player1Accel * 1000;
+        float x = -1 * player1Accel;
         player1.setLinearVelocity(x, 0);
-        //float xx = MathUtils.clamp(player1.getPosition().x, 70, width-70);
-        //player1.setTransform(xx / PPM, 20 / PPM, 0);
+        float xx = MathUtils.clamp(player1.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, MobileTennis.V_WIDTH-BorderWidth/2 - PaddleWidth/2);
+        player1.setTransform(xx / PPM, PaddleDist / PPM, 0);
 
 
-        float y = player2Accel * 1000;
+        float y = player2Accel;
         player2.setLinearVelocity(y, 0);
-        //float yy = MathUtils.clamp(player2.getPosition().x, 70, width-70);
-        //player2.setTransform(yy / PPM, height-20 / PPM, 0);
+        float yy = MathUtils.clamp(player2.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, MobileTennis.V_WIDTH-BorderWidth/2 - PaddleWidth/2);
+        player2.setTransform(yy / PPM, (MobileTennis.V_HEIGHT-PaddleDist) / PPM, 0);
     }
 
     @Override
@@ -208,8 +209,8 @@ public class GameScreen extends AbstractScreen {
         rightBorder = BodyBuilder.BuildWall(world, BorderWidth, BorderHeight, MobileTennis.V_WIDTH-BorderWidth/2, MobileTennis.V_HEIGHT/2, WallSprite);
 
         // the player1 paddles
-        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, MobileTennis.V_WIDTH/2, 4, PaddleSprite);
-        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT-4, PaddleSprite);
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, MobileTennis.V_WIDTH/2, PaddleDist, PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT-PaddleDist, PaddleSprite);
 
         // the goal of the players
         player1Goal = BodyBuilder.BuildWall(world, MobileTennis.V_WIDTH, 2, MobileTennis.V_WIDTH/2, -1);
@@ -284,19 +285,19 @@ public class GameScreen extends AbstractScreen {
 
     private void createNewBall(){
         // game ball
-        ball = BodyBuilder.BuildBall(world, 5, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT/2, GameVars.BallSprite);
+        ball = BodyBuilder.BuildBall(world, BallRadius, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT/2, GameVars.BallSprite);
         Vector2 direction = new Vector2();
         direction.setToRandomDirection();
-        direction.setLength(GameVars.ballSpeed);
+        direction.setLength(BallSpeed);
         ball.setLinearVelocity(direction);
     }
 
     private void resetBall(){
         if(reset != null){
-            reset.setTransform(width/2, height/2, reset.getAngle());
+            reset.setTransform(MobileTennis.V_WIDTH/2 / PPM, MobileTennis.V_HEIGHT/2 / PPM, reset.getAngle());
             Vector2 direction = new Vector2();
             direction.setToRandomDirection();
-            direction.scl(GameVars.ballSpeed);
+            direction.scl(GameVars.BallSpeed);
             ball.setLinearVelocity(direction);
             reset = null;
         }
@@ -310,7 +311,7 @@ public class GameScreen extends AbstractScreen {
             player1Score.setText(player1Goals + "");
 
             // also check if the game is over
-            if(player1Goals == GameVars.winningPoints) {
+            if(player1Goals == GameVars.WinningPoints) {
                 gameEnd(1);
             } else {
                 // let the ball reset in the next step
@@ -322,7 +323,7 @@ public class GameScreen extends AbstractScreen {
             player2Score.setText(player2Goals + "");
 
             // also check if the game is over
-            if(player2Goals == GameVars.winningPoints) {
+            if(player2Goals == GameVars.WinningPoints) {
                 gameEnd(2);
             } else {
                 // let the ball reset in the next step
