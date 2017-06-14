@@ -17,7 +17,6 @@ import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
 import static com.crazyking.mobiletennis.connection.Constants.INFO_LOBBY;
 import static com.crazyking.mobiletennis.connection.Constants.SELECTED_BALL;
 import static com.crazyking.mobiletennis.connection.Constants.WINNING_POINTS;
-import static com.crazyking.mobiletennis.game.GameVars.winningPoints;
 import static com.crazyking.mobiletennis.game.ui.UIBuilder.CreateLabel;
 
 /**

@@ -176,6 +176,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         winningPoints = new Slider(1, 10, 1, false, mt.skin);
         winningPoints.setSize(labelWidth, labelHeight);
         winningPoints.setPosition(width/2, height * 0.7f, Align.center);
+        winningPoints.setValue(GameVars.WinningPoints);
         stage.addActor(winningPoints);
 
         winningPointsValue = UIBuilder.CreateLabel("0", mt.fntButton, labelWidth/2, labelHeight, width/2 + labelWidth/2 + 30, height * 0.7f);
@@ -191,6 +192,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         selectBall.setItems(balls);
         selectBall.setSize(labelWidth, labelHeight/4);
         selectBall.setPosition(width/2, height * 0.6f, Align.center);
+        selectBall.setSelected(GameVars.BallSprite);
         stage.addActor(selectBall);
 
         selectBallTexture = new Texture(Gdx.files.internal("sprites/tennisball.png"));
@@ -217,6 +219,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         ballSpeed = new Slider(1, 10, 1, false, mt.skin);
         ballSpeed.setSize(labelWidth, labelHeight);
         ballSpeed.setPosition(width/2, height * 0.5f, Align.center);
+        ballSpeed.setValue(GameVars.BallSpeed);
         stage.addActor(ballSpeed);
 
         ballSpeedValue = UIBuilder.CreateLabel("0", mt.fntButton, labelWidth/2, labelHeight, width/2 + labelWidth/2 + 30, height * 0.5f);
@@ -228,9 +231,9 @@ public class CreateLobbyScreen extends AbstractScreen {
     private void startGame(){
         //TODO: get the information from the sliders
         // maybe like this
-        GameVars.winningPoints = (int)winningPoints.getValue();
+        GameVars.WinningPoints = (int)winningPoints.getValue();
         GameVars.BallSprite = selectBall.getSelected();
-        //GameVars.ballSpeed = (int)ballSpeed.getValue();
+        //GameVars.BallSpeed = (int)BallSpeed.getValue();
 
         // send message to the paddles
         String message = Messages.getDataStr(START_GAME);
