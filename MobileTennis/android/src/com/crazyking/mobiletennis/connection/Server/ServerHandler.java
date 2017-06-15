@@ -33,6 +33,25 @@ public class ServerHandler extends Thread{
 
     private boolean close = false;
 
+    private boolean waitForConnACK = false;
+    private Thread connAckThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            // Wait one second to retry connection response
+            try {
+                Thread.sleep(1000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            if(waitForConnACK) {
+                sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_SUCCESS)));
+
+                waitForConnACK = true;
+                connAckThread.start();
+            }
+        }
+    });
+
 
     /**
      * Constructor for Server-Handler (handle connection with clients)
@@ -176,6 +195,9 @@ public class ServerHandler extends Thread{
                     playerName = Messages.getValue(message, NAME);
                     if (gameLobby.connectAsGameClient(this, playerName)) {
                         sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_SUCCESS)));
+                        waitForConnACK = true;
+                        connAckThread.start();
+
                         gameLobby.sendMessage(gameLobby.getInformation().toString());
 
 
@@ -185,6 +207,12 @@ public class ServerHandler extends Thread{
                     } else
                         sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_FULL)));
                     break;
+                case CONN_ACK:
+                    waitForConnACK = false;
+                    connAckThread.interrupt();
+
+                    break;
+
                 case CLOSE:
                     if (Messages.getDataMap(message).size() <= 1) {
                         acceptClose();

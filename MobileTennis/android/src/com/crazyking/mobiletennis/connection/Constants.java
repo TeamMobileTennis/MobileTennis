@@ -25,6 +25,8 @@ public final class Constants {
         public final static String START_GAME = "START_GAME";
         public final static String GAME_INFO = "GAME_INFO"; // information about the current lobby/game
 
+        public final static String CONN_ACK = "CACK";
+
     }
     public final static String CODE = "code";               // Key for code, like connection response code or close response code
     public final static String NAME = "name";               // Key for a name
@@ -32,6 +34,8 @@ public final class Constants {
     public final static int CONN_SUCCESS = 0;               // If the connection is successful
     public final static int CONN_FULL = 1;                  // If the lobby is full
     public final static int CONN_EXIST = 2;                 // If a connection with this device already exists
+
+
 
     public final static int CLOSE_REQ = 0;                  // Send a request to close the connection. (Just notify the other client to close)
     public final static int CLOSE_ACCEPT = 1;               // Like 3-way handshake, if a device close the connection, the other send a close, too. But with code 1
@@ -51,4 +55,6 @@ public final class Constants {
     public static final String WINNING_POINTS = "WP";       // the points/goal needed to win the game
     public static final String SELECTED_BALL = "SB";        // the currently selected ball sprite
     public static final String BALL_SPEED = "BS";           // the starting speed of the ball
+
+
 }

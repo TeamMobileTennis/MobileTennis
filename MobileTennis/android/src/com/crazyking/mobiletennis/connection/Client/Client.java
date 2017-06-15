@@ -19,6 +19,7 @@ import static com.crazyking.mobiletennis.connection.Constants.CMD.*;
 import com.crazyking.mobiletennis.connection.Information;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.connection.ViewPeerInterface;
+import com.crazyking.mobiletennis.game.managers.ScreenManager;
 
 /**
  * Created by Adrian Berisha on 03.04.2017.
@@ -255,6 +256,17 @@ public class Client extends Thread{
 
                         }
                     }
+                    break;
+                case RESP:
+                    if(Integer.parseInt(Messages.getValue(message, CODE)) == 0) {
+                        // Connection accepted - send ACK
+                        sendMessage(Messages.getDataStr(CONN_ACK));
+                    }else {
+                        // Connection refused
+                        // TODO - Connection refused
+                    }
+
+                    view.passMessage(message);
                     break;
                 default:
                     view.passMessage(message);
