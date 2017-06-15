@@ -2,8 +2,10 @@ package com.crazyking.mobiletennis.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -39,9 +41,7 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void render(float delta){
         update(delta);
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
-        //Gdx.gl.glClearColor(0f, 1f, 0.114f, 0.3f);
-        Gdx.gl.glBlendColor(0f, 1f, 0.114f, 0.3f);
+        Gdx.gl.glClearColor(166/255f, 1f, 169/255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
