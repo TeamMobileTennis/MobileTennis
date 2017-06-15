@@ -43,9 +43,11 @@ public class ServerHandler extends Thread{
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
+            // Send Connection Response again
             if(waitForConnACK) {
                 sendMessage(Messages.getDataStr(RESP, CODE, Integer.toString(CONN_SUCCESS)));
 
+                // Wait for ACK again
                 waitForConnACK = true;
                 connAckThread.start();
             }

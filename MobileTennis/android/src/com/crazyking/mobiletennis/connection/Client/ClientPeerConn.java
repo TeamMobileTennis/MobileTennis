@@ -3,6 +3,7 @@ package com.crazyking.mobiletennis.connection.Client;
 import android.content.Context;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
@@ -258,5 +259,22 @@ public class ClientPeerConn implements Operator {
     @Override
     public void unregisterReceiver() {
         peerConnection.unregisterReceiver();
+    }
+
+    @Override
+    public boolean isHost() {
+        return false;
+    }
+
+    @Override
+    public boolean getDiscoveryState(){
+        return receiver!=null && receiver.getDiscoveryState();
+    }
+
+    @Override
+    public WifiP2pGroup getGroupInfo() {
+        if(receiver==null)
+            return null;
+        return receiver.getGroupInfo();
     }
 }

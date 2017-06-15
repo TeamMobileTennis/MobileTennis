@@ -1,6 +1,7 @@
 package com.crazyking.mobiletennis.connection;
 
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pGroup;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,17 +11,6 @@ import java.util.ArrayList;
  */
 
 public interface Operator {
-//    /**
-//     * @param name At the Server the Lobby-Name and with
-//     *             the client just a empty string
-//     */
-//    void setup(String name);
-
-//    /**
-//     * @param deviceAddress The Mac-Address of Server to connect
-//     *                      (Only for Client - No Usage for Server)
-//     */
-//    void connectToGame(String deviceAddress);
 
     /**
      * @param message A String with a message to send.
@@ -63,4 +53,24 @@ public interface Operator {
      * Unregister the Receiver
      */
     void unregisterReceiver();
+
+    /**
+     * Method to get information about from which operator
+     * this device is (Host or Client)
+     *
+     * @return  Returns true if Host and false if Client
+     */
+    boolean isHost();
+
+    /**
+     * Boolean with state of discovery
+     * @return  True => discovery runs, false => discovery stops
+     */
+    boolean getDiscoveryState();
+
+    /**
+     *
+     * @return  The current Group Info from Peer-to-Peer connection
+     */
+    WifiP2pGroup getGroupInfo();
 }

@@ -3,6 +3,7 @@ package com.crazyking.mobiletennis.connection.Server;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
@@ -177,6 +178,11 @@ public class ServerPeerConn implements Operator {
         peerConnection.unregisterReceiver();
     }
 
+    @Override
+    public boolean isHost() {
+        return true;
+    }
+
     /**
      * Get current connection info
      */
@@ -196,14 +202,16 @@ public class ServerPeerConn implements Operator {
         }
     }
 
-//    /**
-//     * Don't need the server
-//     *
-//     * @param deviceAddress The Mac-Address of Server to connect
-//     */
-//    @Override
-//    public void connectToGame(String deviceAddress) {
-//        // Don't need here
-//    }
+    @Override
+    public boolean getDiscoveryState(){
+        return receiver!=null && receiver.getDiscoveryState();
+    }
+
+    @Override
+    public WifiP2pGroup getGroupInfo() {
+        if(receiver==null)
+            return null;
+        return receiver.getGroupInfo();
+    }
 
 }

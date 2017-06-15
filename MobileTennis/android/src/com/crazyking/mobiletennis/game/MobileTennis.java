@@ -29,7 +29,7 @@ public class MobileTennis extends Game implements ViewPeerInterface{
 	public static int V_HEIGHT = 78;
 
 	// reference to activity
-	public final AndroidLauncher activity;
+	private final AndroidLauncher activity;
 
 	// Managers
 	public AssetManager assets;
@@ -54,9 +54,9 @@ public class MobileTennis extends Game implements ViewPeerInterface{
 
     private ArrayList<PeerListReceiver> peerListReceivers = new ArrayList<>();
 
-	public MobileTennis(AndroidLauncher act){
-		activity = act;
-        this.context = act.getContext();
+	public MobileTennis(AndroidLauncher activity){
+		this.activity = activity;
+        this.context = activity.getContext();
         this.view = this;
 	}
 
@@ -154,5 +154,13 @@ public class MobileTennis extends Game implements ViewPeerInterface{
 
     public void unregisterPeerListReceiver(PeerListReceiver peerListReceiver){
         this.peerListReceivers.remove(peerListReceiver);
+    }
+
+    public Operator getOperator(){
+        return operator;
+    }
+
+    public ArrayList<WifiP2pDevice> getDevList(){
+        return devList;
     }
 }
