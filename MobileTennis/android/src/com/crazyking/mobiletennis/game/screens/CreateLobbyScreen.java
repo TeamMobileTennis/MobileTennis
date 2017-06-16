@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -61,7 +63,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         balls.add("Tabletennisball");
 
         // Create the UI elements of the screen
-        creatUIElements();
+        createUIElements();
 
     }
 
@@ -84,19 +86,17 @@ public class CreateLobbyScreen extends AbstractScreen {
 
     @Override
     public void update(float delta) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
             mt.screenManager.setScreen(ScreenManager.STATE.MENU);
         }
-
-        updateSliderValues();
     }
+
 
     private void updateSliderValues(){
         winningPointsValue.setText((int)winningPoints.getValue() + "");
         ballSpeedValue.setText((int)ballSpeed.getValue() + "");
 
-        //FIXME: probably dont send this all the time
-        // send the information for the lobby/game all the time?
+        // Send Information, if slider changed
         String update = Messages.getDataStr(INFO_LOBBY,
                                             WINNING_POINTS,
                                             (int)winningPoints.getValue() + "",
@@ -150,9 +150,19 @@ public class CreateLobbyScreen extends AbstractScreen {
     }
 
     // just some private helper functions
-    private void creatUIElements() {
+    private void createUIElements() {
         float labelWidth = Gdx.graphics.getWidth() / 2;
         float labelHeight = Gdx.graphics.getHeight() / 10;
+
+        EventListener sliderEvent = new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                updateSliderValues();
+                return false;
+
+            }
+        };
+
 
         Label title = UIBuilder.CreateLabel("Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.9f);
         stage.addActor(title);
@@ -221,6 +231,10 @@ public class CreateLobbyScreen extends AbstractScreen {
         ballSpeed.setPosition(width/2, height * 0.5f, Align.center);
         ballSpeed.setValue(GameVars.BallSpeed);
         stage.addActor(ballSpeed);
+
+        winningPoints.addListener(sliderEvent);
+        selectBall.addListener(sliderEvent);
+        ballSpeed.addListener(sliderEvent);
 
         ballSpeedValue = UIBuilder.CreateLabel("0", mt.fntButton, labelWidth/2, labelHeight, width/2 + labelWidth/2 + 30, height * 0.5f);
         stage.addActor(ballSpeedValue);

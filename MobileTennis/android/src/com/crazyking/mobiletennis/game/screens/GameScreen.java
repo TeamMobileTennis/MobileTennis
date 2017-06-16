@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -24,6 +25,7 @@ import com.crazyking.mobiletennis.game.GameVars;
 import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.body.BodyBuilder;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
+import java.util.Random;
 
 
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
@@ -287,7 +289,9 @@ public class GameScreen extends AbstractScreen {
         // game ball
         ball = BodyBuilder.BuildBall(world, BallRadius, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT/2, GameVars.BallSprite);
         Vector2 direction = new Vector2();
-        direction.setToRandomDirection();
+        //direction.setToRandomDirection();
+        direction = generateRandomDirection(direction);
+
         direction.setLength(BallSpeed);
         ball.setLinearVelocity(direction);
     }
@@ -296,11 +300,23 @@ public class GameScreen extends AbstractScreen {
         if(reset != null){
             reset.setTransform(MobileTennis.V_WIDTH/2 / PPM, MobileTennis.V_HEIGHT/2 / PPM, reset.getAngle());
             Vector2 direction = new Vector2();
-            direction.setToRandomDirection();
+            //direction.setToRandomDirection();
+            direction = generateRandomDirection(direction);
             direction.scl(GameVars.BallSpeed);
             ball.setLinearVelocity(direction);
             reset = null;
         }
+    }
+
+    private Vector2 generateRandomDirection(Vector2 rndDir){
+        Random random = new Random();
+        rndDir.set((random.nextInt()%361)/360f,1f);
+
+        Log.d("INFO",rndDir.toString());
+
+        if(random.nextInt()%2==0)
+            rndDir.y = rndDir.y * -1;
+        return rndDir;
     }
 
     private void Goal(int player){
