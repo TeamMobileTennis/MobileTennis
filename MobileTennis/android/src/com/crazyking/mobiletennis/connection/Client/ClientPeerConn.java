@@ -187,15 +187,6 @@ public class ClientPeerConn implements Operator {
         }
     }
 
-//    /**
-//     * Setup the peer connection (start searching for p2p devices)
-//     * @param name No need with client
-//     */
-//    @Override
-//    public void setup(String name) {
-//        startPeerDiscover();
-//    }
-
     /**
      *
      * @param view  The view to pass messages and info
@@ -242,7 +233,6 @@ public class ClientPeerConn implements Operator {
                 Log.d("ERROR", "Connection failed. Reason: "+reason);
             }
         });
-        Log.d("INFO", "connectToGame in Client");
     }
 
     /**

@@ -15,10 +15,13 @@ import com.crazyking.mobiletennis.game.MobileTennis;
 import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import static com.crazyking.mobiletennis.connection.Constants.CMD.RESP;
 import static com.crazyking.mobiletennis.connection.Constants.CODE;
+import static com.crazyking.mobiletennis.game.ui.UIBuilder.CreateButton;
 import static com.crazyking.mobiletennis.game.ui.UIBuilder.CreateLabel;
 
 
@@ -26,7 +29,7 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
 
     private ArrayList<WifiP2pDevice> devices = new ArrayList<WifiP2pDevice>();
 
-    private ArrayList<Label> devList = new ArrayList<Label>();
+    private ArrayList<TextButton> devBtnList = new ArrayList<TextButton>();
 
 
     public JoinLobbyScreen(final MobileTennis mt){
@@ -85,19 +88,19 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
     private void search(){
         mt.searchingDevices();
         // create device list in stage
-        for (Label label : devList) {
-            label.remove();
+        for (TextButton btn : devBtnList) {
+            btn.remove();
         }
-        devList.clear();
+        devBtnList.clear();
 
         if(devices==null)
             return;
         int i = 0;
         for (WifiP2pDevice dev : devices ) {
-            Label labelDev = CreateLabel(dev.deviceName, mt.fntButton, 200, 50, width/2, height * (0.7f - 0.1f * i));
-            labelDev.addListener(new LabelHandler(dev));
-            devList.add(labelDev);
-            stage.addActor(labelDev);
+            TextButton buttonDev = CreateButton(dev.deviceName,mt.fntButton,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/12,width/2,height*(0.7f-0-1f*i));
+            buttonDev.addListener(new ButtonHandler(dev));
+            devBtnList.add(buttonDev);
+            stage.addActor(buttonDev);
             i++;
         }
     }
@@ -109,11 +112,11 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
     }
 
 
-    private class LabelHandler extends ClickListener{
+    private class ButtonHandler extends ClickListener{
 
         WifiP2pDevice dev;
 
-        LabelHandler(WifiP2pDevice dev){
+        ButtonHandler(WifiP2pDevice dev){
             this.dev = dev;
         }
 
@@ -143,7 +146,7 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
                 }
                 break;
             default:
-                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet.");
+                Log.d("INFO", Messages.getCommand(message) + " wird hier nicht gehandlet.");
                 break;
         }
     }
@@ -153,7 +156,8 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
         float labelHeight = Gdx.graphics.getHeight() / 10;
         Label title = CreateLabel("Join Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
-        TextButton btnSearch = UIBuilder.CreateButton("Search",  mt.fntButton, 200, 50, width/2, height * 0.2f);
+
+        TextButton btnSearch = UIBuilder.CreateButton("Search",  mt.fntButton, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/12, width/2, height * 0.1f);
         btnSearch.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

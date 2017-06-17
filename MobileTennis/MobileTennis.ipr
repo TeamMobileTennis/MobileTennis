@@ -47,9 +47,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MobileTennis.iml" filepath="$PROJECT_DIR$/MobileTennis.iml"/>
       <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml"/>
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml"/>
-      <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml"/>
-      <module fileurl="file://$PROJECT_DIR$/ios/ios.iml" filepath="$PROJECT_DIR$/ios/ios.iml"/>
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-type="JavaSDK" assert-jdk-15="true" project-jdk-name="1.8">
