@@ -29,6 +29,7 @@ import java.util.Random;
 
 import static com.crazyking.mobiletennis.connection.Constants.ACCX;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.ACCEL;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.END;
 import static com.crazyking.mobiletennis.connection.Constants.PLAYER_CODE;
 import static com.crazyking.mobiletennis.game.GameVars.BallRadius;
 import static com.crazyking.mobiletennis.game.GameVars.BorderHeight;
@@ -374,6 +375,7 @@ public class GameScreen extends AbstractScreen {
 
         Label winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
         stage.addActor(winner);
+        mt.sendMessage(Messages.getDataStr(END));
     }
 
 }

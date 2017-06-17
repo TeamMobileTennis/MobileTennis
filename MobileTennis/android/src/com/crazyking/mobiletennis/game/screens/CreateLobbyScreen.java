@@ -26,6 +26,7 @@ import com.crazyking.mobiletennis.game.managers.ScreenManager;
 import com.crazyking.mobiletennis.game.ui.UIBuilder;
 
 import static com.crazyking.mobiletennis.connection.Constants.BALL_SPEED;
+import static com.crazyking.mobiletennis.connection.Constants.CMD.CONN_ACK;
 import static com.crazyking.mobiletennis.connection.Constants.CMD.START_GAME;
 import static com.crazyking.mobiletennis.connection.Constants.INFO_LOBBY;
 import static com.crazyking.mobiletennis.connection.Constants.SELECTED_BALL;
@@ -76,6 +77,8 @@ public class CreateLobbyScreen extends AbstractScreen {
         mt.disconnect();
 
         mt.createServer();
+
+        updateSliderValues();
     }
 
     @Override
@@ -143,8 +146,11 @@ public class CreateLobbyScreen extends AbstractScreen {
         Log.d("String", cmd);
 
         switch (cmd){
+            case CONN_ACK:
+                    updateSliderValues();
+                break;
             default:
-                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
+                Log.d("INFO", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
                 break;
         }
     }

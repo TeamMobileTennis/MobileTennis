@@ -213,6 +213,8 @@ public class ServerHandler extends Thread{
                     waitForConnACK = false;
                     connAckThread.interrupt();
 
+                    view.passMessage(message);
+
                     break;
 
                 case CLOSE:
