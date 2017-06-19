@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class StyleBuilder {
 
-    static FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans-Regular.ttf"));
+    static FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("BalsamiqSansRegular.ttf"));
 
     private StyleBuilder(){}
 

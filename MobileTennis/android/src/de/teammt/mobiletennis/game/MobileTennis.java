@@ -95,8 +95,8 @@ public class MobileTennis extends Game implements ViewPeerInterface {
 	}
 
 	private void createFonts(){
-		fntTitle = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 10, Color.BLACK, 2, Color.BLACK);
-		fntButton = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 20, Color.WHITE, 2, Color.BLACK);
+		fntTitle = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 9, Color.BLACK, 2, Color.BLACK);
+		fntButton = StyleBuilder.CreateStyle(Gdx.graphics.getWidth() / 18, Color.WHITE, 2, Color.BLACK);
 	}
 
     @Override
