@@ -181,7 +181,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         //TODO: some testing with sliders
 
         // the first slider -------------------------------------
-        Label winningPointsTitle = UIBuilder.CreateLabel("Winning Points", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.75f);
+        Label winningPointsTitle = UIBuilder.CreateLabel("Punkte", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.75f);
         stage.addActor(winningPointsTitle);
 
         winningPoints = new Slider(1, 10, 1, false, mt.skin);
@@ -196,7 +196,7 @@ public class CreateLobbyScreen extends AbstractScreen {
 
 
         // lets try a select menu
-        Label selectBallLabel = UIBuilder.CreateLabel("Select Ball", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.65f);
+        Label selectBallLabel = UIBuilder.CreateLabel("Ball", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.65f);
         stage.addActor(selectBallLabel);
 
         selectBall = new SelectBox<String>(mt.skin);
@@ -224,7 +224,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         // end of the select menu
 
         // the first slider -------------------------------------
-        Label ballSpeedLabel = UIBuilder.CreateLabel("Ballspeed", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.55f);
+        Label ballSpeedLabel = UIBuilder.CreateLabel("Geschwindigkeit", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.55f);
         stage.addActor(ballSpeedLabel);
 
         ballSpeed = new Slider(1, 10, 1, false, mt.skin);

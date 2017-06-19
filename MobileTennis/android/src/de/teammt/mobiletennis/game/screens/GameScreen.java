@@ -184,7 +184,7 @@ public class GameScreen extends AbstractScreen {
                     player2Accel = x;
                 break;
             default:
-                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
+                Log.d("INFO", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
                 break;
         }
     }
@@ -361,7 +361,7 @@ public class GameScreen extends AbstractScreen {
         // stop the ball
         ball.setLinearVelocity(0, 0);
 
-        Label winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
+        Label winner = UIBuilder.CreateLabel("Spieler " + winningPlayer + "\nhat das Spiel gewonnen", mt.fntButton, width, height/8, width/2, height/2);
         stage.addActor(winner);
         mt.sendMessage(Messages.getDataStr(Constants.CMD.END));
     }

@@ -149,10 +149,10 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
     private void createUIElements(){
         float labelWidth = Gdx.graphics.getWidth() / 2;
         float labelHeight = Gdx.graphics.getHeight() / 10;
-        Label title = UIBuilder.CreateLabel("Join Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+        Label title = UIBuilder.CreateLabel("Beitreten", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
 
-        TextButton btnSearch = UIBuilder.CreateButton("Search",  mt.fntButton, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/12, width/2, height * 0.1f);
+        TextButton btnSearch = UIBuilder.CreateButton("Suchen",  mt.fntButton, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/12, width/2, height * 0.1f);
         btnSearch.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

@@ -87,7 +87,7 @@ public class PaddleScreen extends AbstractScreen {
     private void createUIElements(){
         float labelWidth = Gdx.graphics.getWidth() / 2;
         float labelHeight = Gdx.graphics.getHeight() / 10;
-        Label title = CreateLabel("In Game", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+        Label title = CreateLabel("Im Spiel", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
         stage.addActor(title);
     }
