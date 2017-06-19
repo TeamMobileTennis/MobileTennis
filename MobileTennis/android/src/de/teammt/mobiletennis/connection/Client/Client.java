@@ -82,6 +82,7 @@ public class Client extends Thread{
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.d("INFO","wait to send Message");
                     while(!checkConn());
                     writer.println(message);
                 }

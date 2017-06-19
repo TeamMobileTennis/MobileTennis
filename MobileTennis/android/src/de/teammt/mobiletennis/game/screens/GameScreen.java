@@ -24,11 +24,16 @@ import de.teammt.mobiletennis.connection.Messages;
 import de.teammt.mobiletennis.game.GameVars;
 import de.teammt.mobiletennis.game.MobileTennis;
 import de.teammt.mobiletennis.game.body.BodyBuilder;
+import de.teammt.mobiletennis.game.managers.ScreenManager;
 import de.teammt.mobiletennis.game.ui.UIBuilder;
 import java.util.Random;
 
 
 import de.teammt.mobiletennis.connection.Constants;
+
+import static de.teammt.mobiletennis.game.GameVars.BorderWidth;
+import static de.teammt.mobiletennis.game.GameVars.PaddleDist;
+import static de.teammt.mobiletennis.game.GameVars.PaddleWidth;
 
 
 public class GameScreen extends AbstractScreen {
@@ -99,8 +104,8 @@ public class GameScreen extends AbstractScreen {
         //TODO: just some paddle movement testing
         float x = -1 * player1Accel;
         player1.setLinearVelocity(x, 0);
-        float xx = MathUtils.clamp(player1.getPosition().x * PPM, GameVars.BorderWidth/2 + GameVars.PaddleWidth/2, MobileTennis.V_WIDTH- GameVars.BorderWidth/2 - GameVars.PaddleWidth/2);
-        player1.setTransform(xx / PPM, GameVars.PaddleDist / PPM, 0);
+        float xx = MathUtils.clamp(player1.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, MobileTennis.V_WIDTH- BorderWidth/2 - PaddleWidth/2);
+        player1.setTransform(xx / PPM, PaddleDist / PPM, 0);
 
 
         float y = player2Accel;
@@ -203,12 +208,12 @@ public class GameScreen extends AbstractScreen {
         b2dr = new Box2DDebugRenderer();
 
         // left and right border of the game
-        leftBorder = BodyBuilder.BuildWall(world, GameVars.BorderWidth, GameVars.BorderHeight, GameVars.BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
-        rightBorder = BodyBuilder.BuildWall(world, GameVars.BorderWidth, GameVars.BorderHeight, MobileTennis.V_WIDTH- GameVars.BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
+        leftBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
+        rightBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, MobileTennis.V_WIDTH- BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
 
         // the player1 paddles
-        player1 = BodyBuilder.BuildPaddle(world, GameVars.PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, GameVars.PaddleDist, GameVars.PaddleSprite);
-        player2 = BodyBuilder.BuildPaddle(world, GameVars.PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT- GameVars.PaddleDist, GameVars.PaddleSprite);
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, PaddleDist, GameVars.PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT- PaddleDist, GameVars.PaddleSprite);
 
         // the goal of the players
         player1Goal = BodyBuilder.BuildWall(world, MobileTennis.V_WIDTH, 2, MobileTennis.V_WIDTH/2, -1);

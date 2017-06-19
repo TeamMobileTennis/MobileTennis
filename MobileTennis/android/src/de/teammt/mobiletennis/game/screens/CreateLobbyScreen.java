@@ -69,7 +69,7 @@ public class CreateLobbyScreen extends AbstractScreen {
         Gdx.input.setInputProcessor(stage);
 
         // Delete existing connections
-        mt.disconnect();
+        //mt.disconnect();
 
         mt.createServer();
 
@@ -85,6 +85,7 @@ public class CreateLobbyScreen extends AbstractScreen {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+            mt.disconnect();
             mt.screenManager.setScreen(ScreenManager.STATE.MENU);
         }
     }

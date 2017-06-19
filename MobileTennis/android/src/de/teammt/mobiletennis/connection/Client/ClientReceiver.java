@@ -80,6 +80,7 @@ public class ClientReceiver extends BroadcastReceiver {
                 networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
                 if (networkInfo != null) {
                     if (networkInfo.isConnected()) {
+                        Log.d("INFO", "Connected to Server");
                         peer.getConnectionInfo();
                     }else {
                         Log.d("INFO","Not connected");

@@ -7,6 +7,7 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -231,6 +232,22 @@ public class ClientPeerConn implements Operator {
             @Override
             public void onFailure(int reason) {
                 Log.d("ERROR", "Connection failed. Reason: "+reason);
+                String error_string;
+                switch (reason){
+                    case WifiP2pManager.P2P_UNSUPPORTED:
+                        error_string = "Fehler beim Verbinden.\nPeer-to-Peer wird nicht unterstützt.";
+                        break;
+                    case WifiP2pManager.BUSY:
+                        error_string = "Fehler beim Verbinden.\nPartner kann die Anfrage gerade nicht annehmen.";
+                        break;
+                    case WifiP2pManager.ERROR:
+                        error_string = "Fehler beim Verbinden.\nEin interner Fehler ist aufgetreten.";
+                        break;
+                    default:
+                        error_string = "Fehler beim Verbinden.";
+                        break;
+                }
+                Toast.makeText(context,error_string,Toast.LENGTH_SHORT).show();
             }
         });
     }
