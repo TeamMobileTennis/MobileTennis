@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -114,7 +115,12 @@ public class BodyBuilder {
         CircleShape shape = new CircleShape();
         shape.setRadius(radius / GameScreen.PPM);
 
-        body.createFixture(shape, 1.0f);
+        FixtureDef fix = new FixtureDef();
+        fix.shape = shape;
+        fix.restitution = 1;
+
+        //body.createFixture(shape, 1.0f);
+        body.createFixture(fix);
         shape.dispose();
 
         // and give it a sprite

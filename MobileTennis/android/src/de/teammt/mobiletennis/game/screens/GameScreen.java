@@ -217,15 +217,24 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void setCollisionProperties(){
-        //TODO: think abot this again
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
 
+                // TODO: player different sounds depending on the thing we hit
                 sound.play();
 
+                if(Collision(contact, ball, player1Goal)){
+                    // we hit the goal of player 1
+                    Goal(2);
+                } else if(Collision(contact, ball, player2Goal)){
+                    // we hit the goal of player 2
+                    Goal(1);
+                }
+
+
+                /*
                 // if the ball collides with something, it should change the direction
-                //FIXME: can not hit the sides of the paddle
                 if(contact.getFixtureA().getBody() == ball){
                     if(contact.getFixtureB().getBody() == player1 || contact.getFixtureB().getBody() == player2)
                         ball.setLinearVelocity(ball.getLinearVelocity().scl(1, -1));
@@ -254,6 +263,7 @@ public class GameScreen extends AbstractScreen {
                         Goal(1);
                     }
                 }
+                */
             }
 
             @Override
@@ -271,6 +281,14 @@ public class GameScreen extends AbstractScreen {
 
             }
         });
+    }
+
+    // helper function for collision
+    private boolean Collision(Contact contact, Body a, Body b){
+        if((contact.getFixtureA().getBody() == a && contact.getFixtureB().getBody() == b) ||
+                (contact.getFixtureA().getBody() == b && contact.getFixtureB().getBody() == a))
+            return true;
+        return false;
     }
 
     private void createNewBall(){
