@@ -4,6 +4,7 @@ package de.teammt.mobiletennis.game.screens;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -63,6 +64,8 @@ public class GameScreen extends AbstractScreen {
 
     Sprite background;
 
+    boolean running;
+
     public GameScreen(MobileTennis mt){
         super(mt);
 
@@ -81,6 +84,7 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void show() {
         createNewBall();
+        running = true;
     }
 
     @Override
@@ -88,7 +92,7 @@ public class GameScreen extends AbstractScreen {
         world.step(1 / 60f, 6, 2);
         resetBall();
         //ball.applyLinearImpulse(ball.getLinearVelocity(), ball.getAngle(), true);
-        Vector2 vec2 = ball.getLinearVelocity();
+        //Vector2 vec2 = ball.getLinearVelocity();
 
         //ball.setLinearVelocity(vec2.x*1.1f, vec2.y*1.1f);
 
@@ -101,8 +105,12 @@ public class GameScreen extends AbstractScreen {
 
         float y = player2Accel;
         player2.setLinearVelocity(y, 0);
-        float yy = MathUtils.clamp(player2.getPosition().x * PPM, GameVars.BorderWidth/2 + GameVars.PaddleWidth/2, MobileTennis.V_WIDTH- GameVars.BorderWidth/2 - GameVars.PaddleWidth/2);
-        player2.setTransform(yy / PPM, (MobileTennis.V_HEIGHT- GameVars.PaddleDist) / PPM, 0);
+        float yy = MathUtils.clamp(player2.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, MobileTennis.V_WIDTH-BorderWidth/2 - PaddleWidth/2);
+        player2.setTransform(yy / PPM, (MobileTennis.V_HEIGHT-PaddleDist) / PPM, 0);
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK) && !running){
+            mt.screenManager.setScreen(ScreenManager.STATE.CREATE_LOBBY);
+        }
     }
 
     @Override
@@ -358,6 +366,8 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void gameEnd(int winningPlayer){
+        running = false;
+
         // stop the ball
         ball.setLinearVelocity(0, 0);
 
