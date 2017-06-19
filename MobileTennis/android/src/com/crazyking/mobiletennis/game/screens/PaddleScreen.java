@@ -3,6 +3,7 @@ package com.crazyking.mobiletennis.game.screens;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.crazyking.mobiletennis.connection.Messages;
 import com.crazyking.mobiletennis.game.MobileTennis;
@@ -45,6 +46,10 @@ public class PaddleScreen extends AbstractScreen {
             mt.sendMessage(message);
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
+            mt.disconnect();
+            mt.screenManager.setScreen(ScreenManager.STATE.MENU);
+        }
     }
 
     @Override
