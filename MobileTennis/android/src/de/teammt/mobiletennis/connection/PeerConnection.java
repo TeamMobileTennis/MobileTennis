@@ -350,5 +350,7 @@ public class PeerConnection implements PeerInterface{
         return PORT;
     }
 
-
+    public void remove(){
+        instance = null;
+    }
 }

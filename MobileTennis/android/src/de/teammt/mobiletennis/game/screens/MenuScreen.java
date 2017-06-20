@@ -31,6 +31,8 @@ public class MenuScreen extends AbstractScreen {
         Gdx.input.setInputProcessor(stage);
 
         mt.disconnect();
+        if(mt.getOperator()!=null)
+            mt.getOperator().remove();
     }
 
     @Override

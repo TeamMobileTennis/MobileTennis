@@ -92,7 +92,7 @@ public class JoinLobbyScreen extends AbstractScreen implements PeerListReceiver 
             return;
         int i = 0;
         for (WifiP2pDevice dev : devices ) {
-            TextButton buttonDev = UIBuilder.CreateButton(dev.deviceName,mt.fntButton,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/12,width/2,height*(0.7f-0-1f*i));
+            TextButton buttonDev = UIBuilder.CreateButton(dev.deviceName,mt.fntButton,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/12,width/2,height*(0.7f-0.1f*i));
             buttonDev.addListener(new ButtonHandler(dev));
             devBtnList.add(buttonDev);
             stage.addActor(buttonDev);

@@ -72,4 +72,7 @@ public interface Operator {
      * @return  The current Group Info from Peer-to-Peer connection
      */
     WifiP2pGroup getGroupInfo();
+
+
+    void remove();
 }

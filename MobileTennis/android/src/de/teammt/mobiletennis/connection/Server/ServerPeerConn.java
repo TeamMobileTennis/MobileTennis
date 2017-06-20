@@ -213,5 +213,11 @@ public class ServerPeerConn implements Operator {
             return null;
         return receiver.getGroupInfo();
     }
+    @Override
+    public void remove(){
+        closeConnections();
+        peerConnection.remove();
+        instance=null;
+    }
 
 }
