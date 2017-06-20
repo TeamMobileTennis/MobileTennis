@@ -65,7 +65,7 @@ public class ScreenManager {
         }
     }
 
-    public AbstractScreen GetScreen(STATE state){
+    public AbstractScreen getScreen(STATE state){
         return screens.get(state);
     }
 

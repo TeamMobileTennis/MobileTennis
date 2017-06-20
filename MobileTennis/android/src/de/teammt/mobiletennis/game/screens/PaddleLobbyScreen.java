@@ -93,7 +93,7 @@ public class PaddleLobbyScreen extends AbstractScreen {
             case Constants.CMD.CLOSE:
                 mt.screenManager.setScreen(ScreenManager.STATE.MENU);
             default:
-                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet.");
+                Log.d("INFO", Messages.getCommand(message) + " wird hier nicht gehandlet.");
                 break;
         }
     }
@@ -107,19 +107,19 @@ public class PaddleLobbyScreen extends AbstractScreen {
         Label title = UIBuilder.CreateLabel("Lobby", mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.9f);
         stage.addActor(title);
 
-        Label winningPointsLabel = UIBuilder.CreateLabel("Winning Points", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.75f);
+        Label winningPointsLabel = UIBuilder.CreateLabel("Punkte", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.75f);
         stage.addActor(winningPointsLabel);
 
         winningPointsValue = UIBuilder.CreateLabel("0", fnt, labelWidth, labelHeight, width/2, height * 0.7f);
         stage.addActor(winningPointsValue);
 
-        Label selectedBallLabel = UIBuilder.CreateLabel("Selected Ball", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.65f);
+        Label selectedBallLabel = UIBuilder.CreateLabel("Ball", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.65f);
         stage.addActor(selectedBallLabel);
 
         selectedBallValue = UIBuilder.CreateLabel("Tennisball", fnt, labelWidth, labelHeight, width/2, height * 0.6f);
         stage.addActor(selectedBallValue);
 
-        Label ballSpeedLabel = UIBuilder.CreateLabel("Ballspeed", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.55f);
+        Label ballSpeedLabel = UIBuilder.CreateLabel("Geschwindigkeit", mt.fntButton, labelWidth, labelHeight, width/2, height * 0.55f);
         stage.addActor(ballSpeedLabel);
 
         ballSpeedValue = UIBuilder.CreateLabel("400", fnt, labelWidth, labelHeight, width/2, height * 0.5f);

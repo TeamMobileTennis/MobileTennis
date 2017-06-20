@@ -35,7 +35,10 @@ import de.teammt.mobiletennis.connection.Constants;
 import static de.teammt.mobiletennis.game.GameVars.BorderWidth;
 import static de.teammt.mobiletennis.game.GameVars.PaddleDist;
 import static de.teammt.mobiletennis.game.GameVars.PaddleWidth;
+<<<<<<< HEAD
 import static de.teammt.mobiletennis.game.MobileTennis.V_WIDTH;
+=======
+>>>>>>> 55f1ac1ae559906ebd6316ac934aaf8faaa03585
 
 
 public class GameScreen extends AbstractScreen {
@@ -127,7 +130,11 @@ public class GameScreen extends AbstractScreen {
         //TODO: just some paddle movement testing
         float x = -1 * player1Accel;
         player1.setLinearVelocity(x, 0);
+<<<<<<< HEAD
         float xx = MathUtils.clamp(player1.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, V_WIDTH- BorderWidth/2 - PaddleWidth/2);
+=======
+        float xx = MathUtils.clamp(player1.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, MobileTennis.V_WIDTH- BorderWidth/2 - PaddleWidth/2);
+>>>>>>> 55f1ac1ae559906ebd6316ac934aaf8faaa03585
         player1.setTransform(xx / PPM, PaddleDist / PPM, 0);
 
 
@@ -230,7 +237,7 @@ public class GameScreen extends AbstractScreen {
                     player2Accel = x;
                 break;
             default:
-                Log.d("Message Empfangen", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
+                Log.d("INFO", Messages.getCommand(message) + " wird hier nicht gehandlet!!");
                 break;
         }
     }
@@ -242,11 +249,19 @@ public class GameScreen extends AbstractScreen {
 
         // left and right border of the game
         leftBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
+<<<<<<< HEAD
         rightBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, V_WIDTH- BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
 
         // the player1 paddles
         player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, V_WIDTH/2, PaddleDist, GameVars.PaddleSprite);
         player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, V_WIDTH/2, MobileTennis.V_HEIGHT- PaddleDist, GameVars.PaddleSprite);
+=======
+        rightBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, MobileTennis.V_WIDTH- BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
+
+        // the player1 paddles
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, PaddleDist, GameVars.PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT- PaddleDist, GameVars.PaddleSprite);
+>>>>>>> 55f1ac1ae559906ebd6316ac934aaf8faaa03585
 
         // the goal of the players
         player1Goal = BodyBuilder.BuildWall(world, V_WIDTH, 2, V_WIDTH/2, -1);
@@ -413,7 +428,11 @@ public class GameScreen extends AbstractScreen {
         // stop the ball
         ball.setLinearVelocity(0, 0);
 
+<<<<<<< HEAD
         winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
+=======
+        Label winner = UIBuilder.CreateLabel("Spieler " + winningPlayer + "\nhat das Spiel gewonnen", mt.fntButton, width, height/8, width/2, height/2);
+>>>>>>> 55f1ac1ae559906ebd6316ac934aaf8faaa03585
         stage.addActor(winner);
         mt.sendMessage(Messages.getDataStr(Constants.CMD.END));
     }

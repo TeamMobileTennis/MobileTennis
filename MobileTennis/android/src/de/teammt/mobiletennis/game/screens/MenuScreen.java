@@ -29,6 +29,8 @@ public class MenuScreen extends AbstractScreen {
     public void show() {
         // input only on the stage elements
         Gdx.input.setInputProcessor(stage);
+
+        mt.disconnect();
     }
 
     @Override
@@ -78,15 +80,15 @@ public class MenuScreen extends AbstractScreen {
         float labelWidth = Gdx.graphics.getWidth() / 2;
         float labelHeight = Gdx.graphics.getHeight() / 10;
 
-        title = UIBuilder.CreateLabel("Menu",  mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
+        title = UIBuilder.CreateLabel("Menü",  mt.fntTitle, labelWidth, labelHeight, width/2, height * 0.85f);
 
-        createLobby = UIBuilder.CreateButton("Create Lobby",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.7f);
+        createLobby = UIBuilder.CreateButton("Erstellen",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.7f);
         createLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.CREATE_LOBBY));
 
-        joinLobby = UIBuilder.CreateButton("Join Lobby",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.5f);
+        joinLobby = UIBuilder.CreateButton("Beitreten",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.5f);
         joinLobby.addListener(new ButtonHandler(mt, ScreenManager.STATE.JOIN_LOBBY));
 
-        settings = UIBuilder.CreateButton("Settings",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.3f);
+        settings = UIBuilder.CreateButton("Einstellungen",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.3f);
         settings.addListener(new ButtonHandler(mt, ScreenManager.STATE.SETTINGS));
 
         accelTest = UIBuilder.CreateButton("Accelerometer",  mt.fntButton, labelWidth, labelHeight, width/2, height * 0.1f);
