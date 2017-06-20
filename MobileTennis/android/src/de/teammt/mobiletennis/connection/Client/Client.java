@@ -186,6 +186,7 @@ public class Client extends Thread{
             server = new Socket();
             server.setReuseAddress(true);
             server.connect(new InetSocketAddress(host, port));
+            Log.d("INFO","Connect to Host");
 
             reader = new BufferedReader(new InputStreamReader(server.getInputStream()));
             writer = new PrintWriter(server.getOutputStream(), true);

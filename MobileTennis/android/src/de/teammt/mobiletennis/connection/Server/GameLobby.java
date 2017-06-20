@@ -79,6 +79,7 @@ public class GameLobby extends Thread{
                 int pos = getFreePosAtServerHandler(clients);
 
                 if (pos >= 0) {
+                    Log.d("INFO","Wait for incoming connections");
                     clients[pos] = new ServerHandler(serverSocket.accept(), this, view);
                     if(!close)      // Check here for close, because the accept-Method blocks the Thread
                         clients[pos].start();
