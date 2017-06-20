@@ -118,6 +118,7 @@ public class BodyBuilder {
         FixtureDef fix = new FixtureDef();
         fix.shape = shape;
         fix.restitution = 1;
+        fix.friction = 0;
 
         //body.createFixture(shape, 1.0f);
         body.createFixture(fix);

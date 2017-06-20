@@ -3,6 +3,7 @@ package de.teammt.mobiletennis.game.screens;
 
 import android.util.Log;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
@@ -24,11 +25,17 @@ import de.teammt.mobiletennis.connection.Messages;
 import de.teammt.mobiletennis.game.GameVars;
 import de.teammt.mobiletennis.game.MobileTennis;
 import de.teammt.mobiletennis.game.body.BodyBuilder;
+import de.teammt.mobiletennis.game.managers.ScreenManager;
 import de.teammt.mobiletennis.game.ui.UIBuilder;
 import java.util.Random;
 
 
 import de.teammt.mobiletennis.connection.Constants;
+
+import static de.teammt.mobiletennis.game.GameVars.BorderWidth;
+import static de.teammt.mobiletennis.game.GameVars.PaddleDist;
+import static de.teammt.mobiletennis.game.GameVars.PaddleWidth;
+import static de.teammt.mobiletennis.game.MobileTennis.V_WIDTH;
 
 
 public class GameScreen extends AbstractScreen {
@@ -39,6 +46,8 @@ public class GameScreen extends AbstractScreen {
     World world;
     Box2DDebugRenderer b2dr;
     Array<Body> tmpBodies = new Array<Body>();
+
+    Label winner;
 
     // the Bodies
     Body player1;
@@ -66,12 +75,15 @@ public class GameScreen extends AbstractScreen {
 
     boolean running;
 
+    // mini fix var
+    private float ydir = 0;
+
     public GameScreen(MobileTennis mt){
         super(mt);
 
         background = new Sprite(new Texture(Gdx.files.internal("sprites/Tennisplatz.jpg")));
         background.setPosition(0 / PPM, 0 / PPM);
-        background.setSize(MobileTennis.V_WIDTH / PPM, MobileTennis.V_HEIGHT / PPM);
+        background.setSize(V_WIDTH / PPM, MobileTennis.V_HEIGHT / PPM);
 
         createGameObjects();
 
@@ -83,8 +95,24 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void show() {
-        createNewBall();
+        if(ball == null)
+            createNewBall();
+        else {
+            ball.setTransform(V_WIDTH/2 / PPM, MobileTennis.V_HEIGHT/2 / PPM, 0);
+            Vector2 direction = new Vector2();
+            //direction.setToRandomDirection();
+            direction = generateRandomDirection(direction);
+            direction.scl(GameVars.BallSpeed);
+            ball.setLinearVelocity(direction);
+        }
+
+        player1Goals = 0;
+        player2Goals = 0;
+        player1Score.setText("0");
+        player2Score.setText("0");
         running = true;
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -99,8 +127,8 @@ public class GameScreen extends AbstractScreen {
         //TODO: just some paddle movement testing
         float x = -1 * player1Accel;
         player1.setLinearVelocity(x, 0);
-        float xx = MathUtils.clamp(player1.getPosition().x * PPM, GameVars.BorderWidth/2 + GameVars.PaddleWidth/2, MobileTennis.V_WIDTH- GameVars.BorderWidth/2 - GameVars.PaddleWidth/2);
-        player1.setTransform(xx / PPM, GameVars.PaddleDist / PPM, 0);
+        float xx = MathUtils.clamp(player1.getPosition().x * PPM, BorderWidth/2 + PaddleWidth/2, V_WIDTH- BorderWidth/2 - PaddleWidth/2);
+        player1.setTransform(xx / PPM, PaddleDist / PPM, 0);
 
 
         float y = player2Accel;
@@ -109,8 +137,18 @@ public class GameScreen extends AbstractScreen {
         player2.setTransform(yy / PPM, (MobileTennis.V_HEIGHT-PaddleDist) / PPM, 0);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK) && !running){
+            winner.remove();
             mt.screenManager.setScreen(ScreenManager.STATE.CREATE_LOBBY);
         }
+
+        /*
+        if(Math.abs(ball.getLinearVelocity().y) < 0.1 && running) {
+            Vector2 dir = new Vector2(ball.getLinearVelocity().x, ydir);
+            dir.setLength(GameVars.BallSpeed);
+            ball.setLinearVelocity(dir);
+        } else if(running){
+            ydir = ball.getLinearVelocity().y;
+        }*/
     }
 
     @Override
@@ -184,7 +222,7 @@ public class GameScreen extends AbstractScreen {
         switch (cmd){
             case Constants.CMD.ACCEL:
                 int xx = Integer.parseInt(Messages.getValue(message, Constants.ACCX));
-                float x = xx / 1000f;
+                int x = xx;
                 int player = Integer.parseInt(Messages.getValue(message, Constants.PLAYER_CODE));
                 if(player == 1)
                     player1Accel = x;
@@ -203,16 +241,16 @@ public class GameScreen extends AbstractScreen {
         b2dr = new Box2DDebugRenderer();
 
         // left and right border of the game
-        leftBorder = BodyBuilder.BuildWall(world, GameVars.BorderWidth, GameVars.BorderHeight, GameVars.BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
-        rightBorder = BodyBuilder.BuildWall(world, GameVars.BorderWidth, GameVars.BorderHeight, MobileTennis.V_WIDTH- GameVars.BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
+        leftBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
+        rightBorder = BodyBuilder.BuildWall(world, BorderWidth, GameVars.BorderHeight, V_WIDTH- BorderWidth/2, MobileTennis.V_HEIGHT/2, GameVars.WallSprite);
 
         // the player1 paddles
-        player1 = BodyBuilder.BuildPaddle(world, GameVars.PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, GameVars.PaddleDist, GameVars.PaddleSprite);
-        player2 = BodyBuilder.BuildPaddle(world, GameVars.PaddleWidth, GameVars.PaddleHeight, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT- GameVars.PaddleDist, GameVars.PaddleSprite);
+        player1 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, V_WIDTH/2, PaddleDist, GameVars.PaddleSprite);
+        player2 = BodyBuilder.BuildPaddle(world, PaddleWidth, GameVars.PaddleHeight, V_WIDTH/2, MobileTennis.V_HEIGHT- PaddleDist, GameVars.PaddleSprite);
 
         // the goal of the players
-        player1Goal = BodyBuilder.BuildWall(world, MobileTennis.V_WIDTH, 2, MobileTennis.V_WIDTH/2, -1);
-        player2Goal = BodyBuilder.BuildWall(world, MobileTennis.V_WIDTH, 2, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT+1);
+        player1Goal = BodyBuilder.BuildWall(world, V_WIDTH, 2, V_WIDTH/2, -1);
+        player2Goal = BodyBuilder.BuildWall(world, V_WIDTH, 2, V_WIDTH/2, MobileTennis.V_HEIGHT+1);
 
         // Create the score display
         player1Score = UIBuilder.CreateLabel("0", mt.fntButton, 50, 50, width, height * 0.4f);
@@ -301,24 +339,28 @@ public class GameScreen extends AbstractScreen {
 
     private void createNewBall(){
         // game ball
-        ball = BodyBuilder.BuildBall(world, GameVars.BallRadius, MobileTennis.V_WIDTH/2, MobileTennis.V_HEIGHT/2, GameVars.BallSprite);
+        ball = BodyBuilder.BuildBall(world, GameVars.BallRadius, V_WIDTH/2, MobileTennis.V_HEIGHT/2, GameVars.BallSprite);
         Vector2 direction = new Vector2();
         //direction.setToRandomDirection();
         direction = generateRandomDirection(direction);
 
         direction.setLength(GameVars.BallSpeed);
         ball.setLinearVelocity(direction);
+
+        ydir = ball.getLinearVelocity().y;
     }
 
     private void resetBall(){
         if(reset != null){
-            reset.setTransform(MobileTennis.V_WIDTH/2 / PPM, MobileTennis.V_HEIGHT/2 / PPM, reset.getAngle());
+            reset.setTransform(V_WIDTH/2 / PPM, MobileTennis.V_HEIGHT/2 / PPM, reset.getAngle());
             Vector2 direction = new Vector2();
             //direction.setToRandomDirection();
             direction = generateRandomDirection(direction);
             direction.scl(GameVars.BallSpeed);
             ball.setLinearVelocity(direction);
             reset = null;
+
+            ydir = ball.getLinearVelocity().y;
         }
     }
 
@@ -371,7 +413,7 @@ public class GameScreen extends AbstractScreen {
         // stop the ball
         ball.setLinearVelocity(0, 0);
 
-        Label winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
+        winner = UIBuilder.CreateLabel("Player " + winningPlayer + "\nhas won the game", mt.fntButton, width, height/8, width/2, height/2);
         stage.addActor(winner);
         mt.sendMessage(Messages.getDataStr(Constants.CMD.END));
     }

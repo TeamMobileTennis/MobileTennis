@@ -38,7 +38,7 @@ public class PaddleScreen extends AbstractScreen {
         // get the string in the right format
         if(!end) {
             float x = Gdx.input.getAccelerometerX();
-            int xx = (int) (x * 1000);
+            int xx = (int)x;
             String message = Messages.getDataStr(ACCEL, ACCX, xx + "");
             Log.d("String", message);
             // send the message
