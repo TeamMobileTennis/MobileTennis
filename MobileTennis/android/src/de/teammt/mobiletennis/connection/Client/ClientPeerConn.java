@@ -226,6 +226,9 @@ public class ClientPeerConn implements Operator {
             public void onSuccess() {
                 Log.d("INFO","Connection success. Trying to open a socket");
                 action = Messages.getDataStr(Constants.CMD.CONN, Constants.NAME, playerName);
+                if(client != null && client.isAlive()){
+                    getConnectionInfo();
+                }
             }
 
             @Override
